@@ -31,6 +31,8 @@ public interface GlobalErrorCodeConstants {
     ErrorCode NOT_IMPLEMENTED = new ErrorCode(501, "功能未实现/未开启");
     ErrorCode ERROR_CONFIGURATION = new ErrorCode(502, "错误的配置项");
 
+    ErrorCode ERROR_EXTN = new ErrorCode(504, "扩展功能异常");
+
     // ========== 自定义错误段 ==========
     ErrorCode REPEATED_REQUESTS = new ErrorCode(900, "重复请求，请稍后重试"); // 重复请求
     ErrorCode DEMO_DENY = new ErrorCode(901, "演示模式，禁止写操作");
