@@ -5,6 +5,8 @@ import cn.dev33.satoken.session.TokenSign;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.text.StrPool;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.openea.eap.extj.base.UserInfo;
@@ -13,6 +15,14 @@ import org.openea.eap.extj.consts.DeviceType;
 import org.openea.eap.extj.model.OnlineUserModel;
 import org.openea.eap.extj.model.OnlineUserProvider;
 import org.openea.eap.extj.util.data.DataSourceContextHolder;
+import org.openea.eap.framework.common.enums.UserTypeEnum;
+import org.openea.eap.framework.common.exception.ServiceException;
+import org.openea.eap.framework.common.util.spring.EapAppUtil;
+import org.openea.eap.framework.security.core.LoginUser;
+import org.openea.eap.framework.security.core.util.SecurityFrameworkUtils;
+import org.openea.eap.module.system.api.oauth2.OAuth2TokenApi;
+import org.openea.eap.module.system.api.oauth2.dto.OAuth2AccessTokenCheckRespDTO;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Arrays;
@@ -39,6 +49,26 @@ public class UserProvider {
     public UserProvider(RedisUtil redisUtil, CacheKeyUtil cacheKeyUtil) {
         UserProvider.redisUtil = redisUtil;
         UserProvider.cacheKeyUtil = cacheKeyUtil;
+    }
+
+
+    /// eap
+    public static LoginUser getEapLoginUser(){
+        return SecurityFrameworkUtils.getLoginUser();
+    }
+
+    public static UserInfo userInfo(LoginUser loginUser){
+        if(loginUser==null) return null;
+        UserInfo user = new UserInfo();
+        user.setId(""+loginUser.getId());
+        user.setUserId(""+loginUser.getId());
+        String account = loginUser.getUserKey();
+        if(StrUtil.isNotEmpty(account)){
+            user.setUserAccount(loginUser.getUserKey());
+            user.setUserName(loginUser.getUserKey());
+        }
+        // todo load more
+        return user;
     }
 
 
@@ -81,6 +111,9 @@ public class UserProvider {
      */
     public static String getLoginUserId(String token) {
         String loginId = (String) StpUtil.getLoginIdByToken(token);
+        if(StrUtil.isEmpty(loginId)){
+            loginId = getLoginUserId();
+        }
         return parseLoginId(loginId);
     }
 
@@ -91,6 +124,9 @@ public class UserProvider {
      */
     public static String getLoginUserId() {
         String loginId = getUser().getUserId();
+        if(StrUtil.isEmpty(loginId)) {
+            loginId = ""+getEapLoginUser().getId();
+        }
         return parseLoginId(loginId);
     }
 
@@ -256,6 +292,14 @@ public class UserProvider {
      */
     public static UserInfo getUser(String token) {
         UserInfo userInfo = null;
+        if (token != null){
+            LoginUser loginUser = buildLoginUserByToken(token);
+            if(loginUser!=null){
+                userInfo = userInfo(loginUser);
+                return userInfo;
+            }
+        }
+
         String tokens = null;
         if (token != null) {
             tokens = cutToken(token);
@@ -266,16 +310,43 @@ public class UserProvider {
             } catch (Exception e) {
             }
         }
+
         if (tokens != null) {
             if (StpUtil.getLoginIdByToken(tokens) != null) {
                 userInfo = (UserInfo) StpUtil.getTokenSessionByToken(tokens).get(USER_INFO_KEY);
             }
         }
         if (userInfo == null) {
-            userInfo = new UserInfo();
-            userInfo.setId("0");
+            LoginUser loginUser = getEapLoginUser();
+            if(loginUser!=null){
+                userInfo = userInfo(loginUser);
+            }
         }
         return userInfo;
+    }
+
+    private static LoginUser buildLoginUserByToken(String token) {
+        try {
+            Integer userType = UserTypeEnum.ADMIN.getValue();
+            OAuth2TokenApi oauth2TokenApi = (OAuth2TokenApi)EapAppUtil.getBean(OAuth2TokenApi.class);
+            OAuth2AccessTokenCheckRespDTO accessToken = oauth2TokenApi.checkAccessToken(token);
+            if (accessToken == null) {
+                return null;
+            }
+            // 用户类型不匹配，无权限
+            // 注意：只有 /admin-api/* 和 /app-api/* 有 userType，才需要比对用户类型
+            // 类似 WebSocket 的 /ws/* 连接地址，是不需要比对用户类型的
+            if (userType != null
+                    && ObjectUtil.notEqual(accessToken.getUserType(), userType)) {
+                throw new AccessDeniedException("错误的用户类型");
+            }
+            // 构建登录用户
+            return new LoginUser().setId(accessToken.getUserId()).setUserType(accessToken.getUserType())
+                    .setTenantId(accessToken.getTenantId()).setScopes(accessToken.getScopes());
+        } catch (ServiceException serviceException) {
+            // 校验 Token 不通过时，考虑到一些接口是无需登录的，所以直接返回 null 即可
+            return null;
+        }
     }
 
     /**
@@ -284,9 +355,8 @@ public class UserProvider {
      * @return
      */
     public static UserInfo getUser() {
-//        if(StpUtil.getTokenValue() == null){
-//            return  new UserInfo();
-//        }
+
+
         UserInfo userInfo = USER_CACHE.get();
         if (userInfo != null) {
             return userInfo;
@@ -297,6 +367,8 @@ public class UserProvider {
         }
         return userInfo;
     }
+
+
 
     // =================== Token相关操作 ===================
 
