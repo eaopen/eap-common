@@ -1,5 +1,6 @@
 package org.openea.eap.extj.util.wxutil;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import lombok.Cleanup;
@@ -436,6 +437,7 @@ public class HttpUtil {
      */
     public static JSONObject httpRequest(String requestUrl, String requestMethod, String outputStr, String... token) {
         JSONObject jsonObject = null;
+        String logMsg = null;
         try {
             URL url = new URL(requestUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -479,7 +481,12 @@ public class HttpUtil {
             conn.disconnect();
             jsonObject = JSONObject.parseObject(buffer.toString());
         } catch (Exception e) {
-            log.error(e.getMessage());
+            logMsg = String.format("httpRequest error: \r\nrequestUrl=%s, \r\noutputStr=%s, \r\nresult=%s, \r\nmsg=%s", requestUrl, outputStr, jsonObject, e.getMessage());
+            log.error(logMsg, e);
+        }
+        if(StrUtil.isEmpty(logMsg)){
+            logMsg = String.format("httpRequest invoke: \r\nrequestUrl=%s, \r\noutputStr=%s, \r\nresult=%s", requestUrl, outputStr, jsonObject);
+            log.info(logMsg);
         }
         return jsonObject;
     }
