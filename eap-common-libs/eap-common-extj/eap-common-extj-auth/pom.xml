@@ -21,6 +21,12 @@
 
         <dependency>
             <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-module-system-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
             <artifactId>eap-spring-boot-starter-security</artifactId>
         </dependency>
 

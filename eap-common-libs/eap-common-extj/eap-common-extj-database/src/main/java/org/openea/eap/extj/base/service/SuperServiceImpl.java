@@ -10,8 +10,8 @@ import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import org.openea.eap.extj.base.mapper.SuperMapper;
 import org.openea.eap.extj.database.plugins.MyDefaultSqlInjector;
 import org.openea.eap.extj.util.DateUtil;
-import org.openea.eap.extj.util.UserProvider;
 import org.apache.ibatis.binding.MapperMethod;
+import org.openea.eap.framework.security.core.util.SecurityFrameworkUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -34,7 +34,7 @@ public abstract class SuperServiceImpl<M extends SuperMapper<T>, T> extends Serv
         if (tableInfo.isWithLogicDelete() && tableInfo.isWithUpdateFill()) {
             try{
                 if(tableInfo.getPropertyValue(entity, "deleteUserId") == null){
-                    String userId = UserProvider.getLoginUserId();
+                    String userId = ""+SecurityFrameworkUtils.getLoginUserId();
                     if (userId != null) {
                         Date deleteTime = DateUtil.getNowDate();
                         tableInfo.setPropertyValue(entity, "deleteUserId" , userId);
@@ -66,7 +66,7 @@ public abstract class SuperServiceImpl<M extends SuperMapper<T>, T> extends Serv
                     tableInfo.setPropertyValue(instance, tableInfo.getKeyProperty(), e);
                     try{
                         if(tableInfo.getPropertyValue(instance, "deleteUserId") == null){
-                            String userId = UserProvider.getLoginUserId();
+                            String userId = ""+SecurityFrameworkUtils.getLoginUserId();
                             if (userId != null) {
                                 Date deleteTime = DateUtil.getNowDate();
                                 tableInfo.setPropertyValue(instance, "deleteUserId" , userId);
