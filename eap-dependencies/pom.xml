@@ -553,6 +553,12 @@
                 <version>${powerjob.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-official-processors</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
             <!-- 分布式任务调度平台XXL-JOB -->
             <dependency>
                 <groupId>com.xuxueli</groupId>

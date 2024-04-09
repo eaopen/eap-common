@@ -168,5 +168,14 @@ public class PowerJobProperties {
          */
         private Integer healthReportInterval = 10;
 
+        /**
+         * Whether to check quartz job
+         */
+        private boolean checkQuartzJob = false;
+
+        /**
+         * Whether to check spring schedule
+         */
+        private boolean checkSpringSchedule = false;
     }
 }

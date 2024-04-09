@@ -85,6 +85,6 @@ public class EapPowerJobAutoConfiguration {
         /*
          * Create PowerJobSpringWorker object and set properties.
          */
-        return new EapPowerJobSpringWorker(config);
+        return new EapPowerJobSpringWorker(config, properties);
     }
 }
