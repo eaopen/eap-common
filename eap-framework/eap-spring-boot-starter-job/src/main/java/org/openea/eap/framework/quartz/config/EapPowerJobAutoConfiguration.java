@@ -1,6 +1,7 @@
 package org.openea.eap.framework.quartz.config;
 
 import org.openea.eap.framework.quartz.config.properties.PowerJobProperties;
+import org.openea.eap.framework.quartz.core.powerjob.EapPowerJobSpringWorker;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -80,9 +81,10 @@ public class EapPowerJobAutoConfiguration {
         config.setMaxLightweightTaskNum(worker.getMaxLightweightTaskNum());
 
         config.setHealthReportInterval(worker.getHealthReportInterval());
+
         /*
          * Create PowerJobSpringWorker object and set properties.
          */
-        return new PowerJobSpringWorker(config);
+        return new EapPowerJobSpringWorker(config);
     }
 }
