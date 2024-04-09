@@ -80,6 +80,8 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <dom4j.version>2.1.4</dom4j.version>
+
+        <powerjob.version>5.0.1-beta</powerjob.version>
         <xxl-job.version>2.4.0</xxl-job.version>
         <!-- 三方云服务相关 -->
         <okio.version>3.5.0</okio.version>
@@ -199,8 +201,6 @@
                 <artifactId>eap-spring-boot-starter-biz-pay</artifactId>
                 <version>${revision}</version>
             </dependency>
-
-
 
             <!-- Spring 核心 -->
             <dependency>
@@ -539,6 +539,19 @@
                 <version>${flowable.version}</version>
             </dependency>
             <!-- 工作流相关结束 -->
+
+            <!-- 分布式任务调度与计算框架 PowerJob -->
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-worker-spring-boot-starter</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-worker</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
 
             <!-- 分布式任务调度平台XXL-JOB -->
             <dependency>

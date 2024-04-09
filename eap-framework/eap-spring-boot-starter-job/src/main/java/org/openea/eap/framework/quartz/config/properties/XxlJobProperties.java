@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * XxlJob 配置属性
+ *
+ */
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "xxl.job")
