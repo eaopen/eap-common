@@ -1,4 +1,4 @@
-package org.openea.eap.framework.quartz.config.properties;
+package org.openea.eap.framework.schedule.config.properties;
 
 import lombok.Getter;
 import lombok.Setter;

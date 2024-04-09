@@ -1,11 +1,11 @@
-package org.openea.eap.framework.quartz.config;
+package org.openea.eap.framework.schedule.config;
 
 
 //import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.openea.eap.framework.quartz.config.properties.XxlJobProperties;
+import org.openea.eap.framework.schedule.config.properties.XxlJobProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

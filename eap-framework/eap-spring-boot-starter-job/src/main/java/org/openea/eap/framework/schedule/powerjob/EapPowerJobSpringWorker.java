@@ -1,4 +1,4 @@
-package org.openea.eap.framework.quartz.core.powerjob;
+package org.openea.eap.framework.schedule.powerjob;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

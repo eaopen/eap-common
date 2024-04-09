@@ -1,4 +1,4 @@
-package org.openea.eap.framework.quartz.config;
+package org.openea.eap.framework.schedule.config;
 
 import com.alibaba.ttl.TtlRunnable;
 import lombok.extern.slf4j.Slf4j;

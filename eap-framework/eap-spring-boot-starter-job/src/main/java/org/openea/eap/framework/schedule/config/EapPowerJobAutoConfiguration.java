@@ -1,7 +1,7 @@
-package org.openea.eap.framework.quartz.config;
+package org.openea.eap.framework.schedule.config;
 
-import org.openea.eap.framework.quartz.config.properties.PowerJobProperties;
-import org.openea.eap.framework.quartz.core.powerjob.EapPowerJobSpringWorker;
+import org.openea.eap.framework.schedule.config.properties.PowerJobProperties;
+import org.openea.eap.framework.schedule.powerjob.EapPowerJobSpringWorker;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

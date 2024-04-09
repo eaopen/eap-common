@@ -1,4 +1,4 @@
-package org.openea.eap.framework.quartz.core.powerjob;
+package org.openea.eap.framework.schedule.powerjob;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;

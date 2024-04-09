@@ -1,4 +1,4 @@
-package org.openea.eap.framework.quartz.config.properties;
+package org.openea.eap.framework.schedule.config.properties;
 
 import tech.powerjob.common.RemoteConstant;
 import tech.powerjob.common.enums.Protocol;
