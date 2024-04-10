@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.powerjob.common.utils.CommonUtils;
-import tech.powerjob.common.utils.NetUtils;
 import tech.powerjob.worker.PowerJobSpringWorker;
 import tech.powerjob.worker.common.PowerJobWorkerConfig;
 
@@ -43,12 +42,6 @@ public class EapPowerJobAutoConfiguration {
          */
         if (worker.getPort() != null) {
             config.setPort(worker.getPort());
-        } else {
-            int port = worker.getAkkaPort();
-            if (port <= 0) {
-                port = NetUtils.getRandomPort();
-            }
-            config.setPort(port);
         }
         /*
          * appName, name of the application. Applications should be registered in advance to prevent

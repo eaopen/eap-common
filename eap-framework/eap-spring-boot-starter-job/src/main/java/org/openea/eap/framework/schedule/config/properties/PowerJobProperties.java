@@ -1,14 +1,12 @@
 package org.openea.eap.framework.schedule.config.properties;
 
-import tech.powerjob.common.RemoteConstant;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import tech.powerjob.common.enums.Protocol;
 import tech.powerjob.worker.common.constants.StoreStrategy;
 import tech.powerjob.worker.core.processor.ProcessResult;
 import tech.powerjob.worker.core.processor.WorkflowContext;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * PowerJob properties configuration class.
@@ -21,72 +19,6 @@ public class PowerJobProperties {
 
     public Worker getWorker() {
         return worker;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty(replacement = "powerjob.worker.app-name")
-    public String getAppName() {
-        return getWorker().appName;
-    }
-
-    @Deprecated
-    public void setAppName(String appName) {
-        getWorker().setAppName(appName);
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty(replacement = "powerjob.worker.akka-port")
-    public int getAkkaPort() {
-        return getWorker().akkaPort;
-    }
-
-    @Deprecated
-    public void setAkkaPort(int akkaPort) {
-        getWorker().setAkkaPort(akkaPort);
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty(replacement = "powerjob.worker.server-address")
-    public String getServerAddress() {
-        return getWorker().serverAddress;
-    }
-
-    @Deprecated
-    public void setServerAddress(String serverAddress) {
-        getWorker().setServerAddress(serverAddress);
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty(replacement = "powerjob.worker.store-strategy")
-    public StoreStrategy getStoreStrategy() {
-        return getWorker().storeStrategy;
-    }
-
-    @Deprecated
-    public void setStoreStrategy(StoreStrategy storeStrategy) {
-        getWorker().setStoreStrategy(storeStrategy);
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty(replacement = "powerjob.worker.max-result-length")
-    public int getMaxResultLength() {
-        return getWorker().maxResultLength;
-    }
-
-    @Deprecated
-    public void setMaxResultLength(int maxResultLength) {
-        getWorker().setMaxResultLength(maxResultLength);
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty(replacement = "powerjob.worker.allow-lazy-connect-server")
-    public boolean isEnableTestMode() {
-        return getWorker().isAllowLazyConnectServer();
-    }
-
-    @Deprecated
-    public void setEnableTestMode(boolean enableTestMode) {
-        getWorker().setAllowLazyConnectServer(enableTestMode);
     }
 
     /**
@@ -108,16 +40,25 @@ public class PowerJobProperties {
          */
         private String appName;
         /**
-         * Akka port of Powerjob-worker, optional value. Default value of this property is 27777.
-         * If multiple PowerJob-worker nodes were deployed, different, unique ports should be assigned.
-         * Deprecated, please use 'port'
-         */
-        @Deprecated
-        private int akkaPort = RemoteConstant.DEFAULT_WORKER_PORT;
-        /**
          * port
          */
         private Integer port;
+
+        /**
+         * 绑定地址，一般填写本机网卡地址
+         * JVM 参数
+         * BIND_LOCAL_ADDRESS = "powerjob.network.local.address"
+         */
+        private String localAddress;
+        /**
+         * 扩展外部访问地址，用于类似容器内环境
+         * 当存在 NAT 等场景时可通过单独传递外部地址来实现通讯
+         * JVM 参数
+         * NT_EXTERNAL_ADDRESS = "powerjob.network.external.address"
+         * NT_EXTERNAL_PORT = "powerjob.network.external.port"
+         */
+        private String externalAddress;
+        private String externalPort;
         /**
          * Address(es) of Powerjob-server node(s). Ip:port or domain.
          * Example of single Powerjob-server node:
@@ -178,4 +119,5 @@ public class PowerJobProperties {
          */
         private boolean checkSpringSchedule = false;
     }
+
 }
