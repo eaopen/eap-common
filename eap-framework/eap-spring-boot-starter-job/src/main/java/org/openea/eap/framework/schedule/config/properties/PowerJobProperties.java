@@ -74,11 +74,11 @@ public class PowerJobProperties {
         /**
          * Protocol for communication between WORKER and server
          */
-        private Protocol protocol = Protocol.AKKA;
+        private Protocol protocol = Protocol.HTTP;
         /**
          * Local store strategy for H2 database. {@code disk} or {@code memory}.
          */
-        private StoreStrategy storeStrategy = StoreStrategy.DISK;
+        private StoreStrategy storeStrategy = StoreStrategy.MEMORY;
         /**
          * Max length of response result. Result that is longer than the value will be truncated.
          * {@link ProcessResult} max length for #msg
