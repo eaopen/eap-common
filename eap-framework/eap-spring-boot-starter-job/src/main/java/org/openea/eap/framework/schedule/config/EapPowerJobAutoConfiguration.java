@@ -2,6 +2,7 @@ package org.openea.eap.framework.schedule.config;
 
 import org.openea.eap.framework.schedule.config.properties.PowerJobProperties;
 import org.openea.eap.framework.schedule.powerjob.EapPowerJobSpringWorker;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Configuration
 @EnableConfigurationProperties(PowerJobProperties.class)
+@ConditionalOnClass(PowerJobSpringWorker.class)
 @ConditionalOnProperty(prefix = "powerjob.worker", name = "enabled", havingValue = "true", matchIfMissing = false)
 public class EapPowerJobAutoConfiguration {
 
