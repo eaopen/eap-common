@@ -81,6 +81,7 @@
         <javax-mail.version>1.6.2</javax-mail.version>
         <dom4j.version>2.1.4</dom4j.version>
 
+        <jgit.version>6.9.0.202403050737-r</jgit.version>
         <powerjob.version>5.0.1-beta</powerjob.version>
         <xxl-job.version>2.4.0</xxl-job.version>
         <!-- 三方云服务相关 -->
@@ -539,6 +540,13 @@
                 <version>${flowable.version}</version>
             </dependency>
             <!-- 工作流相关结束 -->
+
+            <!-- Git 相关 -->
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
 
             <!-- 分布式任务调度与计算框架 PowerJob -->
             <dependency>
