@@ -20,7 +20,7 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <powerjob.version>5.0.1-beta</powerjob.version>
+<!--        <powerjob.version>5.0.1-beta</powerjob.version>-->
     </properties>
     <dependencies>
         <dependency>
@@ -45,13 +45,11 @@
         <dependency>
             <groupId>tech.powerjob</groupId>
             <artifactId>powerjob-worker</artifactId>
-            <version>${powerjob.version}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.powerjob</groupId>
             <artifactId>powerjob-official-processors</artifactId>
-            <version>${powerjob.version}</version>
         </dependency>
 
         <!-- 3 集成xxl-job 备选 -->
