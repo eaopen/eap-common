@@ -14,7 +14,7 @@
     <url>https://github.com/eaopen/eap-base</url>
 
     <properties>
-        <revision>2.5.1</revision>
+        <revision>2.5.2-SNAPSHOT</revision>
 
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
