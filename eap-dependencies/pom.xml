@@ -14,7 +14,7 @@
     <url>https://github.com/eaopen/eap-base</url>
 
     <properties>
-        <revision>2.5.0</revision>
+        <revision>2.5.1</revision>
 
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
@@ -80,6 +80,10 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <dom4j.version>2.1.4</dom4j.version>
+
+        <jgit.version>6.9.0.202403050737-r</jgit.version>
+        <powerjob.version>5.0.1-beta</powerjob.version>
+        <xxl-job.version>2.4.0</xxl-job.version>
         <!-- 三方云服务相关 -->
         <okio.version>3.5.0</okio.version>
         <okhttp3.version>4.11.0</okhttp3.version>
@@ -147,27 +151,12 @@
             </dependency>
             <dependency>
                 <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-biz-sms</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-biz-pay</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-biz-tenant</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-biz-data-permission</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-biz-social</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -188,6 +177,29 @@
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-desensitize</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-biz-social</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-biz-sms</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-biz-file</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-biz-pay</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -230,7 +242,21 @@
             <!-- 集成Obpm代理模块 -->
             <dependency>
                 <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-integration-obpm</artifactId>
+                <artifactId>eap-obpm-proxy</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 工作流BPM(flowable) -->
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-module-bpm-biz</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 报表Report(jimuReport) -->
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-module-report-biz</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -514,6 +540,39 @@
                 <version>${flowable.version}</version>
             </dependency>
             <!-- 工作流相关结束 -->
+
+            <!-- Git 相关 -->
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+
+            <!-- 分布式任务调度与计算框架 PowerJob -->
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-worker-spring-boot-starter</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-worker</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-official-processors</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
+            <!-- 分布式任务调度平台XXL-JOB -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
 
             <!-- 工具类相关 -->
             <dependency>
@@ -912,7 +971,6 @@
                 <version>${ureport2.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>org.dom4j</groupId>
                 <artifactId>dom4j</artifactId>
@@ -991,6 +1049,12 @@
     <profiles>
         <profile>
             <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.name>dev</profile.name>
+            </properties>
             <distributionManagement>
                 <repository>
                     <id>openea-reps-mvn</id>

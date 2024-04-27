@@ -11,7 +11,6 @@ import java.math.RoundingMode;
  *
  */
 public class MoneyUtils {
-
     /**
      * 计算百分比金额，四舍五入
      *
@@ -19,8 +18,12 @@ public class MoneyUtils {
      * @param rate  百分比，例如说 56.77% 则传入 56.77
      * @return 百分比金额
      */
-    public static Double calculateRatePrice(Number price, Double rate) {
-        return (double) calculateRatePrice(price, rate, 0, RoundingMode.HALF_UP).intValue();
+    public static Integer calculateRatePrice(Integer price, Double rate) {
+        return calculateRatePrice(price, rate, 0, RoundingMode.HALF_UP).intValue();
+    }
+
+    public static Double calculateRatePrice(Double price, Double rate) {
+        return calculateRatePrice(price, rate, 0, RoundingMode.HALF_UP).doubleValue();
     }
 
     /**
@@ -30,7 +33,11 @@ public class MoneyUtils {
      * @param rate  百分比，例如说 56.77% 则传入 56.77
      * @return 百分比金额
      */
-    public static Double calculateRatePriceFloor(Number price, Double rate) {
+    public static Integer calculateRatePriceFloor(Integer price, Double rate) {
+        return calculateRatePrice(price, rate, 0, RoundingMode.FLOOR).intValue();
+    }
+
+    public static Double calculateRatePriceFloor(Double price, Double rate) {
         return calculateRatePrice(price, rate, 0, RoundingMode.FLOOR).doubleValue();
     }
 

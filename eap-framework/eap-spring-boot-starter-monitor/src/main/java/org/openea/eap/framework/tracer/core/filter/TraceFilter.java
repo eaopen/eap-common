@@ -1,5 +1,6 @@
 package org.openea.eap.framework.tracer.core.filter;
 
+import cn.hutool.core.util.StrUtil;
 import org.openea.eap.framework.common.util.monitor.TracerUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -23,8 +24,12 @@ public class TraceFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        // 设置响应 traceId
-        response.addHeader(HEADER_NAME_TRACE_ID, TracerUtils.getTraceId());
+        // 设置响应 traceId, 允许外部传入
+        String traceId = request.getHeader(HEADER_NAME_TRACE_ID);
+        if(StrUtil.isEmpty(traceId)){
+            traceId = TracerUtils.getTraceId();
+            response.addHeader(HEADER_NAME_TRACE_ID, traceId);
+        }
         // 继续过滤
         chain.doFilter(request, response);
     }

@@ -14,8 +14,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>eap-common-extj-core</module>
-        <module>eap-common-extj-auth</module>
-        <module>eap-common-extj-database</module>
     </modules>
 
 </project>

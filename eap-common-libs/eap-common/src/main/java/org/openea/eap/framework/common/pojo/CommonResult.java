@@ -60,6 +60,10 @@ public class CommonResult<T> implements Serializable {
         return error(errorCode.getCode(), errorCode.getMsg());
     }
 
+    public static <T> CommonResult<T> error(ErrorCode errorCode, String detailMsg) {
+        return error(errorCode.getCode(), errorCode.getMsg()+"["+detailMsg+"]");
+    }
+
     public static <T> CommonResult<T> success(T data) {
         CommonResult<T> result = new CommonResult<>();
         result.code = GlobalErrorCodeConstants.SUCCESS.getCode();
