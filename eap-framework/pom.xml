@@ -10,16 +10,12 @@
     </parent>
     <packaging>pom</packaging>
     <modules>
-        <module>eap-spring-boot-starter-banner</module>
         <module>eap-spring-boot-starter-redis</module>
 
         <module>eap-spring-boot-starter-monitor</module>
         <module>eap-spring-boot-starter-protection</module>
         <module>eap-spring-boot-starter-job</module>
         <module>eap-spring-boot-starter-mq</module>
-
-        <module>eap-spring-boot-starter-captcha</module>
-        <module>eap-spring-boot-starter-desensitize</module>
 
         <module>eap-spring-boot-starter-biz-ip</module>
 

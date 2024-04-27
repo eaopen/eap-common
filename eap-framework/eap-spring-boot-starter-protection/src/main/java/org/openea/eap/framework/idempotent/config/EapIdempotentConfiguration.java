@@ -4,6 +4,7 @@ import org.openea.eap.framework.idempotent.core.aop.IdempotentAspect;
 import org.openea.eap.framework.idempotent.core.keyresolver.impl.DefaultIdempotentKeyResolver;
 import org.openea.eap.framework.idempotent.core.keyresolver.impl.ExpressionIdempotentKeyResolver;
 import org.openea.eap.framework.idempotent.core.keyresolver.IdempotentKeyResolver;
+import org.openea.eap.framework.idempotent.core.keyresolver.impl.UserIdempotentKeyResolver;
 import org.openea.eap.framework.idempotent.core.redis.IdempotentRedisDAO;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.openea.eap.framework.redis.config.EapRedisAutoConfiguration;
@@ -30,6 +31,11 @@ public class EapIdempotentConfiguration {
     @Bean
     public DefaultIdempotentKeyResolver defaultIdempotentKeyResolver() {
         return new DefaultIdempotentKeyResolver();
+    }
+
+    @Bean
+    public UserIdempotentKeyResolver userIdempotentKeyResolver() {
+        return new UserIdempotentKeyResolver();
     }
 
     @Bean
