@@ -11,14 +11,9 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "config")
+//@ConfigurationProperties(prefix = "extj.config")
 public class ConfigValueUtil {
 
-//    /**
-//     * 环境路径
-//     */
-//    @Value("${config.Path:}")
-//    private String path;
     /**
      * 数据库备份文件路径
      */
@@ -71,30 +66,29 @@ public class ConfigValueUtil {
     /**
      * 允许上传文件类型
      */
-    @Value("${config.AllowUploadFileType:}")
+    @Value("${config.AllowUploadFileType:jpg,gif,png,bmp,jpeg,doc,docx,ppt,pptx,xls,xlsx,pdf,txt,rar,zip,csv,mp3}")
     private String allowUploadFileType;
     /**
      * 允许图片类型
      */
-    @Value("${config.AllowUploadImageType:}")
+    @Value("${config.AllowUploadImageType:jpg,gif,png,bmp,jpeg,tiff,psd,swf,svg,pcx,dxf,wmf,emf,lic,eps,tga}")
     private String allowUploadImageType;
 
     /**
      * 允许预览类型
      */
-    @Value("${config.AllowPreviewFileType:}")
+    @Value("${config.AllowPreviewFileType:doc,docx,xls,xlsx,ppt,pptx,pdf,jpg,gif,png,bmp,jpeg}")
     private String allowPreviewFileType;
 
     /**
      * 预览方式
      */
-    @Value("${config.PreviewType:}")
-    private String previewType;
+    private String previewType = "kkfile";
 
     /**
      * 预览方式
      */
-    @Value("${config.kkFileUrl:}")
+    @Value("${config.kkFileUrl:/kkFileView}")
     private String kkFileUrl;
 
     /**
@@ -104,7 +98,7 @@ public class ConfigValueUtil {
     /**
      * 代码生成器命名空间
      */
-    @Value("${config.CodeAreasName:}")
+    @Value("${config.CodeAreasName:ext1Code}")
     private String codeAreasName;
 
     /**
@@ -200,18 +194,15 @@ public class ConfigValueUtil {
     /**
      * 软件的错误报告
      */
-    @Value("${config.ErrorReport:}")
-    private String errorReport;
+    private String errorReport = "false";
     /**
      * 软件的错误报告发给谁
      */
-    @Value("${config.ErrorReportTo:}")
-    private String errorReportTo;
+    private String errorReportTo = "none@xxx.com";
     /**
      * 系统日志启用：true、false
      */
-    @Value("${config.RecordLog:}")
-    private String recordLog;
+    private String recordLog = "false";
     /**
      * 多租户启用：true、false
      */
@@ -219,7 +210,6 @@ public class ConfigValueUtil {
     /**
      * 多租户接口
      */
-    @Value("${config.MultiTenancyUrl:}")
     private String multiTenancyUrl;
     /**
      * 多租户模式
@@ -240,13 +230,11 @@ public class ConfigValueUtil {
     /**
      * 版本
      */
-    @Value("${config.SoftVersion:}")
-    private String softVersion;
+    private String softVersion = "3.x";
     /**
      * 推送是否启动：false、true
      */
-    @Value("${config.IgexinEnabled:}")
-    private String igexinEnabled;
+    private String igexinEnabled = "false";
     /**
      * APPID
      */
@@ -255,48 +243,25 @@ public class ConfigValueUtil {
     /**
      * APPKEY
      */
-    @Value("${config.IgexinAppkey:}")
-    private String igexinAppkey;
-    /**
-     * MASTERSECRET
-     */
-    @Value("${config.IgexinMastersecret:}")
-    private String igexinMastersecret;
+    private String igexinAppkey = "";
+    private String igexinMastersecret = "";
 
-    @Value("${config.AppUpdateContent:}")
-    private String appUpdateContent;
-    @Value("${config.AppVersion:}")
-    private String appVersion;
+    private String appUpdateContent = ";";
 
-    /**
-     * -------------租户库配置-----------
-     */
+    private String appVersion = "3.x";
 
-
-
-    /**
-     * -------------跨域配置-----------
-     */
-//    @Value("${config.Origins}")
-//    private String origins;
-//    @Value("${config.Methods}")
-//    private String methods;
 
     /**
      * -------------是否开启测试环境，admin账户可以无限登陆，并且无法修改密码-----------
      */
-    @Value("${config.TestVersion:}")
-    private String testVersion;
+    private String testVersion = "3.0";
 
     /**
      * 是否验证请求是否来自内部
      */
     private boolean enableInnerAuth;
 
-    /**
-     * -------------uniPush在线-----------
-     */
-    @Value("${config.AppPushUrl}")
+    // https://11111.bspapp.com/unipush
     private String appPushUrl;
 
 
