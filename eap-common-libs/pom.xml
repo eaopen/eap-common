@@ -13,7 +13,7 @@
         <module>eap-common</module>
 
         <!-- 可选扩展功能，可视化设计依赖此模块 -->
-        <module>eap-common-extj</module>
+        <module>eap-common-extj-core</module>
     </modules>
 
     <artifactId>eap-common-libs</artifactId>
