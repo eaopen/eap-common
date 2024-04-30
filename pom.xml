@@ -9,7 +9,9 @@
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <description>EAP项目基础脚手架</description>
+    <description>EAP base framework
+        依赖包、基础框架、基本工具以及技术依赖包
+    </description>
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
