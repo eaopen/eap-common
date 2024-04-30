@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-//@ConfigurationProperties(prefix = "extj.config")
+@ConfigurationProperties(prefix = "extj.config")
 public class ConfigValueUtil {
 
     /**
@@ -206,7 +206,8 @@ public class ConfigValueUtil {
     /**
      * 多租户启用：true、false
      */
-    private boolean multiTenancy = false;
+    @Value("${eap.tenant.enable:false}")
+    private boolean multiTenancy;
     /**
      * 多租户接口
      */
