@@ -14,10 +14,10 @@
     <url>https://github.com/eaopen/eap-base</url>
 
     <properties>
-        <revision>2.6.0-SNAPSHOT</revision>
-        <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
+        <revision>2.6.1-SNAPSHOT</revision>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.18</spring.boot.version>
+        <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
         <!-- Web 相关 -->
         <springdoc.version>1.6.15</springdoc.version>
         <knife4j.version>4.3.0</knife4j.version>
@@ -193,38 +193,6 @@
                 <artifactId>eap-spring-boot-starter-websocket</artifactId>
                 <version>${revision}</version>
             </dependency>
-
-            <!-- ==eap 扩展模块== -->
-
-            <!-- 集成平台内IM消息 -->
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-extj-message-rest</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <!-- 集成Obpm代理模块 -->
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-obpm-proxy</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <!-- 工作流BPM(flowable) -->
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-module-bpm-biz</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <!-- 报表Report(jimuReport) -->
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-module-report-biz</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <!-- ==eap 扩展模块== -->
 
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
@@ -555,30 +523,7 @@
             </dependency>
 
 
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-common-extj</artifactId>
-                <version>${revision}</version>
-            </dependency>
 
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-common-extj-core</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-common-extj-auth</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-common-extj-database</artifactId>
-                <version>${revision}</version>
-            </dependency>
 
 
             <dependency>

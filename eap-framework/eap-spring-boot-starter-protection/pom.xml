@@ -21,6 +21,7 @@
             <groupId>io.github.eaopen</groupId>
             <artifactId>eap-spring-boot-starter-web</artifactId>
             <scope>provided</scope> <!-- 设置为 provided，只有限流、幂等使用到 -->
+            <optional>true</optional>
         </dependency>
 
         <!-- DB 相关 -->
