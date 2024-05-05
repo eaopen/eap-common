@@ -17,6 +17,7 @@
         <revision>2.6.2-SNAPSHOT</revision>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.18</spring.boot.version>
+        <spring.ai.version>1.0.0-SNAPSHOT</spring.ai.version>
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
         <!-- Web 相关 -->
         <springdoc.version>1.6.15</springdoc.version>
@@ -124,6 +125,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring.ai.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -523,15 +532,6 @@
             </dependency>
 
 
-
-
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-excel</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -917,6 +917,22 @@
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
     </repositories>
 
