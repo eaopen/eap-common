@@ -205,23 +205,23 @@ OpenEAP前后端分离，采用后端Spring boot 2.x单体多模块，前端vue2
 |---------------------------------------------------------------------------------------------|---------------|-------------|----------------------------------------------------------------|
 | [Spring Boot](https://spring.io/projects/spring-boot)                                       | 应用开发框架        | 2.7.12      | [文档](https://github.com/YunaiV/SpringBoot-Labs)                |
 | [MySQL](https://www.mysql.com/cn/)                                                          | 数据库服务器        | 5.7 / 8.0+  |                                                                |
-| [Druid](https://github.com/alibaba/druid)                                                   | JDBC 连接池、监控组件 | 1.2.16      | [文档](http://www.iocoder.cn/Spring-Boot/datasource-pool/?eap) |
-| [MyBatis Plus](https://mp.baomidou.com/)                                                    | MyBatis 增强工具包 | 3.5.3.1     | [文档](http://www.iocoder.cn/Spring-Boot/MyBatis/?eap)         |
-| [Dynamic Datasource](https://dynamic-datasource.com/)                                       | 动态数据源         | 3.6.1       | [文档](http://www.iocoder.cn/Spring-Boot/datasource-pool/?eap) |
+| [Druid](https://github.com/alibaba/druid)                                                   | JDBC 连接池、监控组件 | 1.2.16      | [文档](https://yu0doc.openea.site/Spring-Boot/datasource-pool/?eap) |
+| [MyBatis Plus](https://mp.baomidou.com/)                                                    | MyBatis 增强工具包 | 3.5.3.1     | [文档](https://yu0doc.openea.site/Spring-Boot/MyBatis/?eap)         |
+| [Dynamic Datasource](https://dynamic-datasource.com/)                                       | 动态数据源         | 3.6.1       | [文档](https://yu0doc.openea.site/Spring-Boot/datasource-pool/?eap) |
 | [Redis](https://redis.io/)                                                                  | key-value 数据库 | 5.0 / 6.0   |                                                                |
-| [Redisson](https://github.com/redisson/redisson)                                            | Redis 客户端     | 3.18.0      | [文档](http://www.iocoder.cn/Spring-Boot/Redis/?eap)           |
-| [Spring MVC](https://github.com/spring-projects/spring-framework/tree/master/spring-webmvc) | MVC 框架        | 5.3.24      | [文档](http://www.iocoder.cn/SpringMVC/MVC/?eap)               |
-| [Spring Security](https://github.com/spring-projects/spring-security)                       | Spring 安全框架   | 5.7.6       | [文档](http://www.iocoder.cn/Spring-Boot/Spring-Security/?eap) |
-| [Hibernate Validator](https://github.com/hibernate/hibernate-validator)                     | 参数校验组件        | 6.2.5       | [文档](http://www.iocoder.cn/Spring-Boot/Validation/?eap)      |
-| [Flowable](https://github.com/flowable/flowable-engine)                                     | 工作流引擎         | 6.8.0       | [文档](https://doc.iocoder.cn/bpm/)                              |
-| [Quartz](https://github.com/quartz-scheduler)                                               | 任务调度组件        | 2.3.2       | [文档](http://www.iocoder.cn/Spring-Boot/Job/?eap)             |
-| [Springdoc](https://springdoc.org/)                                                         | Swagger 文档    | 1.6.15      | [文档](http://www.iocoder.cn/Spring-Boot/Swagger/?eap)         |
-| [Resilience4j](https://github.com/resilience4j/resilience4j)                                | 服务保障组件        | 1.7.1       | [文档](http://www.iocoder.cn/Spring-Boot/Resilience4j/?eap)    |
-| [SkyWalking](https://skywalking.apache.org/)                                                | 分布式应用追踪系统     | 8.12.0      | [文档](http://www.iocoder.cn/Spring-Boot/SkyWalking/?eap)      |
-| [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin)                       | Spring Boot 监控平台 | 2.7.10      | [文档](http://www.iocoder.cn/Spring-Boot/Admin/?eap)           |
+| [Redisson](https://github.com/redisson/redisson)                                            | Redis 客户端     | 3.18.0      | [文档](https://yu0doc.openea.site/Spring-Boot/Redis/?eap)           |
+| [Spring MVC](https://github.com/spring-projects/spring-framework/tree/master/spring-webmvc) | MVC 框架        | 5.3.24      | [文档](https://yu0doc.openea.site/SpringMVC/MVC/?eap)               |
+| [Spring Security](https://github.com/spring-projects/spring-security)                       | Spring 安全框架   | 5.7.6       | [文档](https://yu0doc.openea.site/Spring-Boot/Spring-Security/?eap) |
+| [Hibernate Validator](https://github.com/hibernate/hibernate-validator)                     | 参数校验组件        | 6.2.5       | [文档](https://yu0doc.openea.site/Spring-Boot/Validation/?eap)      |
+| [Flowable](https://github.com/flowable/flowable-engine)                                     | 工作流引擎         | 6.8.0       | [文档](https://yu1doc.openea.site/bpm/)                              |
+| [Quartz](https://github.com/quartz-scheduler)                                               | 任务调度组件        | 2.3.2       | [文档](https://yu0doc.openea.site/Spring-Boot/Job/?eap)             |
+| [Springdoc](https://springdoc.org/)                                                         | Swagger 文档    | 1.6.15      | [文档](https://yu0doc.openea.site/Spring-Boot/Swagger/?eap)         |
+| [Resilience4j](https://github.com/resilience4j/resilience4j)                                | 服务保障组件        | 1.7.1       | [文档](https://yu0doc.openea.site/Spring-Boot/Resilience4j/?eap)    |
+| [SkyWalking](https://skywalking.apache.org/)                                                | 分布式应用追踪系统     | 8.12.0      | [文档](https://yu0doc.openea.site/Spring-Boot/SkyWalking/?eap)      |
+| [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin)                       | Spring Boot 监控平台 | 2.7.10      | [文档](https://yu0doc.openea.site/Spring-Boot/Admin/?eap)           |
 | [Jackson](https://github.com/FasterXML/jackson)                                             | JSON 工具库      | 2.13.3      |                                                                |
-| [MapStruct](https://mapstruct.org/)                                                         | Java Bean 转换  | 1.5.5.Final | [文档](http://www.iocoder.cn/Spring-Boot/MapStruct/?eap)       |
-| [Lombok](https://projectlombok.org/)                                                        | 消除冗长的 Java 代码 | 1.18.26     | [文档](http://www.iocoder.cn/Spring-Boot/Lombok/?eap)          |
+| [MapStruct](https://mapstruct.org/)                                                         | Java Bean 转换  | 1.5.5.Final | [文档](https://yu0doc.openea.site/Spring-Boot/MapStruct/?eap)       |
+| [Lombok](https://projectlombok.org/)                                                        | 消除冗长的 Java 代码 | 1.18.26     | [文档](https://yu0doc.openea.site/Spring-Boot/Lombok/?eap)          |
 | [JUnit](https://junit.org/junit5/)                                                          | Java 单元测试框架   | 5.8.2       | -                                                              |
 | [Mockito](https://github.com/mockito/mockito)                                               | Java Mock 框架  | 4.8.0       | -                                                              |
 | [APISIX](https://github.com/apache/apisix)                                                  | API Gateway   | 3.2.1       | -                                                              |
@@ -361,5 +361,5 @@ https://github.com/PanJiaChen/vue-element-admin
 
 ## 🐶 参考--芋道开源新手必读
 * 演示地址【Vue2 + element-ui】：<http://dashboard.eap.iocoder.cn>
-* 启动文档：<https://doc.iocoder.cn/quick-start/>
-* 视频教程：<https://doc.iocoder.cn/video/>
+* 启动文档：<https://yu1doc.openea.site/quick-start/>
+* 视频教程：<https://yu1doc.openea.site/video/>
