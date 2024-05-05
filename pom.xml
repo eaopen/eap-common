@@ -15,7 +15,7 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.6.1</revision>
+        <revision>2.6.2-SNAPSHOT</revision>
         <!-- Maven 相关 -->
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -32,7 +32,7 @@
 
     <modules>
         <module>eap-common-libs</module>
-        <module>eap-framework</module>
+        <module>eap-framework1</module>
     </modules>
 
     <licenses>

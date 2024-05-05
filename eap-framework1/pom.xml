@@ -13,7 +13,6 @@
         <module>eap-spring-boot-starter-redis</module>
 
         <module>eap-spring-boot-starter-monitor</module>
-        <module>eap-spring-boot-starter-protection</module>
         <module>eap-spring-boot-starter-job</module>
         <module>eap-spring-boot-starter-mq</module>
 
@@ -21,7 +20,7 @@
 
     </modules>
 
-    <artifactId>eap-framework</artifactId>
+    <artifactId>eap-framework1</artifactId>
     <description>
         该包是技术组件，每个子包，代表一个组件。每个组件包括两部分：
             1. core 包：是该组件的核心封装
