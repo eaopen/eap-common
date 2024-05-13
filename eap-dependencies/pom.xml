@@ -14,7 +14,7 @@
     <url>https://github.com/eaopen/eap-base</url>
 
     <properties>
-        <revision>2.6.2-SNAPSHOT</revision>
+        <revision>2.6.3-SNAPSHOT</revision>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.18</spring.boot.version>
         <spring.ai.version>1.0.0-SNAPSHOT</spring.ai.version>
