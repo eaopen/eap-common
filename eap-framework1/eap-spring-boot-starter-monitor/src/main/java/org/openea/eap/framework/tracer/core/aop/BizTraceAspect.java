@@ -2,9 +2,6 @@ package org.openea.eap.framework.tracer.core.aop;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import org.openea.eap.framework.tracer.core.annotation.BizTrace;
-import org.openea.eap.framework.common.util.spring.SpringExpressionUtils;
-import org.openea.eap.framework.tracer.core.util.TracerFrameworkUtils;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.opentracing.tag.Tags;
@@ -13,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.openea.eap.framework.common.util.spring.SpringExpressionUtils;
+import org.openea.eap.framework.tracer.core.annotation.BizTrace;
+import org.openea.eap.framework.tracer.core.util.TracerFrameworkUtils;
 
 import java.util.Map;
 

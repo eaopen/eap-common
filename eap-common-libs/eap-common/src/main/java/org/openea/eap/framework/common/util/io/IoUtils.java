@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import java.io.InputStream;
 
 /**
- * IO 工具类，用于 {@link cn.hutool.core.io.IoUtil} 缺失的方法
+ * IO 工具类，用于 {@link IoUtil} 缺失的方法
  *
  */
 public class IoUtils {

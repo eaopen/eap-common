@@ -1,10 +1,10 @@
 package org.openea.eap.framework.common.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.openea.eap.framework.common.exception.ErrorCode;
 import org.openea.eap.framework.common.exception.ServiceException;
 import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;

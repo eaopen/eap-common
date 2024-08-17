@@ -1,9 +1,9 @@
 package org.openea.eap.framework.ip.core;
 
-import org.openea.eap.framework.ip.core.enums.AreaTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.openea.eap.framework.ip.core.enums.AreaTypeEnum;
 
 import java.util.List;
 

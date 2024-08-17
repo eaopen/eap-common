@@ -1,7 +1,7 @@
 package org.openea.eap.framework.mq.redis.core.pubsub;
 
-import org.openea.eap.framework.mq.redis.core.message.AbstractRedisMessage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openea.eap.framework.mq.redis.core.message.AbstractRedisMessage;
 
 /**
  * Redis Channel Message 抽象类

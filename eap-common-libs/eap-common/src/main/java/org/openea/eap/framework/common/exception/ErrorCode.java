@@ -1,8 +1,8 @@
 package org.openea.eap.framework.common.exception;
 
+import lombok.Data;
 import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
 import org.openea.eap.framework.common.exception.enums.ServiceErrorCodeRange;
-import lombok.Data;
 
 /**
  * 错误码对象

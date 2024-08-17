@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 时间工具类，用于 {@link java.time.LocalDateTime}
+ * 时间工具类，用于 {@link LocalDateTime}
  *
  */
 public class LocalDateTimeUtils {

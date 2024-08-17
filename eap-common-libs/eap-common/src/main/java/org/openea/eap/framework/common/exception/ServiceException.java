@@ -1,8 +1,8 @@
 package org.openea.eap.framework.common.exception;
 
-import org.openea.eap.framework.common.exception.enums.ServiceErrorCodeRange;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.openea.eap.framework.common.exception.enums.ServiceErrorCodeRange;
 
 /**
  * 业务逻辑异常 Exception

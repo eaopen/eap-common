@@ -1,9 +1,9 @@
 package org.openea.eap.framework.mq.redis.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openea.eap.framework.mq.redis.core.RedisMQTemplate;
 import org.openea.eap.framework.mq.redis.core.interceptor.RedisMessageInterceptor;
 import org.openea.eap.framework.redis.config.EapRedisAutoConfiguration;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;

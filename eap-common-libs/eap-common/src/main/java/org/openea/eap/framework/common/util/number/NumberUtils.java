@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import java.math.BigDecimal;
 
 /**
- * 数字的工具类，补全 {@link cn.hutool.core.util.NumberUtil} 的功能
+ * 数字的工具类，补全 {@link NumberUtil} 的功能
  *
  */
 public class NumberUtils {

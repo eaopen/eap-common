@@ -1,8 +1,8 @@
 package org.openea.eap.framework.ip.core.enums;
 
-import org.openea.eap.framework.common.core.IntArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.openea.eap.framework.common.core.IntArrayValuable;
 
 import java.util.Arrays;
 

@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 import static java.util.Collections.singletonList;
 
 /**
- * {@link org.openea.eap.framework.common.pojo.PageParam} 工具类
+ * {@link PageParam} 工具类
  *
  */
 public class PageUtils {

@@ -1,7 +1,7 @@
 package org.openea.eap.framework.mq.redis.core.stream;
 
-import org.openea.eap.framework.mq.redis.core.message.AbstractRedisMessage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openea.eap.framework.mq.redis.core.message.AbstractRedisMessage;
 
 /**
  * Redis Stream Message 抽象类

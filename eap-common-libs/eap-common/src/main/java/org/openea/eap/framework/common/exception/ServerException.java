@@ -1,8 +1,8 @@
 package org.openea.eap.framework.common.exception;
 
-import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
 
 /**
  * 服务器异常 Exception
