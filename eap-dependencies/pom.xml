@@ -55,6 +55,8 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <hutool.version>5.8.29</hutool.version>
         <easyexcel.verion>3.3.4</easyexcel.verion>
+        <nimbus-jose-jwt.version>9.40</nimbus-jose-jwt.version>
+        <jjwt.version>0.12.6</jjwt.version>
         <velocity.version>2.3</velocity.version>
         <fastjson.version>1.2.83</fastjson.version>
         <guava.version>33.2.1-jre</guava.version>
@@ -460,6 +462,24 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <dependency>
