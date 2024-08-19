@@ -55,17 +55,36 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <hutool.version>5.8.29</hutool.version>
         <easyexcel.verion>3.3.4</easyexcel.verion>
+        <poi.version>4.1.2</poi.version>
+        <easypoi-base.version>4.4.0</easypoi-base.version>
         <nimbus-jose-jwt.version>9.40</nimbus-jose-jwt.version>
         <jjwt.version>0.12.6</jjwt.version>
         <velocity.version>2.3</velocity.version>
+        <screw.version>1.0.5</screw.version>
         <fastjson.version>1.2.83</fastjson.version>
         <guava.version>33.2.1-jre</guava.version>
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
-        <commons-net.version>3.11.1</commons-net.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <commons-net.version>3.10.0</commons-net.version>
+        <commons-text.version>1.10.0</commons-text.version>
         <jsch.version>0.1.55</jsch.version>
         <tika-core.version>2.9.2</tika-core.version>
         <ip2region.version>2.7.0</ip2region.version>
         <bizlog-sdk.version>3.0.6</bizlog-sdk.version>
+        <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
+        <sa-token.version>1.34.0</sa-token.version>
+        <nimbus-jose-jwt.version>9.22</nimbus-jose-jwt.version>
+        <pagehelper.version>5.3.2</pagehelper.version>
+        <zxing.version>3.5.1</zxing.version>
+        <pinyin4j.version>2.5.1</pinyin4j.version>
+        <javax-mail.version>1.6.2</javax-mail.version>
+        <dom4j.version>2.1.4</dom4j.version>
+
+        <jgit.version>6.9.0.202403050737-r</jgit.version>
+        <powerjob.version>5.0.1-beta</powerjob.version>
+        <xxl-job.version>2.4.0</xxl-job.version>
         <!-- 三方云服务相关 -->
         <okio.version>3.5.0</okio.version>
         <okhttp3.version>4.11.0</okhttp3.version>
@@ -76,6 +95,24 @@
         <xercesImpl.version>2.12.2</xercesImpl.version>
         <weixin-java.version>4.6.0</weixin-java.version>
     </properties>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/eaopen/openea-eap</url>
+        <connection>https://github.com/eaopen/openea-eap.git</connection>
+        <developerConnection>https://github.com/eaopen</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>openea</name>
+            <url>https://github.com/eaopen</url>
+        </developer>
+    </developers>
 
     <dependencyManagement>
         <dependencies>
@@ -102,6 +139,11 @@
             </dependency>
             <dependency>
                 <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-biz-i18n</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-biz-tenant</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -115,6 +157,7 @@
                 <artifactId>eap-spring-boot-starter-biz-ip</artifactId>
                 <version>${revision}</version>
             </dependency>
+
 
             <!-- Spring 核心 -->
             <dependency>
@@ -174,6 +217,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <dependency>
@@ -423,7 +471,33 @@
             </dependency>
             <!-- 工作流相关结束 -->
 
-            <!-- 工具类相关 -->
+            <!-- Git 相关 -->
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+
+            <!-- 分布式任务调度与计算框架 PowerJob -->
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-worker-spring-boot-starter</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-worker</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-official-processors</artifactId>
+                <version>${powerjob.version}</version>
+            </dependency>
+
+            <!-- 分布式任务调度平台XXL-JOB -->
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-common</artifactId>
@@ -465,21 +539,32 @@
             </dependency>
 
             <dependency>
-                <groupId>com.nimbusds</groupId>
-                <artifactId>nimbus-jose-jwt</artifactId>
-                <version>${nimbus-jose-jwt.version}</version>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
+            <!-- commons-text -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${commons-text.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-api</artifactId>
-                <version>${jjwt.version}</version>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-impl</artifactId>
-                <version>${jjwt.version}</version>
-                <scope>runtime</scope>
+                <groupId>com.github.yitter</groupId>
+                <artifactId>yitter-idgenerator</artifactId>
+                <version>${yitter-idgenerator.version}</version>
             </dependency>
 
             <dependency>
@@ -488,9 +573,30 @@
                 <version>${easyexcel.verion}</version>
             </dependency>
             <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons-io.version}</version>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-base</artifactId>
+                <version>${easypoi-base.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>commons-compress</artifactId>
+                        <groupId>org.apache.commons</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${poi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tika</groupId>
@@ -508,6 +614,22 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.smallbun.screw</groupId>
+                <artifactId>screw-core</artifactId> <!-- 实现数据库文档 -->
+                <version>${screw.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.freemarker</groupId>
+                        <artifactId>freemarker</artifactId> <!-- 移除 Freemarker 依赖，采用 Velocity 作为模板引擎 -->
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.alibaba</groupId>
+                        <artifactId>fastjson</artifactId> <!-- 最新版screw-core1.0.5依赖fastjson1.2.73存在漏洞，移除。 -->
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -557,6 +679,99 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
+            </dependency>
+
+            <!-- javax.mail => jakarta.mail -->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${javax-mail.version}</version>
+            </dependency>
+
+            <!-- 第三方依赖 -->
+            <!-- 安全认证 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-jwt</artifactId>
+                <version>${sa-token.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>cn.hutool</groupId>
+                        <artifactId>hutool-jwt</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-dao-redis-jackson</artifactId>
+                <version>${sa-token.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring-boot-starter-data-redis</artifactId>
+                        <groupId>org.springframework.boot</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-core</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!--pagehelper分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+
+            <!--二维码-->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+
+            <!-- 拼音 -->
+            <dependency>
+                <groupId>com.belerweb</groupId>
+                <artifactId>pinyin4j</artifactId>
+                <version>${pinyin4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.owasp.antisamy</groupId>
+                <artifactId>antisamy</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>commons-io</artifactId>
+                        <groupId>commons-io</groupId>
+                    </exclusion>
+                </exclusions>
+                <version>1.7.3</version>
             </dependency>
 
             <!-- 三方云服务相关 -->
