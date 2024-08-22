@@ -85,6 +85,7 @@
         <jgit.version>6.9.0.202403050737-r</jgit.version>
         <powerjob.version>5.0.1-beta</powerjob.version>
         <xxl-job.version>2.4.0</xxl-job.version>
+        <guice.version>5.1.0</guice.version>
         <!-- 三方云服务相关 -->
         <okio.version>3.5.0</okio.version>
         <okhttp3.version>4.11.0</okhttp3.version>
@@ -137,6 +138,20 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-boot-common-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-biz-i18n</artifactId>
@@ -186,11 +201,20 @@
                 <version>${revision}</version>
             </dependency>
 
+            <!-- spring boot3/openapi3 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
+
+            <!-- spring boot2/openapi2 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
@@ -497,13 +521,6 @@
                 <version>${powerjob.version}</version>
             </dependency>
 
-            <!-- 分布式任务调度平台XXL-JOB -->
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-common</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-excel</artifactId>
@@ -641,7 +658,6 @@
             <dependency>
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>
-                <!--suppress UnresolvedMavenProperty -->
                 <version>${guice.version}</version>
             </dependency>
 

@@ -19,15 +19,29 @@
             1. 框架组件：和我们熟悉的 MyBatis、Redis 等等的拓展
             2. 业务组件：和业务相关的组件的封装，例如说数据字典、操作日志等等。
         如果是业务组件，Maven 名字会包含 biz
+
+        将对system-api和infra-api的依赖API
+        合并到/eap-boot-common/eap-boot-common-api中
     </description>
     <url>https://github.com/eaopen/openea-eap</url>
 
     <modules>
+        <module>eap-spring-boot-starter-mybatis</module>
         <module>eap-spring-boot-starter-redis</module>
+        <module>eap-spring-boot-starter-mq</module>
+
+        <module>eap-spring-boot-starter-web</module>
+        <module>eap-spring-boot-starter-security</module>
+        <module>eap-spring-boot-starter-websocket</module>
+        <module>eap-spring-boot-starter-protection</module>
+        <module>eap-spring-boot-starter-biz-data-permission</module>
+        <module>eap-spring-boot-starter-biz-tenant</module>
+
+        <module>eap-spring-boot-starter-excel</module>
         <module>eap-spring-boot-starter-monitor</module>
         <module>eap-spring-boot-starter-job</module>
-        <module>eap-spring-boot-starter-mq</module>
         <module>eap-spring-boot-starter-biz-ip</module>
+        <module>eap-spring-boot-starter-test</module>
     </modules>
 
 </project>

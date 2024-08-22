@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>eap-common</module>
+        <module>eap-boot-common-api</module>
     </modules>
 
     <artifactId>eap-boot-common</artifactId>
