@@ -28,6 +28,14 @@
             </exclusions>
         </dependency>
 
+        <!-- Web 相关 -->
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-spring-cloud-starter-security</artifactId>
+            <optional>true</optional> <!-- 可选，如果使用 DeptDataPermissionRule 必须提供 -->
+        </dependency>
+
+
         <!-- RPC 远程调用相关 -->
         <dependency>
             <groupId>io.github.eaopen</groupId>
@@ -43,7 +51,6 @@
             <version>${revision}</version>
             <optional>true</optional>
         </dependency>
-
 
     </dependencies>
 
