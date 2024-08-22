@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>eap-cloud-framework</artifactId>
+        <groupId>io.github.eaopen</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>eap-spring-cloud-starter-biz-data-permission</artifactId>
+    <packaging>jar</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>数据权限</description>
+    <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-spring-boot-starter-biz-data-permission</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.github.eaopen</groupId>
+                    <artifactId>eap-boot-common-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- RPC 远程调用相关 -->
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-spring-cloud-starter-rpc</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 业务组件 -->
+        <!-- 需要使用它，进行数据权限的获取 -->
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-cloud-common-api</artifactId>
+            <version>${revision}</version>
+            <optional>true</optional>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

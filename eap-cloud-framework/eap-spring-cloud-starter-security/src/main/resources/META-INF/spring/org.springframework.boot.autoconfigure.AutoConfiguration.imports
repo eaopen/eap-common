@@ -1,0 +1,5 @@
+org.openea.eap.framework.security.config.EapSecurityRpcAutoConfiguration
+org.openea.eap.framework.security.config.EapSecurityAutoConfiguration
+org.openea.eap.framework.security.config.EapWebSecurityConfigurerAdapter
+org.openea.eap.framework.operatelog.config.EapOperateLogConfiguration
+org.openea.eap.framework.operatelog.config.EapOperateLogRpcAutoConfiguration

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.github.eaopen</groupId>
+        <artifactId>eap-common-pom</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <packaging>pom</packaging>
+    <artifactId>eap-cloud-framework</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>eap-spring-cloud-starter-env</module>
+        <module>eap-spring-cloud-starter-rpc</module>
+
+        <module>eap-spring-cloud-starter-web</module>
+        <module>eap-spring-cloud-starter-security</module>
+        <module>eap-spring-cloud-starter-biz-data-permission</module>
+        <module>eap-spring-cloud-starter-biz-tenant</module>
+        <module>eap-spring-cloud-starter-excel</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-cloud-dependencies</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-cloud-common-api</artifactId>
+                <version>${revision}</version>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
