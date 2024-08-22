@@ -36,17 +36,17 @@
 
         <!-- 业务组件 -->
         <!-- 需要使用它，进行数据权限的获取 -->
+<!--        <dependency>-->
+<!--            <groupId>io.github.eaopen</groupId>-->
+<!--            <artifactId>eap-module-system-api</artifactId> -->
+<!--            <version>${revision}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.github.eaopen</groupId>
             <artifactId>eap-boot-common-api</artifactId>
             <version>${revision}</version>
             <optional>true</optional>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.github.eaopen</groupId>-->
-<!--            <artifactId>eap-module-system-api</artifactId> -->
-<!--            <version>${revision}</version>-->
-<!--        </dependency>-->
 
         <!-- Test 测试相关 -->
         <dependency>
