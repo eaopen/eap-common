@@ -40,7 +40,7 @@ public @interface Idempotent {
      *
      * @see DefaultIdempotentKeyResolver 全局级别
      * @see UserIdempotentKeyResolver 用户级别
-     * @see ExpressionIdempotentKeyResolver 自定义表达式，通过 {@link #keyArg()} 计算
+     * @see ExpressionIdempotentKeyResolver 自定义表达式，通过 keyArg() 计算
      */
     Class<? extends IdempotentKeyResolver> keyResolver() default DefaultIdempotentKeyResolver.class;
     /**

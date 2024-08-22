@@ -31,16 +31,16 @@
         <module>eap-spring-boot-starter-mq</module>
 
         <module>eap-spring-boot-starter-web</module>
-        <module>eap-spring-boot-starter-security</module>
         <module>eap-spring-boot-starter-websocket</module>
+        <module>eap-spring-boot-starter-security</module>
         <module>eap-spring-boot-starter-protection</module>
         <module>eap-spring-boot-starter-biz-data-permission</module>
+        <module>eap-spring-boot-starter-biz-ip</module>
         <module>eap-spring-boot-starter-biz-tenant</module>
 
+        <module>eap-spring-boot-starter-job</module>
         <module>eap-spring-boot-starter-excel</module>
         <module>eap-spring-boot-starter-monitor</module>
-        <module>eap-spring-boot-starter-job</module>
-        <module>eap-spring-boot-starter-biz-ip</module>
         <module>eap-spring-boot-starter-test</module>
     </modules>
 

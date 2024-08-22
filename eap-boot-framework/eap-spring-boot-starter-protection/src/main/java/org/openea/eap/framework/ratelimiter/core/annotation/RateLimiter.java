@@ -50,7 +50,7 @@ public @interface RateLimiter {
      * @see UserRateLimiterKeyResolver 用户 ID 级别
      * @see ClientIpRateLimiterKeyResolver 用户 IP 级别
      * @see ServerNodeRateLimiterKeyResolver 服务器 Node 级别
-     * @see ExpressionIdempotentKeyResolver 自定义表达式，通过 {@link #keyArg()} 计算
+     * @see ExpressionIdempotentKeyResolver 自定义表达式，通过 keyArg() 计算
      */
     Class<? extends RateLimiterKeyResolver> keyResolver() default DefaultRateLimiterKeyResolver.class;
     /**
