@@ -18,7 +18,7 @@ public interface OAuth2TokenApi {
      * @param reqDTO 访问令牌的创建信息
      * @return 访问令牌的信息
      */
-    OAuth2AccessTokenRespDTO createAccessToken(@Valid OAuth2AccessTokenCreateReqDTO reqDTO);
+//    OAuth2AccessTokenRespDTO createAccessToken(@Valid OAuth2AccessTokenCreateReqDTO reqDTO);
 
     /**
      * 校验访问令牌
@@ -34,7 +34,7 @@ public interface OAuth2TokenApi {
      * @param accessToken 访问令牌
      * @return 访问令牌的信息
      */
-    OAuth2AccessTokenRespDTO removeAccessToken(String accessToken);
+//    OAuth2AccessTokenRespDTO removeAccessToken(String accessToken);
 
     /**
      * 刷新访问令牌
@@ -43,6 +43,6 @@ public interface OAuth2TokenApi {
      * @param clientId 客户端编号
      * @return 访问令牌的信息
      */
-    OAuth2AccessTokenRespDTO refreshAccessToken(String refreshToken, String clientId);
+//    OAuth2AccessTokenRespDTO refreshAccessToken(String refreshToken, String clientId);
 
 }

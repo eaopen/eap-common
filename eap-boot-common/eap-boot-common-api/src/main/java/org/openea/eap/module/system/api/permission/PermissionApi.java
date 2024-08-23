@@ -17,7 +17,7 @@ public interface PermissionApi {
      * @param roleIds 角色编号集合
      * @return 用户编号集合
      */
-    Set<Long> getUserRoleIdListByRoleIds(Collection<Long> roleIds);
+//    Set<Long> getUserRoleIdListByRoleIds(Collection<Long> roleIds);
 
     /**
      * 判断是否有权限，任一一个即可
