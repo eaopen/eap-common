@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
     <modules>
 
-        <module>eap-cloud-common-api</module>
+        <module>eap-cloud-common-client</module>
     </modules>
 
     <artifactId>eap-cloud-common</artifactId>

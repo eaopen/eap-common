@@ -1,6 +1,6 @@
 package org.openea.eap.framework.dict.config;
 
-import org.openea.eap.module.system.api.dict.DictDataApi;
+import org.openea.eap.module.system.api.dict.DictDataApiClient;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
@@ -9,6 +9,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  */
 @AutoConfiguration
-@EnableFeignClients(clients = DictDataApi.class) // 主要是引入相关的 API 服务
+@EnableFeignClients(clients = DictDataApiClient.class) // 主要是引入相关的 API 服务
 public class EapDictRpcAutoConfiguration {
 }

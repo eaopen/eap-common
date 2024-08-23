@@ -39,7 +39,7 @@
         <!-- 需要使用它，进行 Dict 的查询 -->
         <dependency>
             <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-cloud-common-api</artifactId>
+            <artifactId>eap-cloud-common-client</artifactId>
             <version>${revision}</version>
             <optional>true</optional>
         </dependency>
