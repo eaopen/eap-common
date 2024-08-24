@@ -1,2 +1,3 @@
 org.openea.eap.framework.datapermission.config.EapDataPermissionAutoConfiguration
 org.openea.eap.framework.datapermission.config.EapDeptDataPermissionAutoConfiguration
+##org.openea.eap.framework.datapermission.config.EapDataPermissionRpcAutoConfiguration

@@ -3,9 +3,9 @@ package org.openea.eap.framework.quartz.core.handler;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.thread.ThreadUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.openea.eap.framework.quartz.core.enums.JobDataKeyEnum;
 import org.openea.eap.framework.quartz.core.service.JobLogFrameworkService;
-import lombok.extern.slf4j.Slf4j;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -15,7 +15,6 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 import static cn.hutool.core.exceptions.ExceptionUtil.getRootCauseMessage;
 
@@ -68,6 +67,7 @@ public class JobHandlerInvoker extends QuartzJobBean {
     private String executeInternal(String jobHandlerName, String jobHandlerParam) throws Exception {
         // 获得 JobHandler 对象
         JobHandler jobHandler = applicationContext.getBean(jobHandlerName, JobHandler.class);
+        // todo 支持除springBean之外的调用方式
         Assert.notNull(jobHandler, "JobHandler 不会为空");
         // 执行任务
         return jobHandler.execute(jobHandlerParam);

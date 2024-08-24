@@ -31,14 +31,11 @@
     </properties>
 
     <modules>
-<!--        <module>eap-dependencies</module>-->
+        <module>eap-dependencies</module>
+        <module>eap-cloud-dependencies</module>
+
         <module>eap-boot-common</module>
         <module>eap-boot-framework</module>
-
-<!--        <module>eap-cloud-dependencies</module>-->
-<!--        <module>eap-cloud-common</module>-->
-<!--        <module>eap-cloud-framework</module>-->
-
     </modules>
 
     <licenses>
@@ -63,6 +60,13 @@
 
     <dependencyManagement>
         <dependencies>
+<!--            <dependency>-->
+<!--                <groupId>io.github.eaopen</groupId>-->
+<!--                <artifactId>eap-cloud-dependencies</artifactId>-->
+<!--                <version>${revision}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-dependencies</artifactId>
@@ -176,17 +180,6 @@
 
 
     <profiles>
-        <profile>
-            <id>cloud</id>
-            <properties>
-                <profile.name>cloud</profile.name>
-            </properties>
-            <modules>
-                <!--        <module>eap-cloud-dependencies</module>-->
-                <module>eap-cloud-common</module>
-                <module>eap-cloud-framework</module>
-            </modules>
-        </profile>
         <profile>
             <id>dev</id>
             <activation>

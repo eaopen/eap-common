@@ -18,6 +18,12 @@
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.18</spring.boot.version>
+        <!-- 兼容cloud -->
+        <spring.cloud.version>2021.0.9</spring.cloud.version>
+        <spring.cloud.alibaba.version>2021.0.6.1</spring.cloud.alibaba.version>
+        <spring.cloud.version>3.1.8</spring.cloud.version>
+        <cloud-openfeign.version>3.1.9</cloud-openfeign.version>
+        <openfeign.version>11.10</openfeign.version>
         <!-- Web 相关 -->
         <springdoc.version>1.7.0</springdoc.version>
         <knife4j.version>4.5.0</knife4j.version>
@@ -81,10 +87,10 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <dom4j.version>2.1.4</dom4j.version>
-
         <jgit.version>6.9.0.202403050737-r</jgit.version>
-        <powerjob.version>5.0.1-beta</powerjob.version>
+        <quartz.version>2.3.2</quartz.version>
         <xxl-job.version>2.4.0</xxl-job.version>
+        <powerjob.version>5.0.1-beta</powerjob.version>
         <guice.version>5.1.0</guice.version>
         <!-- 三方云服务相关 -->
         <okio.version>3.5.0</okio.version>
@@ -126,6 +132,41 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- 兼容cloud -->
+            <!-- RPC 相关 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-loadbalancer</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${cloud-openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+            <!-- Registry 注册中心相关 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+            </dependency>
+
+
             <!-- 业务组件 -->
             <dependency>
                 <groupId>io.github.mouzt</groupId>
@@ -141,7 +182,7 @@
 
             <dependency>
                 <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-boot-common-api</artifactId>
+                <artifactId>eap-common-share-api</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -173,6 +214,12 @@
                 <version>${revision}</version>
             </dependency>
 
+            <!-- RPC 远程调用相关 -->
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-rpc</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
             <!-- Spring 核心 -->
             <dependency>
@@ -341,6 +388,18 @@
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-job</artifactId>
                 <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
             </dependency>
 
             <!-- 消息队列相关 -->

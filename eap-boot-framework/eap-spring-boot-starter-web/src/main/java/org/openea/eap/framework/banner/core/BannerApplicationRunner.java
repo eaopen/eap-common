@@ -4,7 +4,6 @@ import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.util.ClassUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,19 +24,10 @@ public class BannerApplicationRunner implements ApplicationRunner {
 
 
             // 工作流
-            if (isNotPresent("org.openea.eap.module.bpm.framework.flowable.config.BpmFlowableConfiguration")) {
-                System.out.println("[工作流模块 eap-module-bpm - 已禁用]");
-            }
-
+            System.out.println("[工作流模块 eap-module-bpm 教程]");
             // AI 大模型
-            if (isNotPresent("org.openea.eap.module.ai.framework.web.config.AiWebConfiguration")) {
-                System.out.println("[AI 大模型 eap-module-ai - 已禁用]");
-            }
+            System.out.println("[AI 大模型 eap-module-ai - 教程]");
         });
-    }
-
-    private static boolean isNotPresent(String className) {
-        return !ClassUtils.isPresent(className, ClassUtils.getDefaultClassLoader());
     }
 
 }

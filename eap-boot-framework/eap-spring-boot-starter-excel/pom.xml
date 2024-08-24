@@ -27,18 +27,19 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- 业务组件 -->
-        <!-- 需要使用它，进行 Dict 的查询 -->
-<!--        <dependency>-->
-<!--            <groupId>io.github.eaopen</groupId>-->
-<!--            <artifactId>eap-module-system-api</artifactId> -->
-<!--            <version>${revision}</version>-->
-<!--        </dependency>-->
+        <!-- RPC 远程调用相关 -->
         <dependency>
             <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-boot-common-api</artifactId>
-            <version>${revision}</version>
+            <artifactId>eap-spring-boot-starter-rpc</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- 业务组件 -->
+        <!-- 需要使用它，进行 Dict 的查询 -->
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-common-share-api</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Web 相关 -->

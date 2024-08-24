@@ -1,5 +1,6 @@
 package org.openea.eap.framework.tenant.core.context;
 
+import cn.hutool.core.util.StrUtil;
 import org.openea.eap.framework.common.enums.DocumentEnum;
 import com.alibaba.ttl.TransmittableThreadLocal;
 

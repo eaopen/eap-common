@@ -18,29 +18,17 @@
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
 
         <!-- 统一依赖管理 -->
-        <spring.boot.version>2.7.18</spring.boot.version>
         <spring.cloud.version>2021.0.9</spring.cloud.version>
         <spring.cloud.alibaba.version>2021.0.6.1</spring.cloud.alibaba.version>
 
-        <!-- RPC 相关 -->
-        <!-- Config 配置中心相关 -->
-
-
+        <!-- gateway依赖 -->
         <knife4j.version>4.5.0</knife4j.version>
-        <xxl-job.version>2.4.0</xxl-job.version>
 
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <!-- 统一依赖管理 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -56,7 +44,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- 依赖 eap-dependencies (同boot版本) -->
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-dependencies</artifactId>
@@ -67,44 +54,9 @@
 
             <!-- 业务组件 -->
 
-            <!-- Web 相关 -->
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-cloud-starter-web</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-cloud-starter-security</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-cloud-starter-biz-tenant</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-cloud-starter-biz-data-permission</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-cloud-starter-excel</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-env</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-cloud-starter-env</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -114,31 +66,16 @@
                 <artifactId>eap-spring-boot-starter-rpc</artifactId>
                 <version>${revision}</version>
             </dependency>
+
+
             <dependency>
                 <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-cloud-starter-rpc</artifactId>
+                <artifactId>eap-spring-cloud-starter-web1</artifactId>
                 <version>${revision}</version>
             </dependency>
+
 
             <!-- Web 相关 -->
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-web</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-security</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-websocket</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
 
             <dependency>
                 <groupId>com.github.xiaoymin</groupId> <!-- 接口文档 UI：knife4j【网关专属】 -->
@@ -146,6 +83,7 @@
                 <version>${knife4j.version}</version>
             </dependency>
 
+            <!-- DB 相关 -->
 
 
             <!-- Registry 注册中心相关 -->
@@ -153,16 +91,7 @@
             <!-- Config 配置中心相关 -->
 
             <!-- Job 定时任务相关 -->
-            <dependency>
-                <groupId>com.xuxueli</groupId>
-                <artifactId>xxl-job-core</artifactId>
-                <version>${xxl-job.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-spring-boot-starter-job</artifactId>
-                <version>${revision}</version>
-            </dependency>
+
 
 
         </dependencies>
@@ -200,3 +129,4 @@
     </build>
 
 </project>
+

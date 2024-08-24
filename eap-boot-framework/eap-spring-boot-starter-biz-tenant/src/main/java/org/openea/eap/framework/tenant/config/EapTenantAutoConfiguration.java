@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.BatchStrategies;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -88,11 +89,30 @@ public class EapTenantAutoConfiguration {
         return registrationBean;
     }
 
-    // ========== MQ ==========
+    // ========== Job ==========
 
     @Bean
-    public TenantRedisMessageInterceptor tenantRedisMessageInterceptor() {
-        return new TenantRedisMessageInterceptor();
+    @ConditionalOnClass(name = "com.xxl.job.core.handler.annotation.XxlJob")
+    public TenantJobAspect tenantJobAspect(TenantFrameworkService tenantFrameworkService) {
+        return new TenantJobAspect(tenantFrameworkService);
+    }
+
+    // ========== MQ ==========
+
+    /**
+     * 多租户 Redis 消息队列的配置类
+     *
+     * 为什么要单独一个配置类呢？如果直接把 TenantRedisMessageInterceptor Bean 的初始化放外面，会报 RedisMessageInterceptor 类不存在的错误
+     */
+    @Configuration
+    @ConditionalOnClass(name = "org.openea.eap.framework.mq.redis.core.RedisMQTemplate")
+    public static class TenantRedisMQAutoConfiguration {
+
+        @Bean
+        public TenantRedisMessageInterceptor tenantRedisMessageInterceptor() {
+            return new TenantRedisMessageInterceptor();
+        }
+
     }
 
     @Bean
@@ -105,13 +125,6 @@ public class EapTenantAutoConfiguration {
     @ConditionalOnClass(name = "org.apache.rocketmq.spring.core.RocketMQTemplate")
     public TenantRocketMQInitializer tenantRocketMQInitializer() {
         return new TenantRocketMQInitializer();
-    }
-
-    // ========== Job ==========
-
-    @Bean
-    public TenantJobAspect tenantJobAspect(TenantFrameworkService tenantFrameworkService) {
-        return new TenantJobAspect(tenantFrameworkService);
     }
 
     // ========== Redis ==========
@@ -129,5 +142,4 @@ public class EapTenantAutoConfiguration {
         // 创建 TenantRedisCacheManager 对象
         return new TenantRedisCacheManager(cacheWriter, redisCacheConfiguration, tenantProperties.getIgnoreCaches());
     }
-
 }

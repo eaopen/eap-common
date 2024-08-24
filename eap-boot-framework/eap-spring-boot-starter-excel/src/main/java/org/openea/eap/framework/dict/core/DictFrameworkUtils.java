@@ -34,7 +34,7 @@ public class DictFrameworkUtils {
 
                 @Override
                 public DictDataRespDTO load(KeyValue<String, String> key) {
-                    return ObjectUtil.defaultIfNull(dictDataApi.getDictData(key.getKey(), key.getValue()), DICT_DATA_NULL);
+                    return ObjectUtil.defaultIfNull(dictDataApi.getDictData(key.getKey(), key.getValue()).getCheckedData(), DICT_DATA_NULL);
                 }
 
             });
@@ -62,7 +62,7 @@ public class DictFrameworkUtils {
 
                 @Override
                 public DictDataRespDTO load(KeyValue<String, String> key) {
-                    return ObjectUtil.defaultIfNull(dictDataApi.parseDictData(key.getKey(), key.getValue()), DICT_DATA_NULL);
+                    return ObjectUtil.defaultIfNull(dictDataApi.parseDictData(key.getKey(), key.getValue()).getCheckedData(), DICT_DATA_NULL);
                 }
 
             });

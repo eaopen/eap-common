@@ -101,7 +101,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
         DeptDataPermissionRespDTO deptDataPermission = loginUser.getContext(CONTEXT_KEY, DeptDataPermissionRespDTO.class);
         // 从上下文中拿不到，则调用逻辑进行获取
         if (deptDataPermission == null) {
-            deptDataPermission = permissionApi.getDeptDataPermission(loginUser.getId());
+            deptDataPermission = permissionApi.getDeptDataPermission(loginUser.getId()).getCheckedData();
             if (deptDataPermission == null) {
                 log.error("[getExpression][LoginUser({}) 获取数据权限为 null]", JsonUtils.toJsonString(loginUser));
                 throw new NullPointerException(String.format("LoginUser(%d) Table(%s/%s) 未返回数据权限",
@@ -118,7 +118,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 
         // 情况二，即不能查看部门，又不能查看自己，则说明 100% 无权限
         if (CollUtil.isEmpty(deptDataPermission.getDeptIds())
-            && Boolean.FALSE.equals(deptDataPermission.getSelf())) {
+                && Boolean.FALSE.equals(deptDataPermission.getSelf())) {
             return new EqualsTo(null, null); // WHERE null = null，可以保证返回的数据为空
         }
 
@@ -180,7 +180,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 
     public void addDeptColumn(Class<? extends BaseDO> entityClass, String columnName) {
         String tableName = TableInfoHelper.getTableInfo(entityClass).getTableName();
-       addDeptColumn(tableName, columnName);
+        addDeptColumn(tableName, columnName);
     }
 
     public void addDeptColumn(String tableName, String columnName) {

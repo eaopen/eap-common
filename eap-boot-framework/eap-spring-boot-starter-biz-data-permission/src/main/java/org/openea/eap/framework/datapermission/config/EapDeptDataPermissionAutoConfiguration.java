@@ -1,5 +1,6 @@
 package org.openea.eap.framework.datapermission.config;
 
+import cn.hutool.extra.spring.SpringUtil;
 import org.openea.eap.framework.datapermission.core.rule.dept.DeptDataPermissionRule;
 import org.openea.eap.framework.datapermission.core.rule.dept.DeptDataPermissionRuleCustomizer;
 import org.openea.eap.framework.security.core.LoginUser;
@@ -17,12 +18,21 @@ import java.util.List;
  */
 @AutoConfiguration
 @ConditionalOnClass(LoginUser.class)
-@ConditionalOnBean(value = {PermissionApi.class, DeptDataPermissionRuleCustomizer.class})
+@ConditionalOnBean(value = DeptDataPermissionRuleCustomizer.class)
 public class EapDeptDataPermissionAutoConfiguration {
 
     @Bean
     public DeptDataPermissionRule deptDataPermissionRule(PermissionApi permissionApi,
                                                          List<DeptDataPermissionRuleCustomizer> customizers) {
+        // Cloud 专属逻辑：优先使用本地的 PermissionApi 实现类，而不是 Feign 调用
+        // 原因：在创建租户时，租户还没创建好，导致 Feign 调用获取数据权限时，报“租户不存在”的错误
+        try {
+            PermissionApi permissionApiImpl = SpringUtil.getBean("permissionApiImpl", PermissionApi.class);
+            if (permissionApiImpl != null) {
+                permissionApi = permissionApiImpl;
+            }
+        } catch (Exception ignored) {}
+
         // 创建 DeptDataPermissionRule 对象
         DeptDataPermissionRule rule = new DeptDataPermissionRule(permissionApi);
         // 补全表配置

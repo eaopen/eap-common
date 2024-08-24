@@ -1,0 +1,8 @@
+org.openea.eap.framework.web.config.EapWebAutoConfiguration
+org.openea.eap.framework.apilog.config.EapApiLogRpcAutoConfiguration
+org.openea.eap.framework.banner.config.EapBannerAutoConfiguration
+org.openea.eap.framework.security.config.EapSecurityRpcAutoConfiguration
+org.openea.eap.framework.datapermission.config.EapDataPermissionRpcAutoConfiguration
+org.openea.eap.framework.tenant.config.EapTenantRpcAutoConfiguration
+org.openea.eap.framework.dict.config.EapDictRpcAutoConfiguration
+org.openea.eap.framework.schedule.config.EapXxlJobAutoConfiguration

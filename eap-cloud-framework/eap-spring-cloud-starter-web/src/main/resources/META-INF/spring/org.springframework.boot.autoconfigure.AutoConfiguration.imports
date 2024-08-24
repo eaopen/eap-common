@@ -1,6 +1,0 @@
-org.openea.eap.framework.apilog.config.EapApiLogAutoConfiguration
-org.openea.eap.framework.jackson.config.EapJacksonAutoConfiguration
-org.openea.eap.framework.swagger.config.EapSwaggerAutoConfiguration
-org.openea.eap.framework.web.config.EapWebAutoConfiguration
-org.openea.eap.framework.apilog.config.EapApiLogRpcAutoConfiguration
-org.openea.eap.framework.banner.config.EapBannerAutoConfiguration

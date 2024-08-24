@@ -39,7 +39,7 @@ import static org.openea.eap.framework.web.core.util.WebFrameworkUtils.HEADER_TE
  */
 @AutoConfiguration
 @ConditionalOnClass({OpenAPI.class})
-@EnableConfigurationProperties({SwaggerProperties.class})
+@EnableConfigurationProperties(SwaggerProperties.class)
 @ConditionalOnProperty(prefix = "springdoc.api-docs", name = "enabled", havingValue = "true", matchIfMissing = true) // 设置为 false 时，禁用
 public class EapSwaggerAutoConfiguration {
 
@@ -95,6 +95,7 @@ public class EapSwaggerAutoConfiguration {
                                          Optional<List<OpenApiBuilderCustomizer>> openApiBuilderCustomizers,
                                          Optional<List<ServerBaseUrlCustomizer>> serverBaseUrlCustomizers,
                                          Optional<JavadocProvider> javadocProvider) {
+
         return new OpenAPIService(openAPI, securityParser, springDocConfigProperties,
                 propertyResolverUtils, openApiBuilderCustomizers, serverBaseUrlCustomizers, javadocProvider);
     }

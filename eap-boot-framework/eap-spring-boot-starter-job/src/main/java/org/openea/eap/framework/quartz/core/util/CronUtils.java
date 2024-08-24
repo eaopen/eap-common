@@ -33,14 +33,14 @@ public class CronUtils {
      * @return 满足条件的执行时间
      */
     public static List<LocalDateTime> getNextTimes(String cronExpression, int n) {
-        // 1. 获得 CronExpression 对象
+        // 获得 CronExpression 对象
         CronExpression cron;
         try {
             cron = new CronExpression(cronExpression);
         } catch (ParseException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
-        // 2. 从当前开始计算，n 个满足条件的
+        // 从当前开始计算，n 个满足条件的
         Date now = new Date();
         List<LocalDateTime> nextTimes = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
@@ -50,7 +50,7 @@ public class CronUtils {
                 break;
             }
             nextTimes.add(LocalDateTimeUtil.of(nextTime));
-            // 2.2 切换现在，为下一个触发时间；
+            // 切换现在，为下一个触发时间；
             now = nextTime;
         }
         return nextTimes;

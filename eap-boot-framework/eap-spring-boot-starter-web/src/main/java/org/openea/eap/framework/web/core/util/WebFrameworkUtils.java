@@ -2,6 +2,7 @@ package org.openea.eap.framework.web.core.util;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.extra.servlet.ServletUtil;
+import org.openea.eap.framework.common.enums.RpcConstants;
 import org.openea.eap.framework.common.enums.TerminalEnum;
 import org.openea.eap.framework.common.enums.UserTypeEnum;
 import org.openea.eap.framework.common.pojo.CommonResult;
@@ -140,6 +141,28 @@ public class WebFrameworkUtils {
         }
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
         return servletRequestAttributes.getRequest();
+    }
+
+    /**
+     * 判断是否为 RPC 请求
+     *
+     * @param request 请求
+     * @return 是否为 RPC 请求
+     */
+    public static boolean isRpcRequest(HttpServletRequest request) {
+        return request.getRequestURI().startsWith(RpcConstants.RPC_API_PREFIX);
+    }
+
+    /**
+     * 判断是否为 RPC 请求
+     *
+     * 约定大于配置，只要以 Api 结尾，都认为是 RPC 接口
+     *
+     * @param className 类名
+     * @return 是否为 RPC 请求
+     */
+    public static boolean isRpcRequest(String className) {
+        return className.endsWith("Api");
     }
 
 }

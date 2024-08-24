@@ -2,11 +2,14 @@ package org.openea.eap.framework.tenant.core.job;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
+import cn.hutool.core.util.StrUtil;
 import org.openea.eap.framework.common.util.json.JsonUtils;
 import org.openea.eap.framework.tenant.core.service.TenantFrameworkService;
 import org.openea.eap.framework.tenant.core.util.TenantUtils;
+import com.xxl.job.core.context.XxlJobHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,11 +33,11 @@ public class TenantJobAspect {
     private final TenantFrameworkService tenantFrameworkService;
 
     @Around("@annotation(tenantJob)")
-    public String around(ProceedingJoinPoint joinPoint, TenantJob tenantJob) {
+    public void around(ProceedingJoinPoint joinPoint, TenantJob tenantJob) {
         // 获得租户列表
         List<Long> tenantIds = tenantFrameworkService.getTenantIds();
         if (CollUtil.isEmpty(tenantIds)) {
-            return null;
+            return;
         }
 
         // 逐个租户，执行 Job
@@ -46,10 +49,16 @@ public class TenantJobAspect {
                     joinPoint.proceed();
                 } catch (Throwable e) {
                     results.put(tenantId, ExceptionUtil.getRootCauseMessage(e));
+                    // 打印异常
+                    XxlJobHelper.log(StrUtil.format("[多租户({}) 执行任务({})，发生异常：{}]",
+                            tenantId, joinPoint.getSignature(), ExceptionUtils.getStackTrace(e)));
                 }
             });
         });
-        return JsonUtils.toJsonString(results);
+        // 如果 results 非空，说明发生了异常，标记 XXL-Job 执行失败
+        if (CollUtil.isNotEmpty(results)) {
+            XxlJobHelper.handleFail(JsonUtils.toJsonString(results));
+        }
     }
 
 }
