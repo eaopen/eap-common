@@ -14,6 +14,5 @@ import org.springframework.context.annotation.Profile;
 @AutoConfiguration
 @EnableFeignClients(clients = {ApiAccessLogApi.class, // 主要是引入相关的 API 服务
         ApiErrorLogApi.class})
-@Profile("cloud")
 public class EapApiLogRpcAutoConfiguration {
 }
