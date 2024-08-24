@@ -97,7 +97,11 @@
                 <version>${revision}</version>
             </dependency>
 
-
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-env</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-cloud-starter-env</artifactId>
@@ -105,6 +109,11 @@
             </dependency>
 
             <!-- RPC 远程调用相关 -->
+            <dependency>
+                <groupId>io.github.eaopen</groupId>
+                <artifactId>eap-spring-boot-starter-rpc</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <dependency>
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-cloud-starter-rpc</artifactId>
