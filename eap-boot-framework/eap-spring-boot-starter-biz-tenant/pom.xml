@@ -21,6 +21,14 @@
             <artifactId>eap-common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-common-share-api</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Web 相关 -->
         <dependency>
             <groupId>io.github.eaopen</groupId>

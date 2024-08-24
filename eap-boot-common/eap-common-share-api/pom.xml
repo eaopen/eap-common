@@ -10,6 +10,9 @@
     </parent>
 
     <artifactId>eap-common-share-api</artifactId>
+    <description>
+        公用共享API，来自system-api和infra-api, 仅用于编译时依赖，不参与打包
+    </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

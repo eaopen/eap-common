@@ -46,6 +46,8 @@
             <groupId>io.github.eaopen</groupId>
             <artifactId>eap-common-share-api</artifactId> <!-- 需要使用它，进行数据权限的获取 -->
             <version>${revision}</version>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
 
         <!-- Test 测试相关 -->
