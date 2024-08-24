@@ -1,2 +1,2 @@
-##org.openea.eap.framework.schedule.config.EapXxlJobAutoConfiguration
+org.openea.eap.framework.quartz.config.EapQuartzAutoConfiguration
 org.openea.eap.framework.schedule.config.EapAsyncAutoConfiguration
