@@ -36,6 +36,7 @@
 
         <module>eap-boot-common</module>
         <module>eap-boot-framework</module>
+        <module>eap-cloud-framework</module>
     </modules>
 
     <licenses>

@@ -9,13 +9,17 @@
         <version>${revision}</version>
     </parent>
     <packaging>pom</packaging>
+    <artifactId>eap-boot-common</artifactId>
+    <description>boot common library
+        eap-common 为boot/cloud共用基础库
+        eap-common-share-api 公用共享API，仅用于编译时依赖，不参与打包
+    </description>
+    <url>https://github.com/eaopen/openea-eap</url>
+
     <modules>
         <module>eap-common</module>
         <module>eap-common-share-api</module>
     </modules>
 
-    <artifactId>eap-boot-common</artifactId>
-    <description>boot common library</description>
-    <url>https://github.com/eaopen/openea-eap</url>
 
 </project>

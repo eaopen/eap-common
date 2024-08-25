@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.eaopen</groupId>
-        <artifactId>eap-boot-framework</artifactId>
+        <artifactId>eap-cloud-framework</artifactId>
         <version>${revision}</version>
     </parent>
 
