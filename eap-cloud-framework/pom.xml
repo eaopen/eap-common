@@ -23,10 +23,9 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <modules>
-        <!--        <module>eap-spring-boot-starter-rpc</module>-->
-
         <module>eap-spring-boot-starter-env</module>
-        <module>eap-spring-cloud-starter-web1</module>
+        <module>eap-spring-boot-starter-rpc</module>
+        <module>eap-spring-cloud-starter-rpc-all</module>
     </modules>
 
 

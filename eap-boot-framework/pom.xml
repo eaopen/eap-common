@@ -46,7 +46,6 @@
         <module>eap-spring-boot-starter-biz-data-permission</module>
         <module>eap-spring-boot-starter-biz-ip</module>
 
-        <module>eap-spring-boot-starter-rpc</module>
     </modules>
 
 </project>

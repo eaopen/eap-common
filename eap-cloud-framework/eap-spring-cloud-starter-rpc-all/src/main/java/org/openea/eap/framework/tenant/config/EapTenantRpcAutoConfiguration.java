@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @AutoConfiguration
 @ConditionalOnProperty(prefix = "eap.tenant", value = "enable", matchIfMissing = true) // 允许使用 eap.tenant.enable=false 禁用多租户

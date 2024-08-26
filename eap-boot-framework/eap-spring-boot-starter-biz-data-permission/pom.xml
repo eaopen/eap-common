@@ -35,11 +35,11 @@
         </dependency>
 
         <!-- RPC 远程调用相关 -->
-        <dependency>
-            <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-spring-boot-starter-rpc</artifactId>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.github.eaopen</groupId>-->
+<!--            <artifactId>eap-spring-boot-starter-rpc</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
 
         <!-- 业务组件 -->
         <dependency>
