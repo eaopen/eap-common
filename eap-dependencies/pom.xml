@@ -50,6 +50,7 @@
         <jedis-mock.version>1.1.2</jedis-mock.version>
         <mockito-inline.version>4.11.0</mockito-inline.version>
         <!-- Bpm 工作流相关 -->
+        <camunda.version>7.19.0</camunda.version>
         <flowable.version>6.8.0</flowable.version>
         <!-- 工具类相关 -->
         <captcha-plus.version>1.0.10</captcha-plus.version>
@@ -522,6 +523,13 @@
             </dependency>
 
             <!-- 工作流相关 -->
+            <dependency>
+                <groupId>org.camunda.bpm.springboot</groupId>
+                <artifactId>camunda-bpm-spring-boot-starter</artifactId>
+                <version>${camunda.version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.flowable</groupId>
                 <artifactId>flowable-spring-boot-starter-process</artifactId>
