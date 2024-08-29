@@ -236,6 +236,8 @@
                 <version>${knife4j.version}</version>
             </dependency>
 
+
+
             <!-- spring boot2/openapi2 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
@@ -248,6 +250,12 @@
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${springdoc.version}</version>
             </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>-->
+<!--                <version>${springdoc.version}</version>-->
+<!--            </dependency>-->
 
             <!-- DB 相关 -->
             <dependency>
