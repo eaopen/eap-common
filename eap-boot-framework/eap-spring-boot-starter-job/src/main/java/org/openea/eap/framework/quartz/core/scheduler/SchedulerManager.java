@@ -8,7 +8,7 @@ import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeCon
 import static org.openea.eap.framework.common.exception.util.ServiceExceptionUtil.exception0;
 
 /**
- * {@link org.quartz.Scheduler} 的管理器，负责创建任务
+ * {@link Scheduler} 的管理器，负责创建任务
  *
  * 考虑到实现的简洁性，我们使用 jobHandlerName 作为唯一标识，即：
  * 1. Job 的 {@link JobDetail#getKey()}
@@ -47,7 +47,7 @@ public class SchedulerManager {
                 .withIdentity(jobHandlerName).build();
         // 创建 Trigger 对象
         Trigger trigger = this.buildTrigger(jobHandlerName, jobHandlerParam, cronExpression, retryCount, retryInterval);
-        // 新增 Job 调度
+        // 新增调度
         scheduler.scheduleJob(jobDetail, trigger);
     }
 
@@ -79,10 +79,6 @@ public class SchedulerManager {
      */
     public void deleteJob(String jobHandlerName) throws SchedulerException {
         validateScheduler();
-        // 暂停 Trigger 对象
-        scheduler.pauseTrigger(new TriggerKey(jobHandlerName));
-        // 取消并删除 Job 调度
-        scheduler.unscheduleJob(new TriggerKey(jobHandlerName));
         scheduler.deleteJob(new JobKey(jobHandlerName));
     }
 
@@ -142,7 +138,7 @@ public class SchedulerManager {
     private void validateScheduler() {
         if (scheduler == null) {
             throw exception0(NOT_IMPLEMENTED.getCode(),
-                    "[定时任务 - 已禁用][参考 https://doc.iocoder.cn/job/ 开启]");
+                    "[定时任务 - 已禁用]");
         }
     }
 

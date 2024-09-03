@@ -1,7 +1,6 @@
 package org.openea.eap.framework.swagger.config;
 
 import lombok.Data;
-import org.springdoc.core.SpringDocConfigProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.validation.constraints.NotEmpty;

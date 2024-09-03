@@ -2,8 +2,6 @@ package org.openea.eap.framework.security.core.filter;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.openea.eap.framework.common.exception.ServiceException;
 import org.openea.eap.framework.common.pojo.CommonResult;
 import org.openea.eap.framework.common.util.json.JsonUtils;
@@ -16,6 +14,8 @@ import org.openea.eap.framework.web.core.util.WebFrameworkUtils;
 import org.openea.eap.module.system.api.oauth2.OAuth2TokenApi;
 import org.openea.eap.module.system.api.oauth2.dto.OAuth2AccessTokenCheckRespDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -46,7 +46,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @SuppressWarnings("NullableProblems")
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-
         // 情况一，基于 header[login-user] 获得用户，例如说来自 Gateway 或者其它服务透传
         LoginUser loginUser = buildLoginUserByHeader(request);
 
@@ -64,7 +63,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                     if (loginUser == null) {
                         loginUser = mockLoginUser(request, token, userType);
                     }
-
                 } catch (Throwable ex) {
                     CommonResult<?> result = globalExceptionHandler.allExceptionHandler(request, ex);
                     ServletUtils.writeJSON(response, result);
@@ -73,19 +71,18 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        // 2. 设置当前用户
+        // 设置当前用户
         if (loginUser != null) {
             SecurityFrameworkUtils.setLoginUser(loginUser, request);
         }
-
-
         // 继续过滤链
         chain.doFilter(request, response);
     }
 
     private LoginUser buildLoginUserByToken(String token, Integer userType) {
         try {
-            OAuth2AccessTokenCheckRespDTO accessToken = oauth2TokenApi.checkAccessToken(token);
+            // 校验访问令牌
+            OAuth2AccessTokenCheckRespDTO accessToken = oauth2TokenApi.checkAccessToken(token).getCheckedData();
             if (accessToken == null) {
                 return null;
             }

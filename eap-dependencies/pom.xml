@@ -14,10 +14,13 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.7.0</revision>
+        <revision>2.7.2</revision>
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.18</spring.boot.version>
+        <!-- openfeign 兼容cloud -->
+        <cloud-openfeign.version>3.1.9</cloud-openfeign.version>
+        <openfeign.version>11.10</openfeign.version>
         <!-- Web 相关 -->
         <springdoc.version>1.7.0</springdoc.version>
         <knife4j.version>4.5.0</knife4j.version>
@@ -47,6 +50,7 @@
         <jedis-mock.version>1.1.2</jedis-mock.version>
         <mockito-inline.version>4.11.0</mockito-inline.version>
         <!-- Bpm 工作流相关 -->
+        <camunda.version>7.19.0</camunda.version>
         <flowable.version>6.8.0</flowable.version>
         <!-- 工具类相关 -->
         <captcha-plus.version>1.0.10</captcha-plus.version>
@@ -81,10 +85,10 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <dom4j.version>2.1.4</dom4j.version>
-
         <jgit.version>6.9.0.202403050737-r</jgit.version>
-        <powerjob.version>5.0.1-beta</powerjob.version>
+        <quartz.version>2.3.2</quartz.version>
         <xxl-job.version>2.4.0</xxl-job.version>
+        <powerjob.version>5.0.1-beta</powerjob.version>
         <guice.version>5.1.0</guice.version>
         <!-- 三方云服务相关 -->
         <okio.version>3.5.0</okio.version>
@@ -126,6 +130,29 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- 兼容cloud rpc -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${cloud-openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-slf4j</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+
+
             <!-- 业务组件 -->
             <dependency>
                 <groupId>io.github.mouzt</groupId>
@@ -141,8 +168,10 @@
 
             <dependency>
                 <groupId>io.github.eaopen</groupId>
-                <artifactId>eap-boot-common-api</artifactId>
+                <artifactId>eap-common-share-api</artifactId>
                 <version>${revision}</version>
+                <scope>provided</scope>
+                <optional>true</optional>
             </dependency>
 
             <dependency>
@@ -172,7 +201,6 @@
                 <artifactId>eap-spring-boot-starter-biz-ip</artifactId>
                 <version>${revision}</version>
             </dependency>
-
 
             <!-- Spring 核心 -->
             <dependency>
@@ -208,6 +236,8 @@
                 <version>${knife4j.version}</version>
             </dependency>
 
+
+
             <!-- spring boot2/openapi2 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
@@ -220,6 +250,12 @@
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${springdoc.version}</version>
             </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>-->
+<!--                <version>${springdoc.version}</version>-->
+<!--            </dependency>-->
 
             <!-- DB 相关 -->
             <dependency>
@@ -341,6 +377,18 @@
                 <groupId>io.github.eaopen</groupId>
                 <artifactId>eap-spring-boot-starter-job</artifactId>
                 <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
             </dependency>
 
             <!-- 消息队列相关 -->
@@ -483,6 +531,13 @@
             </dependency>
 
             <!-- 工作流相关 -->
+            <dependency>
+                <groupId>org.camunda.bpm.springboot</groupId>
+                <artifactId>camunda-bpm-spring-boot-starter</artifactId>
+                <version>${camunda.version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.flowable</groupId>
                 <artifactId>flowable-spring-boot-starter-process</artifactId>

@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>eap-boot-framework</artifactId>
         <groupId>io.github.eaopen</groupId>
+        <artifactId>eap-boot-framework</artifactId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -34,17 +34,13 @@
             <artifactId>eap-spring-boot-starter-mybatis</artifactId>
         </dependency>
 
+
         <!-- 业务组件 -->
-        <!-- 需要使用它，进行数据权限的获取 -->
-<!--        <dependency>-->
-<!--            <groupId>io.github.eaopen</groupId>-->
-<!--            <artifactId>eap-module-system-api</artifactId> -->
-<!--            <version>${revision}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-boot-common-api</artifactId>
+            <artifactId>eap-common-share-api</artifactId> <!-- 需要使用它，进行数据权限的获取 -->
             <version>${revision}</version>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
 

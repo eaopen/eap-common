@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>eap-boot-framework</artifactId>
         <groupId>io.github.eaopen</groupId>
+        <artifactId>eap-boot-framework</artifactId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -23,8 +23,9 @@
 
         <dependency>
             <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-boot-common-api</artifactId>
+            <artifactId>eap-common-share-api</artifactId>
             <version>${revision}</version>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
 
@@ -45,10 +46,17 @@
             <artifactId>eap-spring-boot-starter-redis</artifactId>
         </dependency>
 
+
         <!-- Job 定时任务相关 -->
         <dependency>
             <groupId>io.github.eaopen</groupId>
             <artifactId>eap-spring-boot-starter-job</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- 消息队列相关 -->
@@ -75,8 +83,8 @@
 
         <!-- Test 测试相关 -->
         <dependency>
-            <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-spring-boot-starter-test</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -85,6 +93,8 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
+
+
     </dependencies>
 
 </project>

@@ -16,7 +16,6 @@ import org.openea.eap.framework.web.core.util.WebFrameworkUtils;
 import org.openea.eap.module.infra.api.logger.dto.ApiErrorLogCreateReqDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindException;
@@ -86,7 +85,7 @@ public class GlobalExceptionHandler {
             return validationException((ValidationException) ex);
         }
         if (ex instanceof NoHandlerFoundException) {
-            return noHandlerFoundExceptionHandler(request, (NoHandlerFoundException) ex);
+            return noHandlerFoundExceptionHandler((NoHandlerFoundException) ex);
         }
         if (ex instanceof HttpRequestMethodNotSupportedException) {
             return httpRequestMethodNotSupportedExceptionHandler((HttpRequestMethodNotSupportedException) ex);
@@ -172,7 +171,7 @@ public class GlobalExceptionHandler {
      * 2. spring.mvc.static-path-pattern 为 /statics/**
      */
     @ExceptionHandler(NoHandlerFoundException.class)
-    public CommonResult<?> noHandlerFoundExceptionHandler(HttpServletRequest req, NoHandlerFoundException ex) {
+    public CommonResult<?> noHandlerFoundExceptionHandler(NoHandlerFoundException ex) {
         log.warn("[noHandlerFoundExceptionHandler]", ex);
         return CommonResult.error(NOT_FOUND.getCode(), String.format("请求地址不存在:%s", ex.getRequestURL()));
     }
@@ -239,7 +238,7 @@ public class GlobalExceptionHandler {
         // 情况二：处理异常
         log.error("[defaultExceptionHandler]", ex);
         // 插入异常日志
-        this.createExceptionLog(req, ex);
+        createExceptionLog(req, ex);
         // 返回 ERROR CommonResult
         return CommonResult.error(INTERNAL_SERVER_ERROR.getCode(), INTERNAL_SERVER_ERROR.getMsg());
     }
@@ -265,7 +264,7 @@ public class GlobalExceptionHandler {
         errorLog.setExceptionName(e.getClass().getName());
         errorLog.setExceptionMessage(ExceptionUtil.getMessage(e));
         errorLog.setExceptionRootCauseMessage(ExceptionUtil.getRootCauseMessage(e));
-        errorLog.setExceptionStackTrace(ExceptionUtils.getStackTrace(e));
+        errorLog.setExceptionStackTrace(ExceptionUtil.stacktraceToString(e));
         StackTraceElement[] stackTraceElements = e.getStackTrace();
         Assert.notEmpty(stackTraceElements, "异常 stackTraceElements 不能为空");
         StackTraceElement stackTraceElement = stackTraceElements[0];
@@ -300,51 +299,51 @@ public class GlobalExceptionHandler {
         }
         // 1. 数据报表
         if (message.contains("report_")) {
-            log.error("[报表模块 eap-module-report - 表结构未导入][参考 https://doc.iocoder.cn/report/ 开启]");
+            log.error("[报表模块 eap-module-report - 表结构未导入]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[报表模块 eap-module-report - 表结构未导入][参考 https://doc.iocoder.cn/report/ 开启]");
+                    "[报表模块 eap-module-report - 表结构未导入]");
         }
         // 2. 工作流
         if (message.contains("bpm_")) {
-            log.error("[工作流模块 eap-module-bpm - 表结构未导入][参考 https://doc.iocoder.cn/bpm/ 开启]");
+            log.error("[工作流模块 eap-module-bpm - 表结构未导入]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[工作流模块 eap-module-bpm - 表结构未导入][参考 https://doc.iocoder.cn/bpm/ 开启]");
+                    "[工作流模块 eap-module-bpm - 表结构未导入]");
         }
         // 3. 微信公众号
         if (message.contains("mp_")) {
-            log.error("[微信公众号 eap-module-mp - 表结构未导入][参考 https://doc.iocoder.cn/mp/build/ 开启]");
+            log.error("[微信公众号 eap-module-mp - 表结构未导入]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[微信公众号 eap-module-mp - 表结构未导入][参考 https://doc.iocoder.cn/mp/build/ 开启]");
+                    "[微信公众号 eap-module-mp - 表结构未导入]");
         }
         // 4. 商城系统
         if (StrUtil.containsAny(message, "product_", "promotion_", "trade_")) {
-            log.error("[商城系统 eap-module-mall - 已禁用][参考 https://doc.iocoder.cn/mall/build/ 开启]");
+            log.error("[商城系统 eap-module-mall - 已禁用]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[商城系统 eap-module-mall - 已禁用][参考 https://doc.iocoder.cn/mall/build/ 开启]");
+                    "[商城系统 eap-module-mall - 已禁用]");
         }
         // 5. ERP 系统
         if (message.contains("erp_")) {
-            log.error("[ERP 系统 eap-module-erp - 表结构未导入][参考 https://doc.iocoder.cn/erp/build/ 开启]");
+            log.error("[ERP 系统 eap-module-erp - 表结构未导入]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[ERP 系统 eap-module-erp - 表结构未导入][参考 https://doc.iocoder.cn/erp/build/ 开启]");
+                    "[ERP 系统 eap-module-erp - 表结构未导入]");
         }
         // 6. CRM 系统
         if (message.contains("crm_")) {
-            log.error("[CRM 系统 eap-module-crm - 表结构未导入][参考 https://doc.iocoder.cn/crm/build/ 开启]");
+            log.error("[CRM 系统 eap-module-crm - 表结构未导入]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[CRM 系统 eap-module-crm - 表结构未导入][参考 https://doc.iocoder.cn/crm/build/ 开启]");
+                    "[CRM 系统 eap-module-crm - 表结构未导入]");
         }
         // 7. 支付平台
         if (message.contains("pay_")) {
-            log.error("[支付模块 eap-module-pay - 表结构未导入][参考 https://doc.iocoder.cn/pay/build/ 开启]");
+            log.error("[支付模块 eap-module-pay - 表结构未导入]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[支付模块 eap-module-pay - 表结构未导入][参考 https://doc.iocoder.cn/pay/build/ 开启]");
+                    "[支付模块 eap-module-pay - 表结构未导入]");
         }
         // 8. AI 大模型
         if (message.contains("ai_")) {
-            log.error("[AI 大模型 eap-module-ai - 表结构未导入][参考 https://doc.iocoder.cn/ai/build/ 开启]");
+            log.error("[AI 大模型 eap-module-ai - 表结构未导入]");
             return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[AI 大模型 eap-module-ai - 表结构未导入][参考 https://doc.iocoder.cn/ai/build/ 开启]");
+                    "[AI 大模型 eap-module-ai - 表结构未导入]");
         }
         return null;
     }

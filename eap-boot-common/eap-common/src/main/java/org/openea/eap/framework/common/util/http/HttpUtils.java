@@ -110,7 +110,7 @@ public class HttpUtils {
             authorization = Base64.decodeStr(authorization);
             clientId = StrUtil.subBefore(authorization, ":", false);
             clientSecret = StrUtil.subAfter(authorization, ":", false);
-        // 再从 Param 中获取
+            // 再从 Param 中获取
         } else {
             clientId = request.getParameter("client_id");
             clientSecret = request.getParameter("client_secret");

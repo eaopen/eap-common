@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import static org.openea.eap.framework.common.pojo.CommonResult.success;
 import static org.openea.eap.framework.test.core.util.RandomUtils.randomPojo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -31,7 +32,7 @@ public class DictFrameworkUtilsTest extends BaseMockitoUnitTest {
         // mock 数据
         DictDataRespDTO dataRespDTO = randomPojo(DictDataRespDTO.class, o -> o.setStatus(CommonStatusEnum.ENABLE.getStatus()));
         // mock 方法
-        when(dictDataApi.getDictData(dataRespDTO.getDictType(), dataRespDTO.getValue())).thenReturn(dataRespDTO);
+        when(dictDataApi.getDictData(dataRespDTO.getDictType(), dataRespDTO.getValue())).thenReturn(success(dataRespDTO));
 
         // 断言返回值
         assertEquals(dataRespDTO.getLabel(), DictFrameworkUtils.getDictDataLabel(dataRespDTO.getDictType(), dataRespDTO.getValue()));
@@ -42,8 +43,7 @@ public class DictFrameworkUtilsTest extends BaseMockitoUnitTest {
         // mock 数据
         DictDataRespDTO resp = randomPojo(DictDataRespDTO.class, o -> o.setStatus(CommonStatusEnum.ENABLE.getStatus()));
         // mock 方法
-        when(dictDataApi.parseDictData(resp.getDictType(), resp.getLabel())).thenReturn(resp);
-
+        when(dictDataApi.parseDictData(resp.getDictType(), resp.getLabel())).thenReturn(success(resp));
         // 断言返回值
         assertEquals(resp.getValue(), DictFrameworkUtils.parseDictDataValue(resp.getDictType(), resp.getLabel()));
     }

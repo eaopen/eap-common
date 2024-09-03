@@ -36,7 +36,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.Map;
 
-import static org.openea.eap.framework.apilog.core.interceptor.ApiAccessLogInterceptor.ATTRIBUTE_HANDLER_METHOD;
+import static org.openea.eap.framework.apilog.core.interceptor.ApiAccessLogInterceptor.*;
 import static org.openea.eap.framework.common.util.json.JsonUtils.toJsonString;
 
 /**

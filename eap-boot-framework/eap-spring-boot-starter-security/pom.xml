@@ -47,6 +47,27 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!-- RPC 远程调用相关 -->
+<!--        <dependency>-->
+<!--            <groupId>io.github.eaopen</groupId>-->
+<!--            <artifactId>eap-spring-boot-starter-rpc</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+
+        <!-- 业务组件 -->
+<!--        <dependency>-->
+<!--            <groupId>io.github.eaopen</groupId>-->
+<!--            <artifactId>eap-module-system-api</artifactId> &lt;!&ndash; 需要使用它，进行 Token 的校验 &ndash;&gt;-->
+<!--            <version>${revision}</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-common-share-api</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+
         <!-- 工具类相关 -->
         <dependency>
             <groupId>com.nimbusds</groupId>
@@ -75,19 +96,6 @@
             <artifactId>bizlog-sdk</artifactId>
         </dependency>
 
-        <!-- 业务组件 -->
-        <!-- 需要使用它，进行 Token 的校验 -->
-<!--        <dependency>-->
-<!--            <groupId>io.github.eaopen</groupId>-->
-<!--            <artifactId>eap-module-system-api</artifactId>-->
-<!--            <version>${revision}</version>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-boot-common-api</artifactId>
-            <version>${revision}</version>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
 
 </project>
