@@ -1,12 +1,12 @@
 package org.openea.eap.framework.mq.redis.core;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.openea.eap.framework.common.util.json.JsonUtils;
 import org.openea.eap.framework.mq.redis.core.interceptor.RedisMessageInterceptor;
 import org.openea.eap.framework.mq.redis.core.message.AbstractRedisMessage;
 import org.openea.eap.framework.mq.redis.core.pubsub.AbstractRedisChannelMessage;
 import org.openea.eap.framework.mq.redis.core.stream.AbstractRedisStreamMessage;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.data.redis.connection.stream.RecordId;
 import org.springframework.data.redis.connection.stream.StreamRecords;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,7 +16,6 @@ import java.util.List;
 
 /**
  * Redis MQ 操作模板类
- *
  */
 @AllArgsConstructor
 public class RedisMQTemplate {
@@ -54,12 +53,28 @@ public class RedisMQTemplate {
         try {
             sendMessageBefore(message);
             // 发送消息
-            return redisTemplate.opsForStream().add(StreamRecords.newRecord()
+            RecordId recordId = redisTemplate.opsForStream().add(StreamRecords.newRecord()
                     .ofObject(JsonUtils.toJsonString(message)) // 设置内容
                     .withStreamKey(message.getStreamKey())); // 设置 stream key
+            //消息发送后，如果设置长度裁剪
+            if (message.getMsgMaxLen() > 0) {
+                this.xTrim(message.getStreamKey(), message.getMsgMaxLen());
+            }
+            return recordId;
         } finally {
             sendMessageAfter(message);
         }
+    }
+
+    /**
+     * 防止消息队列无限增长撑爆内存进行裁剪，使用近似裁剪
+     *
+     * @param streamKey 队列key
+     * @param count     保持队列的长度（多余的消息会被裁剪）
+     * @return
+     */
+    private Long xTrim(String streamKey, long count) {
+        return redisTemplate.opsForStream().trim(streamKey, count, true);
     }
 
     /**
