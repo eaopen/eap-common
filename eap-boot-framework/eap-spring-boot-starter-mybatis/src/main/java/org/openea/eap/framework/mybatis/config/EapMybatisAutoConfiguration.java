@@ -29,6 +29,7 @@ public class EapMybatisAutoConfiguration {
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor()); // 分页插件
+        // todo dynamicTableNameInnerInterceptor
         return mybatisPlusInterceptor;
     }
 
