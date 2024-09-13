@@ -107,7 +107,13 @@ public class EapRedisMQConsumerAutoConfiguration {
             // 设置 listener 对应的 redisTemplate
             listener.setRedisMQTemplate(redisMQTemplate);
             // 创建 Consumer 对象
-            Consumer consumer = Consumer.from(listener.getGroup(), consumerName);
+            //Consumer consumer = Consumer.from(listener.getGroup(), consumerName);
+            Consumer consumer = null;//可以用配置文件固定消费者名称
+            if (listener.getConsumerName() != null && !listener.getConsumerName().isEmpty()) {
+                consumer = Consumer.from(listener.getGroup(), listener.getConsumerName());
+            } else {
+                consumer = Consumer.from(listener.getGroup(), consumerName);
+            }
             // 设置 Consumer 消费进度，以最小消费进度为准
             StreamOffset<String> streamOffset = StreamOffset.create(listener.getStreamKey(), ReadOffset.lastConsumed());
             // 设置 Consumer 监听

@@ -40,6 +40,13 @@ public abstract class AbstractRedisStreamMessageListener<T extends AbstractRedis
     @Value("${spring.application.name}")
     @Getter
     private String group;
+
+    /**
+     * Redis 消费者分组，默认使用 spring.application.name 名字
+     */
+    @Value("${spring.redis.stream.consumer:}")
+    @Getter
+    private String consumerName;
     /**
      * RedisMQTemplate
      */
