@@ -7,6 +7,9 @@ package org.openea.eap.framework.datasource.core.enums;
  * 注意，默认是 {@link #MASTER} 数据源
  *
  * 对应官方文档为 http://dynamic-datasource.com/guide/customize/Annotation.html
+ *
+ * https://www.kancloud.cn/tracy5546/dynamic-datasource/2264611
+ *
  */
 public interface DataSourceEnum {
 
