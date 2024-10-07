@@ -93,6 +93,10 @@ public class ServletUtils {
 
     public static String getBody(HttpServletRequest request) {
         // 只有在 json 请求在读取，因为只有 CacheRequestBodyFilter 才会进行缓存，支持重复读取
+        // request.getRequestURI() != "/error"
+        if("/error".equals(request.getRequestURI())){
+            return null;
+        }
         if (isJsonRequest(request)) {
             return ServletUtil.getBody(request);
         }
