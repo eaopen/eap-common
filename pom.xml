@@ -198,6 +198,16 @@
             </distributionManagement>
         </profile>
         <profile>
+            <id>etech-dev</id>
+            <distributionManagement>
+                <repository>
+                    <id>etech-dev-nexus</id>
+                    <name>etech-dev-nexus</name>
+                    <url>http://192.168.8.106:8081/repository/maven-releases/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
             <id>ossrh</id>
             <distributionManagement>
                 <snapshotRepository>
