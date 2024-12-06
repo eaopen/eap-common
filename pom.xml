@@ -198,11 +198,11 @@
             </distributionManagement>
         </profile>
         <profile>
-            <id>etech-dev</id>
+            <id>dev106</id>
             <distributionManagement>
                 <repository>
-                    <id>etech-dev-nexus</id>
-                    <name>etech-dev-nexus</name>
+                    <id>dev106-nexus</id>
+                    <name>dev106-nexus</name>
                     <url>http://192.168.8.106:8081/repository/maven-releases/</url>
                 </repository>
             </distributionManagement>
