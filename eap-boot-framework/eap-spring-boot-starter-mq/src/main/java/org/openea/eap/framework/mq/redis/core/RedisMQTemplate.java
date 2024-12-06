@@ -57,9 +57,9 @@ public class RedisMQTemplate {
                     .ofObject(JsonUtils.toJsonString(message)) // 设置内容
                     .withStreamKey(message.getStreamKey())); // 设置 stream key
             //消息发送后，如果设置长度裁剪
-            if (message.getMsgMaxLen() > 0) {
-                this.xTrim(message.getStreamKey(), message.getMsgMaxLen());
-            }
+//            if (message.getMsgMaxLen() > 0) {
+//                this.xTrim(message.getStreamKey(), message.getMsgMaxLen());
+//            }
             return recordId;
         } finally {
             sendMessageAfter(message);
