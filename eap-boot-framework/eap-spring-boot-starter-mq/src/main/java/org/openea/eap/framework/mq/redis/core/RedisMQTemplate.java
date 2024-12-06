@@ -52,15 +52,9 @@ public class RedisMQTemplate {
     public <T extends AbstractRedisStreamMessage> RecordId send(T message) {
         try {
             sendMessageBefore(message);
-            // 发送消息
-            RecordId recordId = redisTemplate.opsForStream().add(StreamRecords.newRecord()
+            return redisTemplate.opsForStream().add(StreamRecords.newRecord()
                     .ofObject(JsonUtils.toJsonString(message)) // 设置内容
-                    .withStreamKey(message.getStreamKey())); // 设置 stream key
-            //消息发送后，如果设置长度裁剪
-//            if (message.getMsgMaxLen() > 0) {
-//                this.xTrim(message.getStreamKey(), message.getMsgMaxLen());
-//            }
-            return recordId;
+                    .withStreamKey(message.getStreamKey()));
         } finally {
             sendMessageAfter(message);
         }
