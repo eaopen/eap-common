@@ -10,6 +10,12 @@
     </parent>
 
     <artifactId>eap-spring-cloud-starter-rpc-all</artifactId>
+    <name>${project.artifactId}</name>
+    <description>
+        OpenFeign：提供 RESTful API 的调用
+        RPC for security, api log, operate log, data permission, dict, tenant and so on
+    </description>
+    <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

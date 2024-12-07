@@ -242,9 +242,13 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.5.0</version>
                         <configuration>
+                            <encoding>UTF-8</encoding>
+                            <docencoding>UTF-8</docencoding>
+                            <charset>UTF-8</charset>
                             <doclint>none</doclint>
                             <failOnError>false</failOnError>
                             <skip>false</skip>
+                            <additionalJOption>-quiet</additionalJOption>
                         </configuration>
                         <executions>
                             <execution>
