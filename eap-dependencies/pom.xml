@@ -61,7 +61,7 @@
         <easyexcel.verion>3.3.4</easyexcel.verion>
         <poi.version>4.1.2</poi.version>
         <easypoi-base.version>4.4.0</easypoi-base.version>
-        <nimbus-jose-jwt.version>9.40</nimbus-jose-jwt.version>
+        <nimbus-jose-jwt.version>9.47</nimbus-jose-jwt.version>
         <jjwt.version>0.12.6</jjwt.version>
         <velocity.version>2.3</velocity.version>
         <screw.version>1.0.5</screw.version>
@@ -78,8 +78,7 @@
         <bizlog-sdk.version>3.0.6</bizlog-sdk.version>
         <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
         <commons-fileupload.version>1.5</commons-fileupload.version>
-        <sa-token.version>1.34.0</sa-token.version>
-        <nimbus-jose-jwt.version>9.22</nimbus-jose-jwt.version>
+        <sa-token.version>1.39.0</sa-token.version>
         <pagehelper.version>5.3.2</pagehelper.version>
         <zxing.version>3.5.1</zxing.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
@@ -87,7 +86,7 @@
         <dom4j.version>2.1.4</dom4j.version>
         <jgit.version>6.9.0.202403050737-r</jgit.version>
         <quartz.version>2.3.2</quartz.version>
-        <xxl-job.version>2.4.0</xxl-job.version>
+        <xxl-job.version>2.4.2</xxl-job.version>
         <powerjob.version>5.0.1-beta</powerjob.version>
         <guice.version>5.1.0</guice.version>
         <!-- 三方云服务相关 -->
@@ -99,6 +98,7 @@
         <jimureport.version>1.7.8</jimureport.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>
         <weixin-java.version>4.6.0</weixin-java.version>
+        <antisamy.version>1.7.7</antisamy.version>
     </properties>
 
     <licenses>
@@ -842,7 +842,7 @@
                         <groupId>commons-io</groupId>
                     </exclusion>
                 </exclusions>
-                <version>1.7.3</version>
+                <version>${antisamy.version}</version>
             </dependency>
 
             <!-- 三方云服务相关 -->
