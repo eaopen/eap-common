@@ -61,13 +61,25 @@ public class RedisMQTemplate {
     }
 
     /**
+     * 删除队列消息
+     *
+     * @param streamKey 队列key
+     * @param recordIds 消息ID
+     * @return 删除消息数量
+     */
+    public Long delete(String streamKey, String... recordIds) {
+        return redisTemplate.opsForStream().delete(streamKey, recordIds);
+    }
+
+    /**
+     * 裁剪队列消息
      * 防止消息队列无限增长撑爆内存进行裁剪，使用近似裁剪
      *
      * @param streamKey 队列key
      * @param count     保持队列的长度（多余的消息会被裁剪）
-     * @return
+     * @return 删除消息数量
      */
-    private Long xTrim(String streamKey, long count) {
+    public Long trim(String streamKey, long count) {
         return redisTemplate.opsForStream().trim(streamKey, count, true);
     }
 
