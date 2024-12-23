@@ -78,9 +78,9 @@ public class DataPermissionRuleHandlerTest extends BaseMockitoUnitTest {
             @Override
             public Expression getExpression(String tableName, Alias tableAlias) {
                 Column column = MyBatisUtils.buildColumn(tableName, tableAlias, COLUMN);
-                ExpressionList<LongValue> values = new ExpressionList<>(new LongValue(10L),
+                ExpressionList values = new ExpressionList(new LongValue(10L),
                         new LongValue(20L));
-                return new InExpression(column, new Parenthesis((values)));
+                return new InExpression(column, values);
             }
 
         };
