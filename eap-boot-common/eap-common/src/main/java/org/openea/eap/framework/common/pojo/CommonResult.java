@@ -1,5 +1,6 @@
 package org.openea.eap.framework.common.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.openea.eap.framework.common.exception.ErrorCode;
 import org.openea.eap.framework.common.exception.ServiceException;
 import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
@@ -99,6 +100,7 @@ public class CommonResult<T> implements Serializable {
      * 判断是否有异常。如果有，则抛出 {@link ServiceException} 异常
      * 如果没有，则返回 {@link #data} 数据
      */
+    @JSONField(serialize = false)  // 避免 fastjson 序列化
     @JsonIgnore // 避免 jackson 序列化
     public T getCheckedData() {
         checkError();
