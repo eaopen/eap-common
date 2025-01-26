@@ -1,9 +1,9 @@
 package org.openea.eap.module.system.enums.sms;
 
 import cn.hutool.core.util.ArrayUtil;
+import org.openea.eap.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.openea.eap.framework.common.core.IntArrayValuable;
 
 import java.util.Arrays;
 
@@ -13,16 +13,18 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum SmsSceneEnum implements IntArrayValuable {
+public enum SmsSceneEnum implements ArrayValuable<Integer> {
 
     MEMBER_LOGIN(1, "user-sms-login", "会员用户 - 手机号登陆"),
     MEMBER_UPDATE_MOBILE(2, "user-update-mobile", "会员用户 - 修改手机"),
     MEMBER_UPDATE_PASSWORD(3, "user-update-password", "会员用户 - 修改密码"),
     MEMBER_RESET_PASSWORD(4, "user-reset-password", "会员用户 - 忘记密码"),
 
-    ADMIN_MEMBER_LOGIN(21, "admin-sms-login", "后台用户 - 手机号登录");
+    ADMIN_MEMBER_LOGIN(21, "admin-sms-login", "后台用户 - 手机号登录"),
+    ADMIN_MEMBER_REGISTER(22, "admin-sms-register", "后台用户 - 手机号注册"),
+    ADMIN_MEMBER_RESET_PASSWORD(23, "admin-reset-password", "后台用户 - 忘记密码");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(SmsSceneEnum::getScene).toArray();
+    public static final Integer[] ARRAYS = Arrays.stream(values()).map(SmsSceneEnum::getScene).toArray(Integer[]::new);
 
     /**
      * 验证场景的编号
@@ -38,7 +40,7 @@ public enum SmsSceneEnum implements IntArrayValuable {
     private final String description;
 
     @Override
-    public int[] array() {
+    public Integer[] array() {
         return ARRAYS;
     }
 

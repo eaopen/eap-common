@@ -1,12 +1,11 @@
 package org.openea.eap.framework.security.config;
 
 import org.openea.eap.framework.web.config.WebProperties;
+import jakarta.annotation.Resource;
 import org.springframework.core.Ordered;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-
-import javax.annotation.Resource;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 
 /**
  * 自定义的 URL 的安全配置
@@ -14,7 +13,7 @@ import javax.annotation.Resource;
  *
  */
 public abstract class AuthorizeRequestsCustomizer
-        implements Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry>, Ordered {
+        implements Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>, Ordered {
 
     @Resource
     private WebProperties webProperties;

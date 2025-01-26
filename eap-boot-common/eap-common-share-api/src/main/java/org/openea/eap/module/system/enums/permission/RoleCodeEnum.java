@@ -1,8 +1,8 @@
 package org.openea.eap.module.system.enums.permission;
 
+import org.openea.eap.framework.common.util.object.ObjectUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.openea.eap.framework.common.util.object.ObjectUtils;
 
 /**
  * 角色标识枚举

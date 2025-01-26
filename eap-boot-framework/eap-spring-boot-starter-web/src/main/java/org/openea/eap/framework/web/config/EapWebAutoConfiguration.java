@@ -1,12 +1,12 @@
 package org.openea.eap.framework.web.config;
 
-import org.openea.eap.framework.apilog.core.service.ApiErrorLogFrameworkService;
 import org.openea.eap.framework.common.enums.WebFilterOrderEnum;
 import org.openea.eap.framework.web.core.filter.CacheRequestBodyFilter;
 import org.openea.eap.framework.web.core.filter.DemoFilter;
 import org.openea.eap.framework.web.core.handler.GlobalExceptionHandler;
 import org.openea.eap.framework.web.core.handler.GlobalResponseBodyHandler;
 import org.openea.eap.framework.web.core.util.WebFrameworkUtils;
+import org.openea.eap.module.infra.api.logger.ApiErrorLogApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -25,8 +25,8 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.annotation.Resource;
-import javax.servlet.Filter;
+import jakarta.annotation.Resource;
+import jakarta.servlet.Filter;
 
 @AutoConfiguration
 @EnableConfigurationProperties(WebProperties.class)
@@ -59,8 +59,9 @@ public class EapWebAutoConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public GlobalExceptionHandler globalExceptionHandler(ApiErrorLogFrameworkService ApiErrorLogFrameworkService) {
-        return new GlobalExceptionHandler(applicationName, ApiErrorLogFrameworkService);
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    public GlobalExceptionHandler globalExceptionHandler(ApiErrorLogApi apiErrorLogApi) {
+        return new GlobalExceptionHandler(applicationName, apiErrorLogApi);
     }
 
     @Bean

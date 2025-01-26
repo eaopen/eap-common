@@ -1,6 +1,6 @@
 package org.openea.eap.framework.ip.core.enums;
 
-import org.openea.eap.framework.common.core.IntArrayValuable;
+import org.openea.eap.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 @AllArgsConstructor
 @Getter
-public enum AreaTypeEnum implements IntArrayValuable {
+public enum AreaTypeEnum implements ArrayValuable<Integer> {
 
     COUNTRY(1, "国家"),
     PROVINCE(2, "省份"),
@@ -20,7 +20,7 @@ public enum AreaTypeEnum implements IntArrayValuable {
     DISTRICT(4, "地区"), // 县、镇、区等
     ;
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(AreaTypeEnum::getType).toArray();
+    public static final Integer[] ARRAYS = Arrays.stream(values()).map(AreaTypeEnum::getType).toArray(Integer[]::new);
 
     /**
      * 类型
@@ -32,7 +32,7 @@ public enum AreaTypeEnum implements IntArrayValuable {
     private final String name;
 
     @Override
-    public int[] array() {
+    public Integer[] array() {
         return ARRAYS;
     }
 }

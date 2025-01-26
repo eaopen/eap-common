@@ -2,13 +2,11 @@ package org.openea.eap.framework.redis.core;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
-import org.springframework.cache.Cache;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
-import org.springframework.lang.Nullable;
 
 import java.time.Duration;
 
@@ -50,26 +48,6 @@ public class TimeoutRedisCacheManager extends RedisCacheManager {
 
         // 创建 RedisCache 对象，需要忽略掉 ttlStr
         return super.createRedisCache(names[0] + names[1], cacheConfig);
-    }
-
-    @Nullable
-    public Cache getCache(String name){
-        return super.getCache(getCacheName(name));
-    }
-
-    protected String getCacheName(String name){
-        if (StrUtil.isEmpty(name)) {
-            return name;
-        }
-        String[] names = StrUtil.splitToArray(name, SPLIT);
-        if (names.length != 2) {
-            return name;
-        }
-        // 移除 # 后面的 : 以及后面的内容，避免影响解析
-        String ttlStr = StrUtil.subBefore(names[1], StrUtil.COLON, false); // 获得 ttlStr 时间部分
-        names[1] = StrUtil.subAfter(names[1], ttlStr, false); // 移除掉 ttlStr 时间部分
-        // 解析时间
-        return names[0] + names[1];
     }
 
     /**

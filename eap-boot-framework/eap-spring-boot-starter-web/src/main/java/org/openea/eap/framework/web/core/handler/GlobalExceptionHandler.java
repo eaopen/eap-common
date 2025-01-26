@@ -4,7 +4,7 @@ import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
-import org.openea.eap.framework.apilog.core.service.ApiErrorLogFrameworkService;
+import cn.hutool.extra.servlet.JakartaServletUtil;
 import org.openea.eap.framework.common.exception.ServiceException;
 import org.openea.eap.framework.common.exception.util.ServiceExceptionUtil;
 import org.openea.eap.framework.common.pojo.CommonResult;
@@ -13,9 +13,16 @@ import org.openea.eap.framework.common.util.json.JsonUtils;
 import org.openea.eap.framework.common.util.monitor.TracerUtils;
 import org.openea.eap.framework.common.util.servlet.ServletUtils;
 import org.openea.eap.framework.web.core.util.WebFrameworkUtils;
+import org.openea.eap.module.infra.api.logger.ApiErrorLogApi;
 import org.openea.eap.module.infra.api.logger.dto.ApiErrorLogCreateReqDTO;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindException;
@@ -27,16 +34,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
 
-import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.*;
+import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.BAD_REQUEST;
+import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.FORBIDDEN;
+import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.INTERNAL_SERVER_ERROR;
+import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.METHOD_NOT_ALLOWED;
+import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.NOT_FOUND;
+import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.NOT_IMPLEMENTED;
 
 /**
  * 全局异常处理器，将 Exception 翻译成 CommonResult + 对应的异常编号
@@ -55,7 +64,7 @@ public class GlobalExceptionHandler {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private final String applicationName;
 
-    private final ApiErrorLogFrameworkService apiErrorLogFrameworkService;
+    private final ApiErrorLogApi apiErrorLogApi;
 
     /**
      * 处理所有异常，主要是提供给 Filter 使用
@@ -87,6 +96,9 @@ public class GlobalExceptionHandler {
         if (ex instanceof NoHandlerFoundException) {
             return noHandlerFoundExceptionHandler((NoHandlerFoundException) ex);
         }
+        if (ex instanceof NoResourceFoundException) {
+            return noResourceFoundExceptionHandler(request, (NoResourceFoundException) ex);
+        }
         if (ex instanceof HttpRequestMethodNotSupportedException) {
             return httpRequestMethodNotSupportedExceptionHandler((HttpRequestMethodNotSupportedException) ex);
         }
@@ -117,7 +129,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public CommonResult<?> methodArgumentTypeMismatchExceptionHandler(MethodArgumentTypeMismatchException ex) {
-        log.warn("[missingServletRequestParameterExceptionHandler]", ex);
+        log.warn("[methodArgumentTypeMismatchExceptionHandler]", ex);
         return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数类型错误:%s", ex.getMessage()));
     }
 
@@ -141,6 +153,22 @@ public class GlobalExceptionHandler {
         FieldError fieldError = ex.getFieldError();
         assert fieldError != null; // 断言，避免告警
         return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数不正确:%s", fieldError.getDefaultMessage()));
+    }
+
+    /**
+     * 处理 SpringMVC 请求参数类型错误
+     *
+     * 例如说，接口上设置了 @RequestBody实体中 xx 属性类型为 Integer，结果传递 xx 参数类型为 String
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public CommonResult<?> methodArgumentTypeInvalidFormatExceptionHandler(HttpMessageNotReadableException ex) {
+        log.warn("[methodArgumentTypeInvalidFormatExceptionHandler]", ex);
+        if(ex.getCause() instanceof InvalidFormatException) {
+            InvalidFormatException invalidFormatException = (InvalidFormatException) ex.getCause();
+            return CommonResult.error(BAD_REQUEST.getCode(), String.format("请求参数类型错误:%s", invalidFormatException.getValue()));
+        }else {
+            return defaultExceptionHandler(ServletUtils.getRequest(), ex);
+        }
     }
 
     /**
@@ -174,6 +202,15 @@ public class GlobalExceptionHandler {
     public CommonResult<?> noHandlerFoundExceptionHandler(NoHandlerFoundException ex) {
         log.warn("[noHandlerFoundExceptionHandler]", ex);
         return CommonResult.error(NOT_FOUND.getCode(), String.format("请求地址不存在:%s", ex.getRequestURL()));
+    }
+
+    /**
+     * 处理 SpringMVC 请求地址不存在
+     */
+    @ExceptionHandler(NoResourceFoundException.class)
+    private CommonResult<?> noResourceFoundExceptionHandler(HttpServletRequest req, NoResourceFoundException ex) {
+        log.warn("[noResourceFoundExceptionHandler]", ex);
+        return CommonResult.error(NOT_FOUND.getCode(), String.format("请求地址不存在:%s", ex.getResourcePath()));
     }
 
     /**
@@ -250,7 +287,7 @@ public class GlobalExceptionHandler {
             // 初始化 errorLog
             buildExceptionLog(errorLog, req, e);
             // 执行插入 errorLog
-            apiErrorLogFrameworkService.createApiErrorLog(errorLog);
+            apiErrorLogApi.createApiErrorLogAsync(errorLog);
         } catch (Throwable th) {
             log.error("[createExceptionLog][url({}) log({}) 发生异常]", req.getRequestURI(),  JsonUtils.toJsonString(errorLog), th);
         }
@@ -277,12 +314,12 @@ public class GlobalExceptionHandler {
         errorLog.setApplicationName(applicationName);
         errorLog.setRequestUrl(request.getRequestURI());
         Map<String, Object> requestParams = MapUtil.<String, Object>builder()
-                .put("query", ServletUtils.getParamMap(request))
-                .put("body", ServletUtils.getBody(request)).build();
+                .put("query", JakartaServletUtil.getParamMap(request))
+                .put("body", JakartaServletUtil.getBody(request)).build();
         errorLog.setRequestParams(JsonUtils.toJsonString(requestParams));
         errorLog.setRequestMethod(request.getMethod());
         errorLog.setUserAgent(ServletUtils.getUserAgent(request));
-        errorLog.setUserIp(ServletUtils.getClientIP(request));
+        errorLog.setUserIp(JakartaServletUtil.getClientIP(request));
         errorLog.setExceptionTime(LocalDateTime.now());
     }
 

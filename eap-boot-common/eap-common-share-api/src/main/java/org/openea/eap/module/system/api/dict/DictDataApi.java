@@ -2,10 +2,10 @@ package org.openea.eap.module.system.api.dict;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.openea.eap.framework.common.pojo.CommonResult;
 import org.openea.eap.module.system.api.dict.dto.DictDataRespDTO;
 import org.openea.eap.module.system.enums.ApiConstants;

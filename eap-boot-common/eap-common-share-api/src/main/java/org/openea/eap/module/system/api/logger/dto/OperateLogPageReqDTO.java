@@ -1,8 +1,8 @@
 package org.openea.eap.module.system.api.logger.dto;
 
+import org.openea.eap.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.openea.eap.framework.common.pojo.PageParam;
 
 @Schema(name = "RPC 服务 - 操作日志分页 Request DTO")
 @Data

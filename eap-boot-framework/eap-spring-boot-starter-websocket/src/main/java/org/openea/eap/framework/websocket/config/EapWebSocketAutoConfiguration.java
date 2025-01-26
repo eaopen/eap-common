@@ -5,6 +5,7 @@ import org.openea.eap.framework.mq.redis.core.RedisMQTemplate;
 import org.openea.eap.framework.websocket.core.handler.JsonWebSocketMessageHandler;
 import org.openea.eap.framework.websocket.core.listener.WebSocketMessageListener;
 import org.openea.eap.framework.websocket.core.security.LoginUserHandshakeInterceptor;
+import org.openea.eap.framework.websocket.core.security.WebSocketAuthorizeRequestsCustomizer;
 import org.openea.eap.framework.websocket.core.sender.kafka.KafkaWebSocketMessageConsumer;
 import org.openea.eap.framework.websocket.core.sender.kafka.KafkaWebSocketMessageSender;
 import org.openea.eap.framework.websocket.core.sender.local.LocalWebSocketMessageSender;
@@ -76,10 +77,15 @@ public class EapWebSocketAutoConfiguration {
         return new WebSocketSessionManagerImpl();
     }
 
+    @Bean
+    public WebSocketAuthorizeRequestsCustomizer webSocketAuthorizeRequestsCustomizer(WebSocketProperties webSocketProperties) {
+        return new WebSocketAuthorizeRequestsCustomizer(webSocketProperties);
+    }
+
     // ==================== Sender 相关 ====================
 
     @Configuration
-    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "local", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "local")
     public class LocalWebSocketMessageSenderConfiguration {
 
         @Bean
@@ -90,7 +96,7 @@ public class EapWebSocketAutoConfiguration {
     }
 
     @Configuration
-    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "redis", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "redis")
     public class RedisWebSocketMessageSenderConfiguration {
 
         @Bean
@@ -108,7 +114,7 @@ public class EapWebSocketAutoConfiguration {
     }
 
     @Configuration
-    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "rocketmq", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "rocketmq")
     public class RocketMQWebSocketMessageSenderConfiguration {
 
         @Bean
@@ -127,7 +133,7 @@ public class EapWebSocketAutoConfiguration {
     }
 
     @Configuration
-    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "rabbitmq", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "rabbitmq")
     public class RabbitMQWebSocketMessageSenderConfiguration {
 
         @Bean
@@ -156,7 +162,7 @@ public class EapWebSocketAutoConfiguration {
     }
 
     @Configuration
-    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "kafka", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "eap.websocket", name = "sender-type", havingValue = "kafka")
     public class KafkaWebSocketMessageSenderConfiguration {
 
         @Bean

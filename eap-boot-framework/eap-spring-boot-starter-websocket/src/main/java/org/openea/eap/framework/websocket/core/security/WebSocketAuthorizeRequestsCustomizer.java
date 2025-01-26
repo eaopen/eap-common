@@ -4,7 +4,7 @@ import org.openea.eap.framework.security.config.AuthorizeRequestsCustomizer;
 import org.openea.eap.framework.websocket.config.WebSocketProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 
 /**
  * WebSocket 的权限自定义
@@ -16,8 +16,8 @@ public class WebSocketAuthorizeRequestsCustomizer extends AuthorizeRequestsCusto
     private final WebSocketProperties webSocketProperties;
 
     @Override
-    public void customize(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
-        registry.antMatchers(webSocketProperties.getPath()).permitAll();
+    public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
+        registry.requestMatchers(webSocketProperties.getPath()).permitAll();
     }
 
 }

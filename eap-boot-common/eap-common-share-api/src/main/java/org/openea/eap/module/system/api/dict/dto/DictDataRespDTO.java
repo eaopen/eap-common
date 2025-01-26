@@ -1,32 +1,22 @@
 package org.openea.eap.module.system.api.dict.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.openea.eap.framework.common.enums.CommonStatusEnum;
 
-/**
- * 字典数据 Response DTO
- *
- */
+@Schema(description = "RPC 服务 - 字典数据 Response DTO")
 @Data
 public class DictDataRespDTO {
 
-    /**
-     * 字典标签
-     */
+    @Schema(description = "字典标签", requiredMode = Schema.RequiredMode.REQUIRED, example = "eap")
     private String label;
-    /**
-     * 字典值
-     */
+
+    @Schema(description = "字典值", requiredMode = Schema.RequiredMode.REQUIRED, example = "iocoder")
     private String value;
-    /**
-     * 字典类型
-     */
+
+    @Schema(description = "字典类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "sys_common_sex")
     private String dictType;
-    /**
-     * 状态
-     *
-     * 枚举 {@link CommonStatusEnum}
-     */
-    private Integer status;
+
+    @Schema(description = "状态", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
+    private Integer status; // 参见 CommonStatusEnum 枚举
 
 }

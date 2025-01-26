@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import org.openea.eap.framework.tenant.config.TenantProperties;
 import org.openea.eap.framework.tenant.core.context.TenantContextHolder;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
+import com.baomidou.mybatisplus.extension.toolkit.SqlParserUtils;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 
@@ -36,7 +37,7 @@ public class TenantDatabaseInterceptor implements TenantLineHandler {
     @Override
     public boolean ignoreTable(String tableName) {
         return TenantContextHolder.isIgnore() // 情况一，全局忽略多租户
-            || CollUtil.contains(ignoreTables, tableName); // 情况二，忽略多租户的表
+                || CollUtil.contains(ignoreTables, SqlParserUtils.removeWrapperSymbol(tableName)); // 情况二，忽略多租户的表
     }
 
 }

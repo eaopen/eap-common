@@ -6,13 +6,13 @@ import cn.hutool.crypto.digest.DigestUtil;
 import org.openea.eap.framework.signature.core.annotation.ApiSignature;
 import org.openea.eap.framework.signature.core.aop.ApiSignatureAspect;
 import org.openea.eap.framework.signature.core.redis.ApiSignatureRedisDAO;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -69,7 +69,7 @@ public class ApiSignatureTest {
         // 断言结果
         assertTrue(result);
         // 断言调用
-        verify(signatureRedisDAO).setNonce(eq(nonce), eq(120), eq(TimeUnit.SECONDS));
+        verify(signatureRedisDAO).setNonce(eq(appId), eq(nonce), eq(120), eq(TimeUnit.SECONDS));
     }
 
 }

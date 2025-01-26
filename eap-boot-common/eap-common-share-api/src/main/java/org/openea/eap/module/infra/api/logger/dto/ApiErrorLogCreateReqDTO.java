@@ -1,106 +1,68 @@
 package org.openea.eap.module.infra.api.logger.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-/**
- * API 错误日志
- *
- */
+@Schema(description = "RPC 服务 - API 错误日志创建 Request DTO")
 @Data
 public class ApiErrorLogCreateReqDTO {
 
-    /**
-     * 链路编号
-     */
+    @Schema(description = "链路追踪编号", example = "89aca178-a370-411c-ae02-3f0d672be4ab")
     private String traceId;
-    /**
-     * 账号编号
-     */
+
+    @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1024")
     private Long userId;
-    /**
-     * 用户类型
-     */
+    @Schema(description = "用户类型", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Integer userType;
-    /**
-     * 应用名
-     */
+    @Schema(description = "应用名", requiredMode = Schema.RequiredMode.REQUIRED, example = "system-server")
     @NotNull(message = "应用名不能为空")
     private String applicationName;
 
-    /**
-     * 请求方法名
-     */
+    @Schema(description = "请求方法名", requiredMode = Schema.RequiredMode.REQUIRED, example = "GET")
     @NotNull(message = "http 请求方法不能为空")
     private String requestMethod;
-    /**
-     * 访问地址
-     */
+    @Schema(description = "请求地址", requiredMode = Schema.RequiredMode.REQUIRED, example = "/xxx/yyy")
     @NotNull(message = "访问地址不能为空")
     private String requestUrl;
-    /**
-     * 请求参数
-     */
+    @Schema(description = "请求参数", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "请求参数不能为空")
     private String requestParams;
-    /**
-     * 用户 IP
-     */
+    @Schema(description = "用户 IP", requiredMode = Schema.RequiredMode.REQUIRED, example = "127.0.0.1")
     @NotNull(message = "ip 不能为空")
     private String userIp;
-    /**
-     * 浏览器 UA
-     */
+    @Schema(description = "浏览器 UserAgent", requiredMode = Schema.RequiredMode.REQUIRED, example = "Mozilla/5.0")
     @NotNull(message = "User-Agent 不能为空")
     private String userAgent;
 
-    /**
-     * 异常时间
-     */
+    @Schema(description = "异常时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常时间不能为空")
     private LocalDateTime exceptionTime;
-    /**
-     * 异常名
-     */
+    @Schema(description = "异常名", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常名不能为空")
     private String exceptionName;
-    /**
-     * 异常发生的类全名
-     */
+    @Schema(description = "异常发生的类全名", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常发生的类全名不能为空")
     private String exceptionClassName;
-    /**
-     * 异常发生的类文件
-     */
+    @Schema(description = "异常发生的类文件", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常发生的类文件不能为空")
     private String exceptionFileName;
-    /**
-     * 异常发生的方法名
-     */
+    @Schema(description = "异常发生的方法名", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常发生的方法名不能为空")
     private String exceptionMethodName;
-    /**
-     * 异常发生的方法所在行
-     */
+    @Schema(description = "异常发生的方法所在行", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常发生的方法所在行不能为空")
     private Integer exceptionLineNumber;
-    /**
-     * 异常的栈轨迹异常的栈轨迹
-     */
+    @Schema(description = "异常的栈轨迹异常的栈轨迹", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常的栈轨迹不能为空")
     private String exceptionStackTrace;
-    /**
-     * 异常导致的根消息
-     */
+    @Schema(description = "异常导致的根消息", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常导致的根消息不能为空")
     private String exceptionRootCauseMessage;
-    /**
-     * 异常导致的消息
-     */
+    @Schema(description = "异常导致的消息", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "异常导致的消息不能为空")
     private String exceptionMessage;
-
 
 }

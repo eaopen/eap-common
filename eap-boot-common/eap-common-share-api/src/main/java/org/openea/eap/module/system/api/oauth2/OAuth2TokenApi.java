@@ -1,16 +1,18 @@
 package org.openea.eap.module.system.api.oauth2;
 
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.openea.eap.framework.common.pojo.CommonResult;
 import org.openea.eap.module.system.api.oauth2.dto.OAuth2AccessTokenCheckRespDTO;
 import org.openea.eap.module.system.api.oauth2.dto.OAuth2AccessTokenCreateReqDTO;
 import org.openea.eap.module.system.api.oauth2.dto.OAuth2AccessTokenRespDTO;
 import org.openea.eap.module.system.enums.ApiConstants;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
 @Tag(name = "RPC 服务 - OAuth2.0 令牌")

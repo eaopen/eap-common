@@ -9,7 +9,6 @@ import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import org.openea.eap.framework.apilog.core.annotation.ApiAccessLog;
 import org.openea.eap.framework.apilog.core.enums.OperateTypeEnum;
-import org.openea.eap.framework.apilog.core.service.ApiAccessLogFrameworkService;
 import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
 import org.openea.eap.framework.common.pojo.CommonResult;
 import org.openea.eap.framework.common.util.json.JsonUtils;
@@ -18,25 +17,26 @@ import org.openea.eap.framework.common.util.servlet.ServletUtils;
 import org.openea.eap.framework.web.config.WebProperties;
 import org.openea.eap.framework.web.core.filter.ApiRequestFilter;
 import org.openea.eap.framework.web.core.util.WebFrameworkUtils;
+import org.openea.eap.module.infra.api.logger.ApiAccessLogApi;
 import org.openea.eap.module.infra.api.logger.dto.ApiAccessLogCreateReqDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.Map;
 
-import static org.openea.eap.framework.apilog.core.interceptor.ApiAccessLogInterceptor.*;
+import static org.openea.eap.framework.apilog.core.interceptor.ApiAccessLogInterceptor.ATTRIBUTE_HANDLER_METHOD;
 import static org.openea.eap.framework.common.util.json.JsonUtils.toJsonString;
 
 /**
@@ -52,12 +52,12 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
 
     private final String applicationName;
 
-    private final ApiAccessLogFrameworkService apiAccessLogFrameworkService;
+    private final ApiAccessLogApi apiAccessLogApi;
 
-    public ApiAccessLogFilter(WebProperties webProperties, String applicationName, ApiAccessLogFrameworkService apiAccessLogFrameworkService) {
+    public ApiAccessLogFilter(WebProperties webProperties, String applicationName, ApiAccessLogApi apiAccessLogApi) {
         super(webProperties);
         this.applicationName = applicationName;
-        this.apiAccessLogFrameworkService = apiAccessLogFrameworkService;
+        this.apiAccessLogApi = apiAccessLogApi;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
             if (!enable) {
                 return;
             }
-            apiAccessLogFrameworkService.createApiAccessLog(accessLog);
+            apiAccessLogApi.createApiAccessLogAsync(accessLog);
         } catch (Throwable th) {
             log.error("[createApiAccessLog][url({}) log({}) 发生异常]", request.getRequestURI(), toJsonString(accessLog), th);
         }
@@ -145,9 +145,11 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
         if (handlerMethod != null) {
             Tag tagAnnotation = handlerMethod.getBeanType().getAnnotation(Tag.class);
             Operation operationAnnotation = handlerMethod.getMethodAnnotation(Operation.class);
-            String operateModule = accessLogAnnotation != null ? accessLogAnnotation.operateModule() :
+            String operateModule = accessLogAnnotation != null && StrUtil.isNotBlank(accessLogAnnotation.operateModule()) ?
+                    accessLogAnnotation.operateModule() :
                     tagAnnotation != null ? StrUtil.nullToDefault(tagAnnotation.name(), tagAnnotation.description()) : null;
-            String operateName = accessLogAnnotation != null ? accessLogAnnotation.operateName() :
+            String operateName = accessLogAnnotation != null && StrUtil.isNotBlank(accessLogAnnotation.operateName()) ?
+                    accessLogAnnotation.operateName() :
                     operationAnnotation != null ? operationAnnotation.summary() : null;
             OperateTypeEnum operateType = accessLogAnnotation != null && accessLogAnnotation.operateType().length > 0 ?
                     accessLogAnnotation.operateType()[0] : parseOperateLogType(request);
@@ -159,8 +161,7 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
     // ========== 解析 @ApiAccessLog、@Swagger 注解  ==========
 
     private static OperateTypeEnum parseOperateLogType(HttpServletRequest request) {
-        RequestMethod requestMethod = ArrayUtil.firstMatch(method ->
-                StrUtil.equalsAnyIgnoreCase(method.name(), request.getMethod()), RequestMethod.values());
+        RequestMethod requestMethod = RequestMethod.resolve(request.getMethod());
         if (requestMethod == null) {
             return OperateTypeEnum.OTHER;
         }
@@ -235,11 +236,11 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
             return;
         }
         //  情况三：Object，遍历处理
-        Iterator<Map.Entry<String, JsonNode>> iterator = node.fields();
+        Iterator<Map.Entry<String, JsonNode>> iterator = node.properties().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, JsonNode> entry = iterator.next();
             if (ArrayUtil.contains(sanitizeKeys, entry.getKey())
-                || ArrayUtil.contains(SANITIZE_KEYS, entry.getKey())) {
+                    || ArrayUtil.contains(SANITIZE_KEYS, entry.getKey())) {
                 iterator.remove();
                 continue;
             }

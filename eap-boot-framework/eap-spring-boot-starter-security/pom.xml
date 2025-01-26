@@ -53,6 +53,10 @@
 <!--            <artifactId>eap-spring-boot-starter-rpc</artifactId>-->
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+        </dependency>
 
         <!-- 业务组件 -->
 <!--        <dependency>-->
@@ -95,6 +99,7 @@
             <groupId>io.github.mouzt</groupId>
             <artifactId>bizlog-sdk</artifactId>
         </dependency>
+
 
     </dependencies>
 
