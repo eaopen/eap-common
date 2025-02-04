@@ -14,7 +14,7 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.7.4</revision>
+        <revision>2.7.5</revision>
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.18</spring.boot.version>
@@ -94,6 +94,7 @@
         <okio.version>3.5.0</okio.version>
         <okhttp3.version>4.11.0</okhttp3.version>
         <commons-io.version>2.15.1</commons-io.version>
+        <aws-java-sdk-s3.version>1.12.777</aws-java-sdk-s3.version>
         <minio.version>8.5.7</minio.version>
         <justauth.version>1.0.8</justauth.version>
         <jimureport.version>1.7.8</jimureport.version>
@@ -864,6 +865,11 @@
             </dependency>
 
             <!-- 三方云服务相关 -->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${aws-java-sdk-s3.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.squareup.okio</groupId>
                 <artifactId>okio</artifactId>
