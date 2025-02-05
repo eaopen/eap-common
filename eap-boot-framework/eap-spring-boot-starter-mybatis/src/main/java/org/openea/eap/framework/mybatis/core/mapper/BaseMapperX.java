@@ -6,6 +6,7 @@ import org.openea.eap.framework.common.pojo.PageResult;
 import org.openea.eap.framework.common.pojo.SortablePageParam;
 import org.openea.eap.framework.common.pojo.SortingField;
 import org.openea.eap.framework.mybatis.core.enums.SqlConstants;
+import org.openea.eap.framework.mybatis.core.util.JdbcUtils;
 import org.openea.eap.framework.mybatis.core.util.MyBatisUtils;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -151,7 +152,8 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
      */
     default Boolean insertBatch(Collection<T> entities) {
         // 特殊：SQL Server 批量插入后，获取 id 会报错，因此通过循环处理
-        if (Objects.equals(SqlConstants.DB_TYPE, DbType.SQL_SERVER)) {
+        DbType dbType = JdbcUtils.getDbType();
+        if (JdbcUtils.isSQLServer(dbType)) {
             entities.forEach(this::insert);
             return CollUtil.isNotEmpty(entities);
         }
@@ -166,7 +168,8 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
      */
     default Boolean insertBatch(Collection<T> entities, int size) {
         // 特殊：SQL Server 批量插入后，获取 id 会报错，因此通过循环处理
-        if (Objects.equals(SqlConstants.DB_TYPE, DbType.SQL_SERVER)) {
+        DbType dbType = JdbcUtils.getDbType();
+        if (JdbcUtils.isSQLServer(dbType)) {
             entities.forEach(this::insert);
             return CollUtil.isNotEmpty(entities);
         }

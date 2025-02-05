@@ -1,6 +1,8 @@
 package org.openea.eap.framework.mybatis.config;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.extension.parser.JsqlParserGlobal;
+import com.baomidou.mybatisplus.extension.parser.cache.JdkSerialCaffeineJsqlParseCache;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import org.openea.eap.framework.mybatis.core.handler.DefaultDBFieldHandler;
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -17,6 +19,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.ConfigurableEnvironment;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * MyBaits 配置类
  *
@@ -25,6 +29,14 @@ import org.springframework.core.env.ConfigurableEnvironment;
 @MapperScan(value = "${eap.info.base-package}", annotationClass = Mapper.class,
         lazyInitialization = "${mybatis.lazy-initialization:false}") // Mapper 懒加载，目前仅用于单元测试
 public class EapMybatisAutoConfiguration {
+
+    static {
+        // 动态 SQL 智能优化支持本地缓存加速解析，更完善的租户复杂 XML 动态 SQL 支持，静态注入缓存
+        JsqlParserGlobal.setJsqlParseCache(new JdkSerialCaffeineJsqlParseCache(
+                (cache) -> cache.maximumSize(1024)
+                        .expireAfterWrite(5, TimeUnit.SECONDS))
+        );
+    }
 
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
