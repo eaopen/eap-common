@@ -21,6 +21,7 @@ import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
+import net.sf.jsqlparser.expression.operators.relational.ParenthesedExpressionList;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -140,7 +141,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
             return deptExpression;
         }
         // 目前，如果有指定部门 + 可查看自己，采用 OR 条件。即，WHERE (dept_id IN ? OR user_id = ?)
-        return new Parenthesis(new OrExpression(deptExpression, userExpression));
+        return new ParenthesedExpressionList(new OrExpression(deptExpression, userExpression));
     }
 
     private Expression buildDeptExpression(String tableName, Alias tableAlias, Set<Long> deptIds) {
@@ -156,8 +157,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
         // 拼接条件
         return new InExpression(MyBatisUtils.buildColumn(tableName, tableAlias, columnName),
                 // Parenthesis 的目的，是提供 (1,2,3) 的 () 左右括号
-                new ExpressionList(CollectionUtils.convertList(deptIds, LongValue::new))
-        );
+                new ParenthesedExpressionList(new ExpressionList<LongValue>(CollectionUtils.convertList(deptIds, LongValue::new))));
     }
 
     private Expression buildUserExpression(String tableName, Alias tableAlias, Boolean self, Long userId) {
