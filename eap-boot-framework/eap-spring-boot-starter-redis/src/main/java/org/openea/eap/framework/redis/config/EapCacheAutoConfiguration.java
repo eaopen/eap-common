@@ -15,6 +15,7 @@ import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.util.StringUtils;
 
 import java.util.Objects;
@@ -29,14 +30,24 @@ import static org.openea.eap.framework.redis.config.EapRedisAutoConfiguration.bu
 @EnableCaching
 public class EapCacheAutoConfiguration {
 
+
+    @Bean
+    @Primary
+    public RedisCacheConfiguration redisCacheConfiguration(CacheProperties cacheProperties) {
+        return createRedisCacheConfiguration(cacheProperties, buildRedisSerializer());
+    }
+
+    @Bean
+    public RedisCacheConfiguration jdkRedisCacheConfiguration(CacheProperties cacheProperties) {
+        return createRedisCacheConfiguration(cacheProperties, RedisSerializer.java());
+    }
+
     /**
      * RedisCacheConfiguration Bean
      * <p>
      * 参考 org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration 的 createConfiguration 方法
      */
-    @Bean
-    @Primary
-    public RedisCacheConfiguration redisCacheConfiguration(CacheProperties cacheProperties) {
+    protected RedisCacheConfiguration createRedisCacheConfiguration(CacheProperties cacheProperties, RedisSerializer<?> valueSerializer) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
         // 设置使用 : 单冒号，而不是双 :: 冒号，避免 Redis Desktop Manager 多余空格
         // 详细可见 https://blog.csdn.net/chuixue24/article/details/103928965 博客
@@ -49,9 +60,9 @@ public class EapCacheAutoConfiguration {
             }
             return cacheName + StrUtil.COLON;
         });
-        // 设置使用 JSON 序列化方式
+        // 设置使用 value 序列化方式
         config = config.serializeValuesWith(
-                RedisSerializationContext.SerializationPair.fromSerializer(buildRedisSerializer()));
+                RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer));
 
         // 设置 CacheProperties.Redis 的属性
         CacheProperties.Redis redisProperties = cacheProperties.getRedis();
@@ -68,6 +79,7 @@ public class EapCacheAutoConfiguration {
     }
 
     @Bean
+    @Primary
     public RedisCacheManager redisCacheManager(RedisTemplate<String, Object> redisTemplate,
                                                RedisCacheConfiguration redisCacheConfiguration,
                                                EapCacheProperties eapCacheProperties) {
@@ -77,6 +89,18 @@ public class EapCacheAutoConfiguration {
                 BatchStrategies.scan(eapCacheProperties.getRedisScanBatchSize()));
         // 创建 TenantRedisCacheManager 对象
         return new TimeoutRedisCacheManager(cacheWriter, redisCacheConfiguration);
+    }
+
+    @Bean
+    public RedisCacheManager jdkCacheManager(RedisTemplate<String, Object> redisTemplate,
+                                               RedisCacheConfiguration jdkRedisCacheConfiguration,
+                                               EapCacheProperties eapCacheProperties) {
+        // 创建 RedisCacheWriter 对象
+        RedisConnectionFactory connectionFactory = Objects.requireNonNull(redisTemplate.getConnectionFactory());
+        RedisCacheWriter cacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory,
+                BatchStrategies.scan(eapCacheProperties.getRedisScanBatchSize()));
+        // 创建 TenantRedisCacheManager 对象
+        return new TimeoutRedisCacheManager(cacheWriter, jdkRedisCacheConfiguration);
     }
 
 }
