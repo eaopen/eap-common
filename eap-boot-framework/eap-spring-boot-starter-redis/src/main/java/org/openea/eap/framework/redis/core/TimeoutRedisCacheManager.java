@@ -16,6 +16,8 @@ import java.time.Duration;
  * 在 {@link Cacheable#cacheNames()} 格式为 "key#ttl" 时，# 后面的 ttl 为过期时间。
  * 单位为最后一个字母（支持的单位有：d 天，h 小时，m 分钟，s 秒），默认单位为 s 秒
  *
+ * todo 计划优化cacheNames，去掉#后部分，实现同一个cacheName的缓存，使用不同的过期时间
+ *
  */
 public class TimeoutRedisCacheManager extends RedisCacheManager {
 

@@ -17,7 +17,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 public class EapRedisAutoConfiguration {
 
 
-    // StringRedisTemplate, spring boot 已提高
+    // StringRedisTemplate stringRedisTemplate, spring boot 已提高
 
     /**
      * 创建 RedisTemplate Bean，使用 JSON 序列化方式
