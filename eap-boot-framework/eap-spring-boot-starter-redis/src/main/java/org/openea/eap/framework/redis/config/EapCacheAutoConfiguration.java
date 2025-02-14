@@ -79,6 +79,7 @@ public class EapCacheAutoConfiguration {
     }
 
     @Bean
+    @Primary
     public RedisCacheManager redisCacheManager(RedisTemplate<String, Object> redisTemplate,
                                                RedisCacheConfiguration redisCacheConfiguration,
                                                EapCacheProperties eapCacheProperties) {
