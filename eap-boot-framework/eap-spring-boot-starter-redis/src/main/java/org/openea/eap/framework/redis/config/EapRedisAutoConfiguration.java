@@ -16,11 +16,19 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @AutoConfiguration(before = RedissonAutoConfiguration.class) // 目的：使用自己定义的 RedisTemplate Bean
 public class EapRedisAutoConfiguration {
 
+
+    // StringRedisTemplate stringRedisTemplate, spring boot 已提高
+
     /**
      * 创建 RedisTemplate Bean，使用 JSON 序列化方式
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        return jsonRedisTemplate(factory);
+    }
+
+    @Bean
+    public RedisTemplate<String, Object> jsonRedisTemplate(RedisConnectionFactory factory) {
         // 创建 RedisTemplate 对象
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         // 设置 RedisConnection 工厂。😈 它就是实现多种 Java Redis 客户端接入的秘密工厂。感兴趣的胖友，可以自己去撸下。
@@ -31,6 +39,19 @@ public class EapRedisAutoConfiguration {
         // 使用 JSON 序列化方式（库是 Jackson ），序列化 VALUE 。
         template.setValueSerializer(buildRedisSerializer());
         template.setHashValueSerializer(buildRedisSerializer());
+        template.afterPropertiesSet();
+        return template;
+    }
+
+    @Bean
+    public RedisTemplate<String, Object> jdkRedisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(RedisSerializer.string());
+        template.setValueSerializer(RedisSerializer.java());
+        template.setHashKeySerializer(RedisSerializer.string());
+        template.setHashValueSerializer(RedisSerializer.java());
+        template.afterPropertiesSet();
         return template;
     }
 

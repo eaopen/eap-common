@@ -18,6 +18,8 @@ import java.time.Duration;
  * 在 {@link Cacheable#cacheNames()} 格式为 "key#ttl" 时，# 后面的 ttl 为过期时间。
  * 单位为最后一个字母（支持的单位有：d 天，h 小时，m 分钟，s 秒），默认单位为 s 秒
  *
+ * todo 计划优化cacheNames，去掉#后部分，实现同一个cacheName的缓存，使用不同的过期时间
+ *
  */
 public class TimeoutRedisCacheManager extends RedisCacheManager {
 
@@ -52,25 +54,25 @@ public class TimeoutRedisCacheManager extends RedisCacheManager {
         return super.createRedisCache(names[0] + names[1], cacheConfig);
     }
 
-    @Nullable
-    public Cache getCache(String name){
-        return super.getCache(getCacheName(name));
-    }
-
-    protected String getCacheName(String name){
-        if (StrUtil.isEmpty(name)) {
-            return name;
-        }
-        String[] names = StrUtil.splitToArray(name, SPLIT);
-        if (names.length != 2) {
-            return name;
-        }
-        // 移除 # 后面的 : 以及后面的内容，避免影响解析
-        String ttlStr = StrUtil.subBefore(names[1], StrUtil.COLON, false); // 获得 ttlStr 时间部分
-        names[1] = StrUtil.subAfter(names[1], ttlStr, false); // 移除掉 ttlStr 时间部分
-        // 解析时间
-        return names[0] + names[1];
-    }
+//    @Nullable
+//    public Cache getCache(String name){
+//        return super.getCache(getCacheName(name));
+//    }
+//
+//    protected String getCacheName(String name){
+//        if (StrUtil.isEmpty(name)) {
+//            return name;
+//        }
+//        String[] names = StrUtil.splitToArray(name, SPLIT);
+//        if (names.length != 2) {
+//            return name;
+//        }
+//        // 移除 # 后面的 : 以及后面的内容，避免影响解析
+//        String ttlStr = StrUtil.subBefore(names[1], StrUtil.COLON, false); // 获得 ttlStr 时间部分
+//        names[1] = StrUtil.subAfter(names[1], ttlStr, false); // 移除掉 ttlStr 时间部分
+//        // 解析时间
+//        return names[0] + names[1];
+//    }
 
     /**
      * 解析过期时间 Duration
