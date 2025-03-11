@@ -15,7 +15,7 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.8.0</revision>
+        <revision>2.8.1</revision>
         <!-- Maven 相关 -->
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -25,7 +25,7 @@
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <!-- 待优化 -->
         <lombok.version>1.18.36</lombok.version>
-        <spring.boot.version>3.4.2</spring.boot.version>
+        <spring.boot.version>3.4.3</spring.boot.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
