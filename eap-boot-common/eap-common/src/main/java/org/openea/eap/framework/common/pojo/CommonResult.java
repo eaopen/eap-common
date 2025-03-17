@@ -2,6 +2,7 @@ package org.openea.eap.framework.common.pojo;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.openea.eap.framework.common.exception.ErrorCode;
 import org.openea.eap.framework.common.exception.ServiceException;
 import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
@@ -18,6 +19,7 @@ import java.util.Objects;
  * @param <T> 数据泛型
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CommonResult<T> implements Serializable {
 
     /**
