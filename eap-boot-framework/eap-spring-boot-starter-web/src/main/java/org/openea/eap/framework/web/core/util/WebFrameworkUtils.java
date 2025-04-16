@@ -1,5 +1,7 @@
 package org.openea.eap.framework.web.core.util;
 
+import cn.hutool.core.net.NetUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import org.openea.eap.framework.common.enums.RpcConstants;
@@ -124,6 +126,28 @@ public class WebFrameworkUtils {
         }
         String terminalValue = request.getHeader(HEADER_TERMINAL);
         return NumberUtil.parseInt(terminalValue, TerminalEnum.UNKNOWN.getTerminal());
+    }
+
+    public static String getClientIp(HttpServletRequest request, String... otherHeaderNames) {
+        String[] headers = { "X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR" };
+        if (ArrayUtil.isNotEmpty(otherHeaderNames)) {
+            headers = ArrayUtil.addAll(headers, otherHeaderNames);
+        }
+        // 方式一，通过 header 获取
+        String ip;
+        for (String header : headers) {
+            ip = request.getHeader(header);
+            if (!NetUtil.isUnknown(ip)) {
+                return NetUtil.getMultistageReverseProxyIp(ip);
+            }
+        }
+
+        // 方式二，通过 remoteAddress 获取
+        if (request.getRemoteAddr() == null) {
+            return null;
+        }
+        ip = request.getRemoteHost();
+        return NetUtil.getMultistageReverseProxyIp(ip);
     }
 
     public static void setCommonResult(ServletRequest request, CommonResult<?> result) {
