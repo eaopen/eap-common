@@ -5,6 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
+import org.apache.catalina.connector.ClientAbortException;
 import org.openea.eap.framework.common.exception.ServiceException;
 import org.openea.eap.framework.common.exception.util.ServiceExceptionUtil;
 import org.openea.eap.framework.common.pojo.CommonResult;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.async.AsyncRequestNotUsableException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -40,12 +42,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
 
-import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.BAD_REQUEST;
-import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.FORBIDDEN;
-import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.INTERNAL_SERVER_ERROR;
-import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.METHOD_NOT_ALLOWED;
-import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.NOT_FOUND;
-import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.NOT_IMPLEMENTED;
+import static org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants.*;
 
 /**
  * 全局异常处理器，将 Exception 翻译成 CommonResult + 对应的异常编号
@@ -108,7 +105,44 @@ public class GlobalExceptionHandler {
         if (ex instanceof AccessDeniedException) {
             return accessDeniedExceptionHandler(request, (AccessDeniedException) ex);
         }
+
+        // 网络异常或客户端异常
+        // java.io.IOException
+        // org.springframework.web.context.request.async.AsyncRequestNotUsableException
+        // org.apache.catalina.connector.ClientAbortException
+        if (ex instanceof ClientAbortException) {
+            return clientAbortExceptionHandler(request, (ClientAbortException) ex);
+        }
+        if( ex instanceof AsyncRequestNotUsableException) {
+            return asyncRequestNotUsableExceptionHandler(request, (AsyncRequestNotUsableException) ex);
+        }
+
         return defaultExceptionHandler(request, ex);
+    }
+
+    /**
+     * 处理客户端终止的异常
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(value = ClientAbortException.class)
+    public CommonResult<?> clientAbortExceptionHandler(HttpServletRequest req, ClientAbortException ex) {
+        String ip = WebFrameworkUtils.getClientIp(req);
+        log.warn("[clientAbortExceptionHandler][client ip is {}]", ip, ex);
+        return CommonResult.error(NETWORK_ERROR.getCode(), String.format("客户端终止:%s", ex.getMessage()));
+    }
+
+    /**
+     * 处理异步请求不可用的异常
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(value = AsyncRequestNotUsableException.class)
+    public CommonResult<?> asyncRequestNotUsableExceptionHandler(HttpServletRequest req, AsyncRequestNotUsableException ex) {
+        String ip = WebFrameworkUtils.getClientIp(req);
+        log.warn("[asyncRequestNotUsableExceptionHandler][client ip is {}]", ip, ex);
+        return CommonResult.error(NETWORK_ERROR.getCode(), String.format("异步请求不可用:%s", ex.getMessage()));
     }
 
     /**
