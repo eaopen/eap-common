@@ -1,5 +1,6 @@
 package org.openea.eap.framework.datasource;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
 import com.baomidou.dynamic.datasource.creator.DefaultDataSourceCreator;
@@ -27,6 +28,10 @@ public class EapDynamicDataSourceUtil {
         }
         if(dynamicRoutingDataSource==null){
            // throw exception
+        }
+        // 增加转换驼峰兼容
+        if(!dynamicRoutingDataSource.getDataSources().containsKey(ds)){
+            ds = StrUtil.toCamelCase(ds);
         }
         dataSource = dynamicRoutingDataSource.getDataSource(ds);
         if(dataSource==null){
