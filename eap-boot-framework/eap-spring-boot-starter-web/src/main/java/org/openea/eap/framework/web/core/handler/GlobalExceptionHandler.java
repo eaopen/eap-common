@@ -375,47 +375,47 @@ public class GlobalExceptionHandler {
                     "[报表模块 eap-module-report - 表结构未导入]");
         }
         // 2. 工作流
-        if (message.contains("bpm_")) {
-            log.error("[工作流模块 eap-module-bpm - 表结构未导入]");
-            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[工作流模块 eap-module-bpm - 表结构未导入]");
-        }
+//        if (message.contains("bpm_")) {
+//            log.error("[工作流模块 eap-module-bpm - 表结构未导入]");
+//            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+//                    "[工作流模块 eap-module-bpm - 表结构未导入]");
+//        }
         // 3. 微信公众号
-        if (message.contains("mp_")) {
-            log.error("[微信公众号 eap-module-mp - 表结构未导入]");
-            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[微信公众号 eap-module-mp - 表结构未导入]");
-        }
+//        if (message.contains("mp_")) {
+//            log.error("[微信公众号 eap-module-mp - 表结构未导入]");
+//            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+//                    "[微信公众号 eap-module-mp - 表结构未导入]");
+//        }
         // 4. 商城系统
-        if (StrUtil.containsAny(message, "product_", "promotion_", "trade_")) {
-            log.error("[商城系统 eap-module-mall - 已禁用]");
-            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[商城系统 eap-module-mall - 已禁用]");
-        }
+//        if (StrUtil.containsAny(message, "product_", "promotion_", "trade_")) {
+//            log.error("[商城系统 eap-module-mall - 已禁用]");
+//            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+//                    "[商城系统 eap-module-mall - 已禁用]");
+//        }
         // 5. ERP 系统
-        if (message.contains("erp_")) {
-            log.error("[ERP 系统 eap-module-erp - 表结构未导入]");
-            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[ERP 系统 eap-module-erp - 表结构未导入]");
-        }
+//        if (message.contains("erp_")) {
+//            log.error("[ERP 系统 eap-module-erp - 表结构未导入]");
+//            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+//                    "[ERP 系统 eap-module-erp - 表结构未导入]");
+//        }
         // 6. CRM 系统
-        if (message.contains("crm_")) {
-            log.error("[CRM 系统 eap-module-crm - 表结构未导入]");
-            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[CRM 系统 eap-module-crm - 表结构未导入]");
-        }
+//        if (message.contains("crm_")) {
+//            log.error("[CRM 系统 eap-module-crm - 表结构未导入]");
+//            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+//                    "[CRM 系统 eap-module-crm - 表结构未导入]");
+//        }
         // 7. 支付平台
-        if (message.contains("pay_")) {
-            log.error("[支付模块 eap-module-pay - 表结构未导入]");
-            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[支付模块 eap-module-pay - 表结构未导入]");
-        }
+//        if (message.contains("pay_")) {
+//            log.error("[支付模块 eap-module-pay - 表结构未导入]");
+//            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+//                    "[支付模块 eap-module-pay - 表结构未导入]");
+//        }
         // 8. AI 大模型
-        if (message.contains("ai_")) {
-            log.error("[AI 大模型 eap-module-ai - 表结构未导入]");
-            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
-                    "[AI 大模型 eap-module-ai - 表结构未导入]");
-        }
+//        if (message.contains("ai_")) {
+//            log.error("[AI 大模型 eap-module-ai - 表结构未导入]");
+//            return CommonResult.error(NOT_IMPLEMENTED.getCode(),
+//                    "[AI 大模型 eap-module-ai - 表结构未导入]");
+//        }
         return null;
     }
 
