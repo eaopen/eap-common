@@ -22,10 +22,10 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
+        <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
         <!-- 待优化 -->
         <lombok.version>1.18.36</lombok.version>
-        <spring.boot.version>3.4.3</spring.boot.version>
+        <spring.boot.version>3.5.3</spring.boot.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

@@ -15,24 +15,24 @@
 
     <properties>
         <revision>2.8.5</revision>
-        <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
+        <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
-        <spring.boot.version>3.4.5</spring.boot.version>
+        <spring.boot.version>3.5.3</spring.boot.version>
         <!-- openfeign 兼容cloud -->
         <cloud-openfeign.version>4.2.0</cloud-openfeign.version>
         <openfeign.version>13.5</openfeign.version>
         <!-- Web 相关 -->
-        <springdoc.version>2.8.3</springdoc.version>
+        <springdoc.version>2.8.9</springdoc.version>
         <knife4j.version>4.6.0</knife4j.version>
         <servlet.versoin>2.5</servlet.versoin>
         <!-- DB 相关 -->
-        <druid.version>1.2.24</druid.version>
+        <druid.version>1.2.25</druid.version>
         <mybatis.version>3.5.19</mybatis.version>
-        <mybatis-spring.version>3.0.4</mybatis-spring.version>
-        <mybatis-plus.version>3.5.10.1</mybatis-plus.version>
-        <mybatis-plus-generator.version>3.5.10.1</mybatis-plus-generator.version>
+        <mybatis-spring.version>3.0.5</mybatis-spring.version>
+        <mybatis-plus.version>3.5.12</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.12</mybatis-plus-generator.version>
         <dynamic-datasource.version>4.3.1</dynamic-datasource.version>
-        <mybatis-plus-join.version>1.4.13</mybatis-plus-join.version>
+        <mybatis-plus-join.version>1.5.4</mybatis-plus-join.version>
         <jsql.version>4.9</jsql.version>
         <easy-trans.version>3.0.6</easy-trans.version>
         <redisson.version>3.41.0</redisson.version>
@@ -41,12 +41,12 @@
         <opengauss.jdbc.version>5.1.0</opengauss.jdbc.version>
         <taos.version>3.3.3</taos.version>
         <!-- 消息队列 -->
-        <rocketmq-spring.version>2.3.2</rocketmq-spring.version>
+        <rocketmq-spring.version>2.3.3</rocketmq-spring.version>
         <!-- 服务保障相关 -->
         <lock4j.version>2.2.7</lock4j.version>
         <!-- 监控相关 -->
         <skywalking.version>9.4.0</skywalking.version>
-        <spring-boot-admin.version>3.4.5</spring-boot-admin.version>
+        <spring-boot-admin.version>3.5.0</spring-boot-admin.version>
         <opentracing.version>0.33.0</opentracing.version>
         <!-- Test 测试相关 -->
         <podam.version>8.0.2.RELEASE</podam.version>
@@ -58,11 +58,11 @@
         <!-- 工具类相关 -->
         <anji-plus-captcha.version>1.4.0</anji-plus-captcha.version>
         <captcha-plus.version>2.0.3</captcha-plus.version>
-        <jsoup.version>1.18.3</jsoup.version>
-        <lombok.version>1.18.36</lombok.version>
+        <jsoup.version>1.20.1</jsoup.version>
+        <lombok.version>1.18.38</lombok.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <hutool.version>5.8.35</hutool.version>
-        <hutool-6.version>6.0.0-M19</hutool-6.version>
+        <hutool-6.version>6.0.0-M22</hutool-6.version>
         <easyexcel.verion>4.0.3</easyexcel.verion>
         <poi.version>4.1.2</poi.version>
         <easypoi-base.version>4.4.0</easypoi-base.version>
@@ -74,6 +74,8 @@
         <guava.version>33.4.8-jre</guava.version>
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
         <!--<commons-io.version>2.11.0</commons-io.version>-->
+        <commons-io.version>2.19.0</commons-io.version>
+        <commons-compress.version>1.27.1</commons-compress.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-net.version>3.11.1</commons-net.version>
         <commons-text.version>1.10.0</commons-text.version>
@@ -102,16 +104,14 @@
         <!-- 三方云服务相关 -->
         <okio.version>3.5.0</okio.version>
         <okhttp3.version>4.11.0</okhttp3.version>
-        <commons-io.version>2.17.0</commons-io.version>
-        <commons-compress.version>1.27.1</commons-compress.version>
         <awssdk.version>2.30.14</awssdk.version>
         <aws-java-sdk-s3.version>1.12.777</aws-java-sdk-s3.version>
         <minio.version>8.5.7</minio.version>
         <justauth.version>1.16.7</justauth.version>
         <justauth-starter.version>1.4.0</justauth-starter.version>
-        <jimureport.version>1.7.8</jimureport.version>
+        <jimureport.version>1.9.4</jimureport.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>
-        <weixin-java.version>4.7.5.B</weixin-java.version>
+        <weixin-java.version>4.7.6-20250704.154059</weixin-java.version>
         <antisamy.version>1.7.7</antisamy.version>
     </properties>
 
@@ -267,6 +267,11 @@
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc.version}</version>
             </dependency>
 <!--            <dependency>-->
