@@ -95,6 +95,11 @@
             <url>https://maven.aliyun.com/repository/public</url>
         </repository>
         <repository>
+            <id>openeap-mvn-cnb</id>
+            <name>openeap-mvn-cnb</name>
+            <url>https://maven.cnb.cool/openeap/mvn/-/packages/</url>
+        </repository>
+        <repository>
             <id>openea-reps-mvn</id>
             <name>mvn</name>
             <url>https://openea-maven.pkg.coding.net/repository/reps/mvn/</url>
@@ -226,10 +231,15 @@
             </properties>
             <distributionManagement>
                 <repository>
-                    <id>openea-reps-mvn</id>
-                    <name>mvn</name>
-                    <url>https://openea-maven.pkg.coding.net/repository/reps/mvn/</url>
+                    <id>openeap-mvn-cnb</id>
+                    <name>openeap-mvn-cnb</name>
+                    <url>https://maven.cnb.cool/openeap/mvn/-/packages/</url>
                 </repository>
+<!--                <repository>-->
+<!--                    <id>openea-reps-mvn</id>-->
+<!--                    <name>mvn</name>-->
+<!--                    <url>https://openea-maven.pkg.coding.net/repository/reps/mvn/</url>-->
+<!--                </repository>-->
             </distributionManagement>
         </profile>
         <profile>
