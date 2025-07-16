@@ -1,8 +1,7 @@
 package org.openea.eap.framework.tenant.core.service;
 
 import org.openea.eap.framework.common.pojo.CommonResult;
-import org.openea.eap.framework.common.util.cache.CacheUtils;
-import org.openea.eap.module.system.api.tenant.TenantApi;
+import org.openea.eap.framework.common.biz.system.tenant.TenantCommonApi;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ import static org.openea.eap.framework.common.util.cache.CacheUtils.buildAsyncRe
 @RequiredArgsConstructor
 public class TenantFrameworkServiceImpl implements TenantFrameworkService {
 
-    private final TenantApi tenantApi;
+    private final TenantCommonApi tenantApi;
 
     /**
      * 针对 {@link #getTenantIds()} 的缓存

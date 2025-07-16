@@ -1,9 +1,9 @@
 package org.openea.eap.framework.datapermission.core.rpc;
 
-import org.openea.eap.framework.datapermission.core.annotation.DataPermission;
-import org.openea.eap.framework.datapermission.core.aop.DataPermissionContextHolder;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import org.openea.eap.framework.datapermission.core.annotation.DataPermission;
+import org.openea.eap.framework.datapermission.core.aop.DataPermissionContextHolder;
 
 /**
  * DataPermission 的 RequestInterceptor 实现类：Feign 请求时，将 {@link DataPermission} 设置到 header 中，继续透传给被调用的服务

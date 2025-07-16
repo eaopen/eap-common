@@ -36,10 +36,16 @@ public class IPUtils {
         try {
             long now = System.currentTimeMillis();
             byte[] bytes = ResourceUtil.readBytes("ip2region.xdb");
+            // 增加文件大小校验
+            if (bytes == null || bytes.length == 0) {
+                throw new IOException("IP数据库文件为空或读取失败");
+            }
             SEARCHER = Searcher.newWithBuffer(bytes);
-            log.info("启动加载 IPUtils 成功，耗时 ({}) 毫秒", System.currentTimeMillis() - now);
+            log.info("启动加载 IPUtils 成功，数据bytes {},耗时 ({}) 毫秒", bytes.length, System.currentTimeMillis() - now);
         } catch (IOException e) {
             log.error("启动加载 IPUtils 失败", e);
+            // 可以在这里添加默认SEARCHER初始化或抛出运行时异常
+            throw new RuntimeException("IP数据库初始化失败", e);
         }
     }
 

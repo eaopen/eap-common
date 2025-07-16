@@ -9,6 +9,8 @@ import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import org.openea.eap.framework.apilog.core.annotation.ApiAccessLog;
 import org.openea.eap.framework.apilog.core.enums.OperateTypeEnum;
+import org.openea.eap.framework.common.biz.infra.logger.ApiAccessLogCommonApi;
+import org.openea.eap.framework.common.biz.infra.logger.dto.ApiAccessLogCreateReqDTO;
 import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
 import org.openea.eap.framework.common.pojo.CommonResult;
 import org.openea.eap.framework.common.util.json.JsonUtils;
@@ -17,8 +19,6 @@ import org.openea.eap.framework.common.util.servlet.ServletUtils;
 import org.openea.eap.framework.web.config.WebProperties;
 import org.openea.eap.framework.web.core.filter.ApiRequestFilter;
 import org.openea.eap.framework.web.core.util.WebFrameworkUtils;
-import org.openea.eap.module.infra.api.logger.ApiAccessLogApi;
-import org.openea.eap.module.infra.api.logger.dto.ApiAccessLogCreateReqDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -52,9 +52,9 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
 
     private final String applicationName;
 
-    private final ApiAccessLogApi apiAccessLogApi;
+    private final ApiAccessLogCommonApi apiAccessLogApi;
 
-    public ApiAccessLogFilter(WebProperties webProperties, String applicationName, ApiAccessLogApi apiAccessLogApi) {
+    public ApiAccessLogFilter(WebProperties webProperties, String applicationName, ApiAccessLogCommonApi apiAccessLogApi) {
         super(webProperties);
         this.applicationName = applicationName;
         this.apiAccessLogApi = apiAccessLogApi;

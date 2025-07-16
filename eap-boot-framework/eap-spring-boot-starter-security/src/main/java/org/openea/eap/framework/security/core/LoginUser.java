@@ -58,6 +58,11 @@ public class LoginUser {
     @JsonIgnore
     private Map<String, Object> context;
 
+    /**
+     * 访问的租户编号
+     */
+    private Long visitTenantId;
+
     public void setContext(String key, Object value) {
         if (context == null) {
             context = new HashMap<>();

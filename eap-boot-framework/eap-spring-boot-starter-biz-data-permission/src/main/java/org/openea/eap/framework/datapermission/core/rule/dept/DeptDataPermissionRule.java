@@ -3,6 +3,7 @@ package org.openea.eap.framework.datapermission.core.rule.dept;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import org.openea.eap.framework.common.biz.system.permission.PermissionCommonApi;
 import org.openea.eap.framework.common.enums.UserTypeEnum;
 import org.openea.eap.framework.common.util.collection.CollectionUtils;
 import org.openea.eap.framework.common.util.json.JsonUtils;
@@ -11,8 +12,7 @@ import org.openea.eap.framework.mybatis.core.dataobject.BaseDO;
 import org.openea.eap.framework.mybatis.core.util.MyBatisUtils;
 import org.openea.eap.framework.security.core.LoginUser;
 import org.openea.eap.framework.security.core.util.SecurityFrameworkUtils;
-import org.openea.eap.module.system.api.permission.PermissionApi;
-import org.openea.eap.module.system.api.permission.dto.DeptDataPermissionRespDTO;
+import org.openea.eap.framework.common.biz.system.permission.dto.DeptDataPermissionRespDTO;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +58,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 
     static final Expression EXPRESSION_NULL = new NullValue();
 
-    private final PermissionApi permissionApi;
+    private final PermissionCommonApi permissionApi;
 
     /**
      * 基于部门的表字段配置

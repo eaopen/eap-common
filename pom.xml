@@ -15,7 +15,7 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.8.2</revision>
+        <revision>2.8.5</revision>
         <!-- Maven 相关 -->
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -32,11 +32,12 @@
 
     <modules>
         <module>eap-dependencies</module>
-        <module>eap-cloud-dependencies</module>
-
         <module>eap-boot-common</module>
         <module>eap-boot-framework</module>
-        <module>eap-cloud-framework</module>
+
+        <!-- cloud, move to profile:cloud -->
+<!--        <module>eap-cloud-dependencies</module>-->
+<!--        <module>eap-cloud-framework</module>-->
     </modules>
 
     <licenses>
@@ -193,6 +194,28 @@
 
 
     <profiles>
+        <profile>
+            <id>cloud</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <!-- cloud 微服务支持 -->
+                <module>eap-cloud-dependencies</module>
+                <module>eap-cloud-framework</module>
+            </modules>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>io.github.eaopen</groupId>
+                        <artifactId>eap-cloud-dependencies</artifactId>
+                        <version>${revision}</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+        </profile>
         <profile>
             <id>dev</id>
             <activation>

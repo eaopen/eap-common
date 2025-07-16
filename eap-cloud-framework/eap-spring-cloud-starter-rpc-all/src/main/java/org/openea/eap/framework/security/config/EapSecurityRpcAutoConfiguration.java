@@ -1,8 +1,8 @@
 package org.openea.eap.framework.security.config;
 
+import org.openea.eap.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
+import org.openea.eap.framework.common.biz.system.permission.PermissionCommonApi;
 import org.openea.eap.framework.security.core.rpc.LoginUserRequestInterceptor;
-import org.openea.eap.module.system.api.oauth2.OAuth2TokenApi;
-import org.openea.eap.module.system.api.permission.PermissionApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Bean;
  *
  */
 @AutoConfiguration
-@EnableFeignClients(clients = {OAuth2TokenApi.class, // 主要是引入相关的 API 服务
-        PermissionApi.class})
+@EnableFeignClients(clients = {OAuth2TokenCommonApi.class, // 主要是引入相关的 API 服务
+        PermissionCommonApi.class})
 public class EapSecurityRpcAutoConfiguration {
 
     @Bean

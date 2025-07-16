@@ -1,23 +1,24 @@
 package org.openea.eap.framework.operatelog.core.service;
 
+import org.openea.eap.framework.common.biz.system.logger.OperateLogCommonApi;
 import org.openea.eap.framework.common.util.monitor.TracerUtils;
 import org.openea.eap.framework.common.util.servlet.ServletUtils;
 import org.openea.eap.framework.security.core.LoginUser;
 import org.openea.eap.framework.security.core.util.SecurityFrameworkUtils;
-import org.openea.eap.module.system.api.logger.OperateLogApi;
-import org.openea.eap.module.system.api.logger.dto.OperateLogCreateReqDTO;
+import org.openea.eap.framework.common.biz.system.logger.dto.OperateLogCreateReqDTO;
 import com.mzt.logapi.beans.LogRecord;
 import com.mzt.logapi.service.ILogRecordService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
 /**
  * 操作日志 ILogRecordService 实现类
  *
- * 基于 {@link OperateLogApi} 实现，记录操作日志
+ * 基于 {@link OperateLogCommonApi} 实现，记录操作日志
  *
  * @author HUIHUI
  */
@@ -25,7 +26,7 @@ import java.util.List;
 public class LogRecordServiceImpl implements ILogRecordService {
 
     @Resource
-    private OperateLogApi operateLogApi;
+    private OperateLogCommonApi operateLogApi;
 
     @Override
     public void record(LogRecord logRecord) {

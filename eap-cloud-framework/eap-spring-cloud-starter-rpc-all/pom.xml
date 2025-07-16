@@ -32,9 +32,9 @@
 
         <dependency>
             <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-common-share-api</artifactId>
-            <scope>compile</scope>
+            <artifactId>eap-common-biz-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>io.github.eaopen</groupId>
             <artifactId>eap-spring-boot-starter-web</artifactId>
@@ -72,6 +72,10 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-openfeign-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.eaopen</groupId>
+            <artifactId>eap-common-biz-api</artifactId>
         </dependency>
 
     </dependencies>

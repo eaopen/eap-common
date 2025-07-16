@@ -6,6 +6,7 @@ import cn.hutool.system.SystemUtil;
 import org.openea.eap.framework.common.enums.DocumentEnum;
 import org.openea.eap.framework.mq.redis.core.RedisMQTemplate;
 import org.openea.eap.framework.mq.redis.core.job.RedisPendingMessageResendJob;
+import org.openea.eap.framework.mq.redis.core.job.RedisStreamMessageCleanupJob;
 import org.openea.eap.framework.mq.redis.core.pubsub.AbstractRedisChannelMessageListener;
 import org.openea.eap.framework.mq.redis.core.stream.AbstractRedisStreamMessageListener;
 import org.openea.eap.framework.redis.config.EapRedisAutoConfiguration;
@@ -70,6 +71,17 @@ public class EapRedisMQConsumerAutoConfiguration {
                                                                      @Value("${spring.application.name}") String groupName,
                                                                      RedissonClient redissonClient) {
         return new RedisPendingMessageResendJob(listeners, redisTemplate, groupName, redissonClient);
+    }
+
+    /**
+     * 创建 Redis Stream 消息清理任务
+     */
+    @Bean
+    @ConditionalOnBean(AbstractRedisStreamMessageListener.class)
+    public RedisStreamMessageCleanupJob redisStreamMessageCleanupJob(List<AbstractRedisStreamMessageListener<?>> listeners,
+                                                                     RedisMQTemplate redisTemplate,
+                                                                     RedissonClient redissonClient) {
+        return new RedisStreamMessageCleanupJob(listeners, redisTemplate, redissonClient);
     }
 
     /**

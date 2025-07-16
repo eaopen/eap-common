@@ -1,9 +1,10 @@
 package org.openea.eap.framework.test.core.ut;
 
-import com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure;
+import cn.hutool.extra.spring.SpringUtil;
 import org.openea.eap.framework.datasource.config.EapDataSourceAutoConfiguration;
 import org.openea.eap.framework.mybatis.config.EapMybatisAutoConfiguration;
 import org.openea.eap.framework.test.config.SqlInitializationTestConfiguration;
+import com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.github.yulichang.autoconfigure.MybatisPlusJoinAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -35,6 +36,9 @@ public class BaseDbUnitTest {
             EapMybatisAutoConfiguration.class, // 自己的 MyBatis 配置类
             MybatisPlusAutoConfiguration.class, // MyBatis 的自动配置类
             MybatisPlusJoinAutoConfiguration.class, // MyBatis 的Join配置类
+
+            // 其它配置类
+            SpringUtil.class
     })
     public static class Application {
     }

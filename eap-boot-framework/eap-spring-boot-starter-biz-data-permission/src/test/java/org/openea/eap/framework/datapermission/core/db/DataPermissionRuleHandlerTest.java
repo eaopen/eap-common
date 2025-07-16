@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
  * 主要复用了 MyBatis Plus 的 TenantLineInnerInterceptorTest 的单元测试
  * 不过它的单元测试不是很规范，考虑到是复用的，所以暂时不进行修改~
  *
+ * will fix Tenant多层sql未支持
  */
 public class DataPermissionRuleHandlerTest extends BaseMockitoUnitTest {
 

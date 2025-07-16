@@ -2,13 +2,13 @@ package org.openea.eap.framework.datapermission.core.rule.dept;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ReflectUtil;
+import org.openea.eap.framework.common.biz.system.permission.PermissionCommonApi;
 import org.openea.eap.framework.common.enums.UserTypeEnum;
 import org.openea.eap.framework.common.util.collection.SetUtils;
 import org.openea.eap.framework.security.core.LoginUser;
 import org.openea.eap.framework.security.core.util.SecurityFrameworkUtils;
 import org.openea.eap.framework.test.core.ut.BaseMockitoUnitTest;
-import org.openea.eap.module.system.api.permission.PermissionApi;
-import org.openea.eap.module.system.api.permission.dto.DeptDataPermissionRespDTO;
+import org.openea.eap.framework.common.biz.system.permission.dto.DeptDataPermissionRespDTO;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Expression;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +39,7 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
     private DeptDataPermissionRule rule;
 
     @Mock
-    private PermissionApi permissionApi;
+    private PermissionCommonApi permissionApi;
 
     @BeforeEach
     @SuppressWarnings("unchecked")

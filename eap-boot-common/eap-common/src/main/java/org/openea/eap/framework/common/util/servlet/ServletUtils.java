@@ -119,4 +119,8 @@ public class ServletUtils {
         return JakartaServletUtil.getParamMap(request);
     }
 
+    public static Map<String, String> getHeaderMap(HttpServletRequest request) {
+        return JakartaServletUtil.getHeaderMap(request);
+    }
+
 }

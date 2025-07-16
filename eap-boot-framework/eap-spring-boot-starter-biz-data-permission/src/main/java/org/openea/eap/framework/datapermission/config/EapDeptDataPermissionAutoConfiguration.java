@@ -1,10 +1,11 @@
 package org.openea.eap.framework.datapermission.config;
 
 import cn.hutool.extra.spring.SpringUtil;
+import org.openea.eap.framework.common.biz.system.permission.PermissionCommonApi;
 import org.openea.eap.framework.datapermission.core.rule.dept.DeptDataPermissionRule;
 import org.openea.eap.framework.datapermission.core.rule.dept.DeptDataPermissionRuleCustomizer;
 import org.openea.eap.framework.security.core.LoginUser;
-import org.openea.eap.module.system.api.permission.PermissionApi;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -18,16 +19,16 @@ import java.util.List;
  */
 @AutoConfiguration
 @ConditionalOnClass(LoginUser.class)
-@ConditionalOnBean(value = DeptDataPermissionRuleCustomizer.class)
+@ConditionalOnBean(value = {PermissionCommonApi.class, DeptDataPermissionRuleCustomizer.class})
 public class EapDeptDataPermissionAutoConfiguration {
 
     @Bean
-    public DeptDataPermissionRule deptDataPermissionRule(PermissionApi permissionApi,
+    public DeptDataPermissionRule deptDataPermissionRule(PermissionCommonApi permissionApi,
                                                          List<DeptDataPermissionRuleCustomizer> customizers) {
         // Cloud 专属逻辑：优先使用本地的 PermissionApi 实现类，而不是 Feign 调用
         // 原因：在创建租户时，租户还没创建好，导致 Feign 调用获取数据权限时，报“租户不存在”的错误
         try {
-            PermissionApi permissionApiImpl = SpringUtil.getBean("permissionApiImpl", PermissionApi.class);
+            PermissionCommonApi permissionApiImpl = SpringUtil.getBean("permissionApiImpl", PermissionCommonApi.class);
             if (permissionApiImpl != null) {
                 permissionApi = permissionApiImpl;
             }

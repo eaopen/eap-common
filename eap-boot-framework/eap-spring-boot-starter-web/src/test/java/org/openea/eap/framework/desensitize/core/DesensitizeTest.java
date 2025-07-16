@@ -48,7 +48,7 @@ public class DesensitizeTest {
         DesensitizeDemo d = JsonUtils.parseObject(JsonUtils.toJsonString(desensitizeDemo), DesensitizeDemo.class);
         // 断言
         assertNotNull(d);
-        assertEquals("芋***", d.getNickname());
+        assertEquals("E****", d.getNickname());
         assertEquals("998800********31", d.getBankCard());
         assertEquals("粤A6***6", d.getCarLicense());
         assertEquals("0108*****22", d.getFixedPhone());

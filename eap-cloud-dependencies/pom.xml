@@ -14,11 +14,11 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.8.2</revision>
+        <revision>2.8.5</revision>
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
 
         <!-- 统一依赖管理 -->
-        <spring.cloud.version>2024.0.0</spring.cloud.version>
+        <spring.cloud.version>2024.0.1</spring.cloud.version>
         <spring.cloud.alibaba.version>2023.0.3.2</spring.cloud.alibaba.version>
 
         <!-- gateway依赖 -->

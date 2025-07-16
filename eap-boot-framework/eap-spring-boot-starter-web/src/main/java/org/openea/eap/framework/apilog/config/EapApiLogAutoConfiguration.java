@@ -2,10 +2,10 @@ package org.openea.eap.framework.apilog.config;
 
 import org.openea.eap.framework.apilog.core.filter.ApiAccessLogFilter;
 import org.openea.eap.framework.apilog.core.interceptor.ApiAccessLogInterceptor;
+import org.openea.eap.framework.common.biz.infra.logger.ApiAccessLogCommonApi;
 import org.openea.eap.framework.common.enums.WebFilterOrderEnum;
 import org.openea.eap.framework.web.config.WebProperties;
 import org.openea.eap.framework.web.config.EapWebAutoConfiguration;
-import org.openea.eap.module.infra.api.logger.ApiAccessLogApi;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -23,10 +23,9 @@ public class EapApiLogAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     @ConditionalOnProperty(prefix = "eap.access-log", value = "enable", matchIfMissing = true) // 允许使用 eap.access-log.enable=false 禁用访问日志
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public FilterRegistrationBean<ApiAccessLogFilter> apiAccessLogFilter(WebProperties webProperties,
                                                                          @Value("${spring.application.name}") String applicationName,
-                                                                         ApiAccessLogApi apiAccessLogApi) {
+                                                                         ApiAccessLogCommonApi apiAccessLogApi) {
         ApiAccessLogFilter filter = new ApiAccessLogFilter(webProperties, applicationName, apiAccessLogApi);
         return createFilterBean(filter, WebFilterOrderEnum.API_ACCESS_LOG_FILTER);
     }

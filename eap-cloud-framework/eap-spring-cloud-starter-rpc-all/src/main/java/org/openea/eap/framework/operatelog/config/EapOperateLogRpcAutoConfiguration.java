@@ -1,6 +1,6 @@
 package org.openea.eap.framework.operatelog.config;
 
-import org.openea.eap.module.system.api.logger.OperateLogApi;
+import org.openea.eap.framework.common.biz.system.logger.OperateLogCommonApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
@@ -9,6 +9,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  */
 @AutoConfiguration
-@EnableFeignClients(clients = {OperateLogApi.class}) // 主要是引入相关的 API 服务
+@EnableFeignClients(clients = {OperateLogCommonApi.class}) // 主要是引入相关的 API 服务
 public class EapOperateLogRpcAutoConfiguration {
 }

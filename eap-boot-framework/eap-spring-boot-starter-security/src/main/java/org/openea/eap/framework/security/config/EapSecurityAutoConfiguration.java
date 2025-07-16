@@ -1,5 +1,6 @@
 package org.openea.eap.framework.security.config;
 
+import org.openea.eap.framework.common.biz.system.permission.PermissionCommonApi;
 import org.openea.eap.framework.security.core.context.TransmittableThreadLocalSecurityContextHolderStrategy;
 import org.openea.eap.framework.security.core.filter.TokenAuthenticationFilter;
 import org.openea.eap.framework.security.core.handler.AccessDeniedHandlerImpl;
@@ -8,8 +9,7 @@ import org.openea.eap.framework.security.core.service.SecurityFrameworkService;
 import org.openea.eap.framework.security.core.service.SecurityFrameworkServiceImpl;
 import org.openea.eap.framework.security.core.util.PwdEncoderUtil;
 import org.openea.eap.framework.web.core.handler.GlobalExceptionHandler;
-import org.openea.eap.module.system.api.oauth2.OAuth2TokenApi;
-import org.openea.eap.module.system.api.permission.PermissionApi;
+import org.openea.eap.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -72,12 +72,12 @@ public class EapSecurityAutoConfiguration {
      */
     @Bean
     public TokenAuthenticationFilter authenticationTokenFilter(GlobalExceptionHandler globalExceptionHandler,
-                                                               OAuth2TokenApi oauth2TokenApi) {
+                                                               OAuth2TokenCommonApi oauth2TokenApi) {
         return new TokenAuthenticationFilter(securityProperties, globalExceptionHandler, oauth2TokenApi);
     }
 
     @Bean("ss") // 使用 Spring Security 的缩写，方便使用
-    public SecurityFrameworkService securityFrameworkService(PermissionApi permissionApi) {
+    public SecurityFrameworkService securityFrameworkService(PermissionCommonApi permissionApi) {
         return new SecurityFrameworkServiceImpl(permissionApi);
     }
 

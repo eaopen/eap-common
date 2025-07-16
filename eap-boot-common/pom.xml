@@ -12,13 +12,13 @@
     <artifactId>eap-boot-common</artifactId>
     <description>boot common library
         eap-common 为boot/cloud共用基础库
-        eap-common-share-api 公用共享API，仅用于编译时依赖，不参与打包
+        eap-common-biz-api 公用共享API
     </description>
     <url>https://github.com/eaopen/openea-eap</url>
 
     <modules>
         <module>eap-common</module>
-        <module>eap-common-share-api</module>
+        <module>eap-common-biz-api</module>
     </modules>
 
 

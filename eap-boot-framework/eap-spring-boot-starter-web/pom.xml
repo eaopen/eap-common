@@ -65,10 +65,7 @@
         <!-- 需要使用它，进行错误码的记录 -->
         <dependency>
             <groupId>io.github.eaopen</groupId>
-            <artifactId>eap-common-share-api</artifactId>
-            <version>${revision}</version>
-            <scope>provided</scope>
-            <optional>true</optional>
+            <artifactId>eap-common-biz-api</artifactId>
         </dependency>
 
         <!-- xss -->

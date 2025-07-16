@@ -1,7 +1,7 @@
 package org.openea.eap.framework.apilog.config;
 
-import org.openea.eap.module.infra.api.logger.ApiAccessLogApi;
-import org.openea.eap.module.infra.api.logger.ApiErrorLogApi;
+import org.openea.eap.framework.common.biz.infra.logger.ApiAccessLogCommonApi;
+import org.openea.eap.framework.common.biz.infra.logger.ApiErrorLogCommonApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
@@ -10,7 +10,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  */
 @AutoConfiguration
-@EnableFeignClients(clients = {ApiAccessLogApi.class, // 主要是引入相关的 API 服务
-        ApiErrorLogApi.class})
+@EnableFeignClients(clients = {ApiAccessLogCommonApi.class, ApiErrorLogCommonApi.class}) // 主要是引入相关的 API 服务
 public class EapApiLogRpcAutoConfiguration {
 }

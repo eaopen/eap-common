@@ -2,10 +2,12 @@ package org.openea.eap.framework.signature.core.aop;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import org.openea.eap.framework.common.exception.ServiceException;
+import org.openea.eap.framework.common.exception.enums.GlobalErrorCodeConstants;
 import org.openea.eap.framework.common.util.servlet.ServletUtils;
 import org.openea.eap.framework.signature.core.annotation.ApiSignature;
 import org.openea.eap.framework.signature.core.redis.ApiSignatureRedisDAO;
@@ -69,13 +71,17 @@ public class ApiSignatureAspect {
 
         // 3. 将 nonce 记入缓存，防止重复使用（重点二：此处需要将 ttl 设定为允许 timestamp 时间差的值 x 2 ）
         String nonce = request.getHeader(signature.nonce());
-        signatureRedisDAO.setNonce(appId, nonce, signature.timeout() * 2, signature.timeUnit());
+        if (BooleanUtil.isFalse(signatureRedisDAO.setNonce(appId, nonce, signature.timeout() * 2, signature.timeUnit()))) {
+            String timestamp = request.getHeader(signature.timestamp());
+            log.info("[verifySignature][appId({}) timestamp({}) nonce({}) sign({}) 存在重复请求]", appId, timestamp, nonce, clientSignature);
+            throw new ServiceException(GlobalErrorCodeConstants.REPEATED_REQUESTS.getCode(), "存在重复请求");
+        }
         return true;
     }
 
     /**
      * 校验请求头加签参数
-     *
+     * <p>
      * 1. appId 是否为空
      * 2. timestamp 是否为空，请求是否已经超时，默认 10 分钟
      * 3. nonce 是否为空，随机数是否 10 位以上，是否在规定时间内已经访问过了
@@ -118,7 +124,7 @@ public class ApiSignatureAspect {
 
     /**
      * 构建签名字符串
-     *
+     * <p>
      * 格式为 = 请求参数 + 请求体 + 请求头 + 密钥
      *
      * @param signature signature
