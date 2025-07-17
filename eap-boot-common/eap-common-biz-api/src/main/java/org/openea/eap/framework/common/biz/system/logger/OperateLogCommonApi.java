@@ -4,14 +4,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.openea.eap.framework.common.biz.system.logger.dto.OperateLogCreateReqDTO;
-import org.openea.eap.framework.common.biz.system.logger.dto.OperateLogRespDTO;
 import org.openea.eap.framework.common.enums.RpcConstants;
 import org.openea.eap.framework.common.pojo.CommonResult;
-import org.openea.eap.framework.common.pojo.PageResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
