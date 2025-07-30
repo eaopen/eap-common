@@ -1,15 +1,20 @@
 package org.openea.eap.framework.common.pojo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 @Schema(description="分页参数")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageParam implements Serializable {
 
     private static final Integer PAGE_NO = 1;
