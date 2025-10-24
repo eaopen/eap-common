@@ -64,7 +64,7 @@
         <hutool.version>5.8.35</hutool.version>
         <hutool-6.version>6.0.0-M22</hutool-6.version>
         <easyexcel.verion>4.0.3</easyexcel.verion>
-        <poi.version>4.1.2</poi.version>
+        <poi.version>5.4.0</poi.version>
         <easypoi-base.version>4.4.0</easypoi-base.version>
         <nimbus-jose-jwt.version>9.47</nimbus-jose-jwt.version>
         <jjwt.version>0.12.6</jjwt.version>
