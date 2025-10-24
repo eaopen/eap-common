@@ -25,7 +25,7 @@
         <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
         <!-- 待优化 -->
         <lombok.version>1.18.36</lombok.version>
-        <spring.boot.version>3.5.3</spring.boot.version>
+        <spring.boot.version>3.5.6</spring.boot.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -98,18 +98,6 @@
             <id>openeap-mvn-cnb</id>
             <name>openeap-mvn-cnb</name>
             <url>https://maven.cnb.cool/openeap/mvn/-/packages/</url>
-        </repository>
-        <repository>
-            <id>openea-reps-mvn</id>
-            <name>mvn</name>
-            <url>https://openea-maven.pkg.coding.net/repository/reps/mvn/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -242,16 +230,16 @@
 <!--                </repository>-->
             </distributionManagement>
         </profile>
-        <profile>
-            <id>dev106</id>
-            <distributionManagement>
-                <repository>
-                    <id>dev106-nexus</id>
-                    <name>dev106-nexus</name>
-                    <url>http://192.168.8.106:8081/repository/maven-releases/</url>
-                </repository>
-            </distributionManagement>
-        </profile>
+<!--        <profile>-->
+<!--            <id>dev106</id>-->
+<!--            <distributionManagement>-->
+<!--                <repository>-->
+<!--                    <id>dev106-nexus</id>-->
+<!--                    <name>dev106-nexus</name>-->
+<!--                    <url>http://192.168.8.106:8081/repository/maven-releases/</url>-->
+<!--                </repository>-->
+<!--            </distributionManagement>-->
+<!--        </profile>-->
         <profile>
             <id>ossrh</id>
             <distributionManagement>

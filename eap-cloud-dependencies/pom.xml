@@ -167,6 +167,7 @@
                 </repository>
             </distributionManagement>
         </profile>
+        <!--
         <profile>
             <id>dev106</id>
             <distributionManagement>
@@ -177,6 +178,7 @@
                 </repository>
             </distributionManagement>
         </profile>
+        -->
         <profile>
             <id>ossrh</id>
             <distributionManagement>

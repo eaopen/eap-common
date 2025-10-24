@@ -56,17 +56,17 @@ eap-common-pom (根模块)
 
 ### 技术栈
 
-| 技术 | 版本 | 说明 |
-|------|------|------|
-| Java | 17+ | 编程语言 |
-| Spring Boot | 3.5.3 | 应用框架 |
+| 技术 | 版本     | 说明 |
+|------|--------|------|
+| Java | 17+    | 编程语言 |
+| Spring Boot | 3.5.6  | 应用框架 |
 | Spring Security | 5.7.6+ | 安全框架 |
 | MyBatis Plus | 3.5.12 | ORM框架 |
-| Redis | 6.0+ | 缓存数据库 |
-| MySQL | 8.0+ | 关系数据库 |
-| Flowable | 7.0.1 | 工作流引擎 |
-| Vue.js | 2.x | 前端框架 |
-| Element UI | - | UI组件库 |
+| Redis | 6.0+   | 缓存数据库 |
+| MySQL | 8.0+   | 关系数据库 |
+| Flowable | 7.0.1  | 工作流引擎 |
+| Vue.js | 2.x    | 前端框架 |
+| Element UI | -      | UI组件库 |
 
 ## 🚀 快速开始
 
@@ -237,21 +237,21 @@ eap-common-pom (根模块)
 
 ### 3.1 后端技术栈
 
-| 技术组件 | 版本 | 用途说明 |
-|---------|------|----------|
-| Spring Boot | 3.5.3 | 应用开发框架 |
-| Spring Security | 5.7.6+ | 安全认证框架 |
-| MyBatis Plus | 3.5.12 | ORM框架 |
-| Druid | 1.2.25 | 数据库连接池 |
+| 技术组件 | 版本       | 用途说明 |
+|---------|----------|----------|
+| Spring Boot | 3.5.6    | 应用开发框架 |
+| Spring Security | 5.7.6+   | 安全认证框架 |
+| MyBatis Plus | 3.5.12   | ORM框架 |
+| Druid | 1.2.25   | 数据库连接池 |
 | Redis | 5.0/6.0+ | 缓存数据库 |
-| Redisson | 3.41.0 | Redis客户端 |
+| Redisson | 3.41.0   | Redis客户端 |
 | MySQL | 5.7/8.0+ | 关系型数据库 |
-| Flowable | 7.0.1 | 工作流引擎 |
-| Quartz | 2.3.2 | 任务调度 |
-| Knife4j | 4.6.0 | API文档 |
-| Hutool | 5.8.35 | Java工具库 |
-| MapStruct | 1.6.3 | Bean转换 |
-| Lombok | 1.18.38 | 代码简化 |
+| Flowable | 7.0.1    | 工作流引擎 |
+| Quartz | 2.3.2    | 任务调度 |
+| Knife4j | 4.6.0    | API文档 |
+| Hutool | 5.8.35   | Java工具库 |
+| MapStruct | 1.6.3    | Bean转换 |
+| Lombok | 1.18.38  | 代码简化 |
 
 ### 3.2 前端技术栈
 
