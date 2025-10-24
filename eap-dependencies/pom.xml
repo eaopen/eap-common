@@ -89,7 +89,7 @@
         <pf4j-spring.version>0.9.0</pf4j-spring.version>
         <vertx.version>4.5.13</vertx.version>
         <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
-        <commons-fileupload.version>1.5</commons-fileupload.version>
+        <commons-fileupload.version>1.6.0</commons-fileupload.version>
         <sa-token.version>1.39.0</sa-token.version>
         <pagehelper.version>5.3.2</pagehelper.version>
         <zxing.version>3.5.1</zxing.version>
