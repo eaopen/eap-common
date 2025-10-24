@@ -1108,18 +1108,6 @@
                 </repository>
             </distributionManagement>
         </profile>
-        <!--
-        <profile>
-            <id>dev106</id>
-            <distributionManagement>
-                <repository>
-                    <id>dev106-nexus</id>
-                    <name>dev106-nexus</name>
-                    <url>http://192.168.8.106:8081/repository/maven-releases/</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-        -->
         <profile>
             <id>ossrh</id>
             <distributionManagement>
