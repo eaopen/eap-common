@@ -96,7 +96,7 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <dom4j.version>2.1.4</dom4j.version>
-        <jgit.version>6.9.0.202403050737-r</jgit.version>
+        <jgit.version>6.10.1.202505221210-r</jgit.version>
         <quartz.version>2.3.2</quartz.version>
         <xxl-job.version>2.4.2</xxl-job.version>
         <powerjob.version>5.0.1-beta</powerjob.version>
