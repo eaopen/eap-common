@@ -10,6 +10,7 @@
     </parent>
     <packaging>pom</packaging>
     <artifactId>eap-boot-common</artifactId>
+    <name>${project.artifactId}</name>
     <description>boot common library
         eap-common 为boot/cloud共用基础库
         eap-common-biz-api 公用共享API

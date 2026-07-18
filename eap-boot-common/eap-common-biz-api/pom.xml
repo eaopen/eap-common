@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>eap-common-biz-api</artifactId>
+    <name>${project.artifactId}</name>
 
     <description>
         公用共享API，来自system-api和infra-api, 仅用于编译时依赖，不参与打包

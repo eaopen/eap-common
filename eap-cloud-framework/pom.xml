@@ -11,6 +11,7 @@
 
     <packaging>pom</packaging>
     <artifactId>eap-cloud-framework</artifactId>
+    <name>${project.artifactId}</name>
     <description>
         该包是技术组件，每个子包，代表一个组件。每个组件包括两部分：
         1. core 包：是该组件的核心封装
