@@ -5,6 +5,7 @@ import cn.hutool.core.util.ReflectUtil;
 import org.openea.eap.framework.common.exception.ErrorCode;
 import org.openea.eap.framework.common.exception.ServiceException;
 import org.openea.eap.framework.common.exception.util.ServiceExceptionUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
 
@@ -34,6 +35,11 @@ public class AssertUtils {
         Arrays.stream(expectedFields).forEach(expectedField -> {
             // 忽略 jacoco 自动生成的 $jacocoData 属性的情况
             if (expectedField.isSynthetic()) {
+                return;
+            }
+            // 数据库不存在的字段不会在 Mapper 查询结果中返回。
+            TableField tableField = expectedField.getAnnotation(TableField.class);
+            if (tableField != null && !tableField.exist()) {
                 return;
             }
             // 如果是忽略的属性，则不进行比对
@@ -67,6 +73,13 @@ public class AssertUtils {
     public static boolean isPojoEquals(Object expected, Object actual, String... ignoreFields) {
         Field[] expectedFields = ReflectUtil.getFields(expected.getClass());
         return Arrays.stream(expectedFields).allMatch(expectedField -> {
+            if (expectedField.isSynthetic()) {
+                return true;
+            }
+            TableField tableField = expectedField.getAnnotation(TableField.class);
+            if (tableField != null && !tableField.exist()) {
+                return true;
+            }
             // 如果是忽略的属性，则不进行比对
             if (ArrayUtil.contains(ignoreFields, expectedField.getName())) {
                 return true;

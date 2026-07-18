@@ -6,6 +6,9 @@ import org.openea.eap.framework.common.pojo.PageParam;
 import org.openea.eap.framework.common.pojo.SortingField;
 import org.openea.eap.framework.mybatis.core.enums.DbTypeEnum;
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
 /**
  * MyBatis 工具类
@@ -26,6 +30,8 @@ import java.util.stream.Collectors;
 public class MyBatisUtils {
 
     private static final String MYSQL_ESCAPE_CHARACTER = "`";
+
+    private static final Pattern SAFE_COLUMN_NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*$");
 
     public static <T> Page<T> buildPage(PageParam pageParam) {
         return buildPage(pageParam, null);
@@ -42,6 +48,56 @@ public class MyBatisUtils {
                     .collect(Collectors.toList()));
         }
         return page;
+    }
+
+    /**
+     * 为非分页查询补充经过校验的排序字段，避免将请求参数直接拼接到 SQL 中。
+     */
+    @SuppressWarnings("PatternVariableCanBeUsed")
+    public static <T> void addOrder(Wrapper<T> wrapper, Collection<SortingField> sortingFields) {
+        if (CollectionUtil.isEmpty(sortingFields)) {
+            return;
+        }
+        if (wrapper instanceof QueryWrapper<T> query) {
+            for (SortingField sortingField : sortingFields) {
+                String columnName = buildSafeOrderColumn(sortingField.getField());
+                if (columnName != null) {
+                    query.orderBy(true, isAscOrder(sortingField.getOrder()), columnName);
+                }
+            }
+            return;
+        }
+        if (wrapper instanceof LambdaQueryWrapper<T> lambdaQuery) {
+            StringBuilder orderBy = new StringBuilder();
+            for (SortingField sortingField : sortingFields) {
+                String columnName = buildSafeOrderColumn(sortingField.getField());
+                if (columnName == null) {
+                    continue;
+                }
+                if (!orderBy.isEmpty()) {
+                    orderBy.append(", ");
+                }
+                orderBy.append(columnName).append(" ").append(getOrderDirection(sortingField.getOrder()));
+            }
+            if (!orderBy.isEmpty()) {
+                lambdaQuery.last("ORDER BY " + orderBy);
+            }
+            return;
+        }
+        throw new IllegalArgumentException("Unsupported wrapper type: " + wrapper.getClass().getName());
+    }
+
+    public static boolean isAscOrder(String order) {
+        return SortingField.ORDER_ASC.equals(order);
+    }
+
+    public static String getOrderDirection(String order) {
+        return isAscOrder(order) ? "ASC" : "DESC";
+    }
+
+    private static String buildSafeOrderColumn(String field) {
+        String columnName = StrUtil.toUnderlineCase(field);
+        return StrUtil.isNotEmpty(columnName) && SAFE_COLUMN_NAME_PATTERN.matcher(columnName).matches() ? columnName : null;
     }
 
     /**
