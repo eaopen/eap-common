@@ -4,18 +4,18 @@
 
 ![Open EAP Logo](https://raw.githubusercontent.com/eaopen/openea-eap/dev/doc/yudao/ruoyi-vue-pro-architecture.png)
 
-**开放企业应用平台 - 基于Spring Boot 3.x的企业级应用开发框架**
+**开放企业应用平台 - 基于Spring Boot 4.1的企业级应用开发框架**
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
-[![Java](https://img.shields.io/badge/Java-17+-green.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.15-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-2.9.0-orange.svg)](https://github.com/eaopen/openea-eap)
+[![Java](https://img.shields.io/badge/Java-21+-green.svg)](https://openjdk.java.net/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Version](https://img.shields.io/badge/Version-3.0.0-orange.svg)](https://github.com/eaopen/openea-eap)
 
 </div>
 
 ## 📖 项目简介
 
-Open EAP（开放企业应用平台）是一个基于Spring Boot 3.x的企业级应用开发框架，整合了多个开源项目，为企业应用快速开发提供基础框架支持。
+Open EAP（开放企业应用平台）是一个基于Spring Boot 4.1的企业级应用开发框架，整合了多个开源项目，为企业应用快速开发提供基础框架支持。
 
 ### 🎯 设计理念
 
@@ -25,7 +25,7 @@ Open EAP（开放企业应用平台）是一个基于Spring Boot 3.x的企业级
 
 ### ✨ 核心特性
 
-- 🚀 **前后端分离**：Spring Boot 3.x + Vue2/Element-UI
+- 🚀 **前后端分离**：Spring Boot 4.1 + Vue2/Element-UI
 - 🏢 **多租户支持**：完整的SaaS多租户解决方案
 - 🌍 **国际化支持**：完整的i18n国际化框架
 - 🔄 **工作流引擎**：集成Flowable/Activiti工作流
@@ -64,10 +64,10 @@ eap-common-pom (根模块)
 
 | 技术 | 版本     | 说明 |
 |------|--------|------|
-| Java | 17+    | 编程语言 |
-| Spring Boot | 3.5.15  | 应用框架 |
-| Spring Security | 6.x（由 Boot BOM 管理） | 安全框架 |
-| MyBatis Plus | 3.5.16 | ORM框架 |
+| Java | 21+    | 编程语言 |
+| Spring Boot | 4.1.0  | 应用框架 |
+| Spring Security | 7.x（由 Boot BOM 管理） | 安全框架 |
+| MyBatis Plus | 3.5.17 | ORM框架 |
 | Redis | 6.0+   | 缓存数据库 |
 | MySQL | 8.0+   | 关系数据库 |
 | Flowable | 8.0.0  | 工作流引擎 |
@@ -78,8 +78,15 @@ eap-common-pom (根模块)
 
 ### 环境要求
 
-- JDK 17+
+- JDK 21+
 - Maven 3.6+
+
+### 3.0 升级说明
+
+- 3.0.0 统一使用 JDK 21、Spring Boot 4.1.0、Spring Framework 7 和 Spring Security 7，不再支持 JDK 17。
+- Web、AOP、MyBatis-Plus、Druid、Dynamic Datasource 与 JimuReport 已切换到 Boot 4 对应 Starter；SpringDoc 升级到 3.0.3。
+- Spring Boot 4 的自动配置按技术域拆包，自定义集成代码已迁移到 `restclient`、`jackson2`、`cache`、`jdbc`、`data.redis` 等新包。
+- 测试使用标准 `spring-boot-starter-test`；应用测试中的 `@MockBean` 需迁移为 Spring Framework 的 `@MockitoBean`。
 
 ### 本地构建与验证
 
@@ -178,7 +185,7 @@ eap-common-pom (根模块)
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   前端应用       │    │   后端服务       │    │   数据存储       │
-│  Vue2 + Element │◄──►│ Spring Boot 3.x │◄──►│ MySQL + Redis   │
+│  Vue2 + Element │◄──►│ Spring Boot 4.1 │◄──►│ MySQL + Redis   │
 │                 │    │                 │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
@@ -204,7 +211,7 @@ eap-common-pom (根模块)
 
 | 技术组件 | 版本       | 用途说明 |
 |---------|----------|----------|
-| Spring Boot | 3.5.15   | 应用开发框架 |
+| Spring Boot | 4.1.0   | 应用开发框架 |
 | Spring Security | 6.x（由 Boot BOM 管理） | 安全认证框架 |
 | MyBatis Plus | 3.5.16   | ORM框架 |
 | Druid | 1.2.28   | 数据库连接池 |
@@ -440,7 +447,7 @@ openea-eap/
 
 Open EAP是一个功能完整、架构清晰的企业级应用开发平台，具有以下优势：
 
-1. **技术先进**：基于最新的Spring Boot 3.x技术栈
+1. **技术先进**：基于最新的Spring Boot 4.1技术栈
 2. **架构灵活**：支持单体到微服务的平滑演进
 3. **功能丰富**：涵盖企业应用开发的各个方面
 4. **扩展性强**：良好的模块化设计和插件机制
@@ -656,7 +663,7 @@ springdoc:
 # 业务配置
 eap:
   info:
-    version: 2.9.0
+    version: 3.0.0
     base-package: org.openea.eap
   web:
     admin-api:
@@ -723,6 +730,6 @@ eap:
 
 ---
 
-**文档版本**：v2.9.0
+**文档版本**：v3.0.0
 **最后更新**：2026年7月
 **维护者**：Open EAP开发团队

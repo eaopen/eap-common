@@ -3,7 +3,7 @@ package org.openea.eap.framework.test.config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
-import org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties;
+import org.springframework.boot.sql.autoconfigure.init.SqlInitializationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer;
 import org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer;
