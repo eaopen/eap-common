@@ -1,9 +1,7 @@
 package org.openea.eap.framework.common.util.http;
 
 import cn.hutool.core.codec.Base64;
-import cn.hutool.core.map.TableMap;
 import cn.hutool.core.net.url.UrlBuilder;
-import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
@@ -34,14 +32,10 @@ public class HttpUtils {
         return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 
-    @SuppressWarnings("unchecked")
     public static String replaceUrlQuery(String url, String key, String value) {
         UrlBuilder builder = UrlBuilder.of(url, Charset.defaultCharset());
-        // 先移除
-        TableMap<CharSequence, CharSequence> query = (TableMap<CharSequence, CharSequence>)
-                ReflectUtil.getFieldValue(builder.getQuery(), "query");
-        query.remove(key);
-        // 后添加
+        // 先移除，再添加，避免依赖 Hutool 的内部字段实现。
+        builder.getQuery().remove(key);
         builder.addQuery(key, value);
         return builder.build();
     }

@@ -8,8 +8,8 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 [![Java](https://img.shields.io/badge/Java-17+-green.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-2.8.5-orange.svg)](https://github.com/eaopen/openea-eap)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.15-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Version](https://img.shields.io/badge/Version-2.9.0-orange.svg)](https://github.com/eaopen/openea-eap)
 
 </div>
 
@@ -33,6 +33,12 @@ Open EAP（开放企业应用平台）是一个基于Spring Boot 3.x的企业级
 - ☁️ **微服务就绪**：单体架构可无缝切换为微服务
 - 🔒 **安全可靠**：Spring Security + JWT + 数据权限
 - 📊 **监控完善**：SkyWalking链路追踪 + Spring Boot Admin
+
+## 🤝 人机协作
+
+开发人员与编码智能体共用 [AGENTS.md](AGENTS.md) 作为仓库协作规范：其中说明模块边界、兼容性要求、依赖管理和验证命令。Codex 直接读取该文件；Claude Code 通过 [CLAUDE.md](CLAUDE.md) 指向同一规则，避免多份指引发生偏差。
+
+推荐协作流程：先确认模块与调用方 → 做最小范围修改 → 运行相关测试 → 更新 README/技术文档 → 在交付说明中记录验证结果。共享框架变更完成后，先安装本仓产物，再验证同级 `eap-boot`。
 
 ## 🏗️ 架构设计
 
@@ -59,12 +65,12 @@ eap-common-pom (根模块)
 | 技术 | 版本     | 说明 |
 |------|--------|------|
 | Java | 17+    | 编程语言 |
-| Spring Boot | 3.5.6  | 应用框架 |
-| Spring Security | 5.7.6+ | 安全框架 |
-| MyBatis Plus | 3.5.12 | ORM框架 |
+| Spring Boot | 3.5.15  | 应用框架 |
+| Spring Security | 6.x（由 Boot BOM 管理） | 安全框架 |
+| MyBatis Plus | 3.5.16 | ORM框架 |
 | Redis | 6.0+   | 缓存数据库 |
 | MySQL | 8.0+   | 关系数据库 |
-| Flowable | 7.0.1  | 工作流引擎 |
+| Flowable | 8.0.0  | 工作流引擎 |
 | Vue.js | 2.x    | 前端框架 |
 | Element UI | -      | UI组件库 |
 
@@ -74,67 +80,26 @@ eap-common-pom (根模块)
 
 - JDK 17+
 - Maven 3.6+
-- MySQL 8.0+
-- Redis 6.0+
-- Node.js 16+ (前端开发)
 
-### 本地开发
+### 本地构建与验证
 
 1. **克隆项目**
 ```bash
 git clone https://github.com/eaopen/openea-eap.git
-cd openea-eap
+cd openea-eap/eap-common
 ```
 
-2. **数据库初始化**
+2. **执行共享框架测试**
 ```bash
-# 创建数据库
-mysql -u root -p
-CREATE DATABASE eap DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-# 导入初始化脚本
-mysql -u root -p eap < sql/eap.sql
+mvn -q -Dflatten.skip=true test
 ```
 
-3. **修改配置**
-```yaml
-# application-local.yml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/eap
-    username: root
-    password: your_password
-  redis:
-    host: localhost
-    port: 6379
-```
-
-4. **启动应用**
+3. **安装到本地 Maven 仓库**
 ```bash
-# 编译项目
-mvn clean install -DskipTests
-
-# 启动后端服务
-cd eap-server
-mvn spring-boot:run
-
-# 启动前端 (另开终端)
-cd eap-ui-admin
-npm install
-npm run dev
+mvn -q -DskipTests install
 ```
 
-5. **访问系统**
-- 后端API: http://localhost:48080
-- 前端界面: http://localhost:8080
-- API文档: http://localhost:48080/swagger-ui.html
-
-### Docker部署
-
-```bash
-# 使用docker-compose一键启动
-docker-compose up -d
-```
+`eap-common` 是共享依赖库，不能单独启动。安装后可在同级 `eap-boot` 中执行 `mvn -q -Dflatten.skip=true test`，或在实际应用模块中启动服务。
 
 ## 📚 主要功能
 
@@ -239,19 +204,19 @@ eap-common-pom (根模块)
 
 | 技术组件 | 版本       | 用途说明 |
 |---------|----------|----------|
-| Spring Boot | 3.5.6    | 应用开发框架 |
-| Spring Security | 5.7.6+   | 安全认证框架 |
-| MyBatis Plus | 3.5.12   | ORM框架 |
-| Druid | 1.2.25   | 数据库连接池 |
+| Spring Boot | 3.5.15   | 应用开发框架 |
+| Spring Security | 6.x（由 Boot BOM 管理） | 安全认证框架 |
+| MyBatis Plus | 3.5.16   | ORM框架 |
+| Druid | 1.2.28   | 数据库连接池 |
 | Redis | 5.0/6.0+ | 缓存数据库 |
-| Redisson | 3.41.0   | Redis客户端 |
+| Redisson | 4.6.1    | Redis客户端 |
 | MySQL | 5.7/8.0+ | 关系型数据库 |
-| Flowable | 7.0.1    | 工作流引擎 |
+| Flowable | 8.0.0    | 工作流引擎 |
 | Quartz | 2.3.2    | 任务调度 |
-| Knife4j | 4.6.0    | API文档 |
-| Hutool | 5.8.35   | Java工具库 |
+| Knife4j | 4.5.0    | API文档 |
+| Hutool | 5.8.46   | Java工具库 |
 | MapStruct | 1.6.3    | Bean转换 |
-| Lombok | 1.18.38  | 代码简化 |
+| Lombok | 1.18.46  | 代码简化 |
 
 ### 3.2 前端技术栈
 
@@ -691,7 +656,7 @@ springdoc:
 # 业务配置
 eap:
   info:
-    version: 2.8.5
+    version: 2.9.0
     base-package: org.openea.eap
   web:
     admin-api:
@@ -752,146 +717,12 @@ eap:
 </configuration>
 ```
 
-## 附录E：部署脚本示例
+## 附录E：部署边界
 
-### E.1 Docker部署
-```dockerfile
-# Dockerfile
-FROM openjdk:17-jdk-slim
-
-LABEL maintainer="openea@github.com"
-
-# 设置时区
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-RUN echo 'Asia/Shanghai' >/etc/timezone
-
-# 创建应用目录
-WORKDIR /app
-
-# 复制应用文件
-COPY target/eap-server.jar app.jar
-
-# 暴露端口
-EXPOSE 48080
-
-# 启动应用
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
-```
-
-```yaml
-# docker-compose.yml
-version: '3.8'
-
-services:
-  mysql:
-    image: mysql:8.0
-    container_name: eap-mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: eap
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
-
-  redis:
-    image: redis:6.2
-    container_name: eap-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-  eap-server:
-    build: .
-    container_name: eap-server
-    ports:
-      - "48080:48080"
-    depends_on:
-      - mysql
-      - redis
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/eap?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 123456
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
-
-volumes:
-  mysql_data:
-  redis_data:
-```
-
-### E.2 Kubernetes部署
-```yaml
-# k8s-deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: eap-server
-  labels:
-    app: eap-server
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: eap-server
-  template:
-    metadata:
-      labels:
-        app: eap-server
-    spec:
-      containers:
-      - name: eap-server
-        image: eap-server:2.8.5
-        ports:
-        - containerPort: 48080
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: "prod"
-        - name: SPRING_DATASOURCE_URL
-          value: "jdbc:mysql://mysql-service:3306/eap"
-        - name: SPRING_REDIS_HOST
-          value: "redis-service"
-        resources:
-          requests:
-            memory: "1Gi"
-            cpu: "500m"
-          limits:
-            memory: "2Gi"
-            cpu: "1000m"
-        livenessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 48080
-          initialDelaySeconds: 60
-          periodSeconds: 30
-        readinessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 48080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: eap-server-service
-spec:
-  selector:
-    app: eap-server
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 48080
-  type: LoadBalancer
-```
+`eap-common` 是 Maven BOM 与共享框架库，不生成可部署的应用镜像，也不提供 Docker 或 Kubernetes 部署清单。应用打包、容器构建和环境配置统一由同级 `eap-boot` 仓库的 `eap-server`、`eap-gateway` 与 `script/docker/` 负责。
 
 ---
 
-**文档版本**：v1.0  
-**最后更新**：2025年1月  
+**文档版本**：v2.9.0
+**最后更新**：2026年7月
 **维护者**：Open EAP开发团队
