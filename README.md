@@ -8,8 +8,8 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 [![Java](https://img.shields.io/badge/Java-17+-green.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.15-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-2.9.0-orange.svg)](https://github.com/eaopen/openea-eap)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.16-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Version](https://img.shields.io/badge/Version-2.9.1-orange.svg)](https://github.com/eaopen/openea-eap)
 
 </div>
 
@@ -65,7 +65,7 @@ eap-common-pom (根模块)
 | 技术 | 版本     | 说明 |
 |------|--------|------|
 | Java | 17+    | 编程语言 |
-| Spring Boot | 3.5.15  | 应用框架 |
+| Spring Boot | 3.5.16  | 应用框架 |
 | Spring Security | 6.x（由 Boot BOM 管理） | 安全框架 |
 | MyBatis Plus | 3.5.16 | ORM框架 |
 | Redis | 6.0+   | 缓存数据库 |
@@ -204,7 +204,7 @@ eap-common-pom (根模块)
 
 | 技术组件 | 版本       | 用途说明 |
 |---------|----------|----------|
-| Spring Boot | 3.5.15   | 应用开发框架 |
+| Spring Boot | 3.5.16   | 应用开发框架 |
 | Spring Security | 6.x（由 Boot BOM 管理） | 安全认证框架 |
 | MyBatis Plus | 3.5.16   | ORM框架 |
 | Druid | 1.2.28   | 数据库连接池 |
@@ -656,7 +656,7 @@ springdoc:
 # 业务配置
 eap:
   info:
-    version: 2.9.0
+    version: 2.9.1
     base-package: org.openea.eap
   web:
     admin-api:
@@ -723,6 +723,6 @@ eap:
 
 ---
 
-**文档版本**：v2.9.0
+**文档版本**：v2.9.1
 **最后更新**：2026年7月
 **维护者**：Open EAP开发团队
