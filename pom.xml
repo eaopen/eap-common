@@ -224,23 +224,18 @@
                     <name>openeap-mvn-cnb</name>
                     <url>https://maven.cnb.cool/openeap/mvn/-/packages/</url>
                 </repository>
-<!--                <repository>-->
-<!--                    <id>openea-reps-mvn</id>-->
-<!--                    <name>mvn</name>-->
-<!--                    <url>https://openea-maven.pkg.coding.net/repository/reps/mvn/</url>-->
-<!--                </repository>-->
             </distributionManagement>
         </profile>
-<!--        <profile>-->
-<!--            <id>dev106</id>-->
-<!--            <distributionManagement>-->
-<!--                <repository>-->
-<!--                    <id>dev106-nexus</id>-->
-<!--                    <name>dev106-nexus</name>-->
-<!--                    <url>http://192.168.8.106:8081/repository/maven-releases/</url>-->
-<!--                </repository>-->
-<!--            </distributionManagement>-->
-<!--        </profile>-->
+        <profile>
+            <id>dev138</id>
+            <distributionManagement>
+                <repository>
+                    <id>dev138-nexus</id>
+                    <name>dev138-nexus</name>
+                    <url>http://10.12.1.138:8081/repository/maven-releases/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
         <profile>
             <id>ossrh</id>
             <build>

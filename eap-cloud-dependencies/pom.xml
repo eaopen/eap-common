@@ -167,18 +167,16 @@
                 </repository>
             </distributionManagement>
         </profile>
-        <!--
         <profile>
-            <id>dev106</id>
+            <id>dev138</id>
             <distributionManagement>
                 <repository>
-                    <id>dev106-nexus</id>
-                    <name>dev106-nexus</name>
-                    <url>http://192.168.8.106:8081/repository/maven-releases/</url>
+                    <id>dev138-nexus</id>
+                    <name>dev138-nexus</name>
+                    <url>http://10.12.1.138:8081/repository/maven-releases/</url>
                 </repository>
             </distributionManagement>
         </profile>
-        -->
         <profile>
             <id>ossrh</id>
             <build>
