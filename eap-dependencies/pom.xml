@@ -14,7 +14,7 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.9.1</revision>
+        <revision>2.9.1b</revision>
         <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
         <spring.boot.version>3.5.16</spring.boot.version>
