@@ -14,7 +14,7 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>2.9.1c</revision>
+        <revision>2.9.2</revision>
         <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
         <spring.boot.version>3.5.16</spring.boot.version>
@@ -61,6 +61,8 @@
         <hutool-6.version>6.0.0-M22</hutool-6.version>
         <easyexcel.verion>4.0.3</easyexcel.verion>
         <poi.version>5.4.0</poi.version>
+        <!-- poi-ooxml-schemas 的最后发布版本：POI 5.x 起该构件不再发布，版本不能跟随 ${poi.version} -->
+        <poi-ooxml-schemas.version>4.1.2</poi-ooxml-schemas.version>
         <easypoi-base.version>4.4.0</easypoi-base.version>
         <nimbus-jose-jwt.version>10.0.2</nimbus-jose-jwt.version>
         <jjwt.version>0.12.6</jjwt.version>
@@ -743,7 +745,16 @@
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml-schemas</artifactId>
-                <version>${poi.version}</version>
+                <!-- 2.9.2 修复：poi-ooxml-schemas 自 POI 5.0 起已停止发布（最后一个版本是 4.1.2，
+                     5.x 由 poi-ooxml-full / poi-ooxml-lite 取代），原来按 ${poi.version}=5.4.0 管理
+                     会指向不存在的坐标，导致依赖该构件的应用（easypoi 4.x 显式依赖它）解析直接失败。
+                     修改逻辑：单列 ${poi-ooxml-schemas.version} 钉在最后一个真实版本 4.1.2，
+                     同时保持 poi / poi-ooxml 仍跟随 ${poi.version}=5.4.0（easyexcel 4.0.3 需要 POI 5.x）。
+                     修改原因：升级实践中，使用 easypoi 的下游应用被迫在应用侧整体钉版 POI 家族 4.1.2 以规避解析失败，
+                     属 BOM 缺陷外溢到应用，故在共享 BOM 内修正死坐标。
+                     注意：本修正只消除“坐标不存在”的解析失败；仍在 easypoi 4.x 上的应用若需要 POI 4.x 运行时，
+                     仍应在应用侧自行钉版（属应用依赖选择，非 BOM 缺陷）。 -->
+                <version>${poi-ooxml-schemas.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tika</groupId>
