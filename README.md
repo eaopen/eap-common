@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 [![Java](https://img.shields.io/badge/Java-17+-green.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.16-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-2.9.1-orange.svg)](https://github.com/eaopen/openea-eap)
+[![Version](https://img.shields.io/badge/Version-2.9.2-orange.svg)](https://github.com/eaopen/openea-eap)
 
 </div>
 
@@ -39,6 +39,8 @@ Open EAP（开放企业应用平台）是一个基于Spring Boot 3.x的企业级
 开发人员与编码智能体共用 [AGENTS.md](AGENTS.md) 作为仓库协作规范：其中说明模块边界、兼容性要求、依赖管理和验证命令。Codex 直接读取该文件；Claude Code 通过 [CLAUDE.md](CLAUDE.md) 指向同一规则，避免多份指引发生偏差。
 
 推荐协作流程：先确认模块与调用方 → 做最小范围修改 → 运行相关测试 → 更新 README/技术文档 → 在交付说明中记录验证结果。共享框架变更完成后，先安装本仓产物，再验证同级 `eap-boot`。
+
+升级本框架或下游应用前，先阅读 [升级指南](doc/升级指南.md)（版本矩阵、升级步骤、本版特性与下游注意事项）；每个版本的对外变更见 [更新日志](CHANGELOG.md)；升级改动的回迁结论与后续治理方案见 [2.9.2 升级下游回迁评估](doc/2.9.2-升级下游回迁评估.md)。
 
 ## 🏗️ 架构设计
 
@@ -656,7 +658,7 @@ springdoc:
 # 业务配置
 eap:
   info:
-    version: 2.9.1
+    version: 2.9.2
     base-package: org.openea.eap
   web:
     admin-api:
@@ -723,6 +725,6 @@ eap:
 
 ---
 
-**文档版本**：v2.9.1
-**最后更新**：2026年7月
+**文档版本**：v2.9.2
+**最后更新**：2026年9月
 **维护者**：Open EAP开发团队
