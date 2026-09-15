@@ -15,7 +15,7 @@
         eap-common 为boot/cloud共用基础库
         eap-common-biz-api 公用共享API
     </description>
-    <url>https://github.com/eaopen/openea-eap</url>
+    <url>https://github.com/eaopen/eap-common</url>
 
     <modules>
         <module>eap-common</module>

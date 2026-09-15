@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 [![Java](https://img.shields.io/badge/Java-17+-green.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.16-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-2.9.2-orange.svg)](https://github.com/eaopen/openea-eap)
+[![Version](https://img.shields.io/badge/Version-2.9.2-orange.svg)](https://github.com/eaopen/eap-common)
 
 </div>
 
@@ -87,7 +87,7 @@ eap-common-pom (根模块)
 
 1. **克隆项目**
 ```bash
-git clone https://github.com/eaopen/openea-eap.git
+git clone https://github.com/eaopen/eap-common.git
 cd openea-eap/eap-common
 ```
 

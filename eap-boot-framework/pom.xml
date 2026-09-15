@@ -24,7 +24,7 @@
         将对system-api和infra-api的依赖API
         合并到/eap-boot-common/eap-boot-common-api中
     </description>
-    <url>https://github.com/eaopen/openea-eap</url>
+    <url>https://github.com/eaopen/eap-common</url>
 
     <modules>
 

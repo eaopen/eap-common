@@ -21,7 +21,7 @@
         boot共用中rpc相关启动配置放入web1
 
     </description>
-    <url>https://github.com/eaopen/openea-eap</url>
+    <url>https://github.com/eaopen/eap-common</url>
 
     <modules>
         <module>eap-spring-boot-starter-env</module>

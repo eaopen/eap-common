@@ -169,8 +169,8 @@ OpenEAP前后端分离，采用后端Spring boot 2.x单体多模块，前端vue2
 
 ### 项目
 
-* [openea-eap](https://github.com/eaopen/openea-eap) 综合版本
-  * 分支dev/eap22为最新版本，分拆项目为maven库依赖
+* [openea-eap](https://github.com/eaopen/openea-eap) 综合版本（已归档，仅作存档）
+  * 2026-09 起已拆分为 [eap-common](https://github.com/eaopen/eap-common)（共享框架与 Maven BOM）与 [eap-boot](https://github.com/eaopen/eap-boot)（单体应用脚手架）
   * 分支[eap2.1](https://github.com/eaopen/openea-eap/tree/eap2.1)为旧版本，所有代码在同一项目中 
 
 

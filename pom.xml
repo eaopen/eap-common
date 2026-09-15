@@ -12,7 +12,7 @@
     <description>EAP base framework
         依赖包、基础框架、基本工具以及技术依赖包
     </description>
-    <url>https://github.com/eaopen/openea-eap</url>
+    <url>https://github.com/eaopen/eap-common</url>
 
     <properties>
         <revision>2.9.2</revision>
@@ -48,8 +48,8 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/eaopen/openea-eap</url>
-        <connection>https://github.com/eaopen/openea-eap.git</connection>
+        <url>https://github.com/eaopen/eap-common</url>
+        <connection>https://github.com/eaopen/eap-common.git</connection>
         <developerConnection>https://github.com/eaopen</developerConnection>
     </scm>
     <developers>
