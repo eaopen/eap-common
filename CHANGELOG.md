@@ -10,6 +10,12 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- `eap-spring-boot-starter-security`：JWT 新旧签发路径均加入随机 `jti`，避免相同身份与客户端在同一秒内
+  得到相同 access token；新增兼容检测方法用于区分无 `jti` 的历史 JWT 与 UUID 等不透明 token。现有签发方法签名、
+  运行时依赖和既有 claims 保持兼容，旧 token 无需失效。
+
 ## [2.9.2] - 2026-09-15
 
 > ⚠️ 无破坏性 API 变更。下游升级前请核对[升级指南](doc/升级指南.md) §四：
