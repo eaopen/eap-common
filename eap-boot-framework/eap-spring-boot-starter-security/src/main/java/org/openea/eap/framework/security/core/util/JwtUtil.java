@@ -10,10 +10,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Encoders;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.mapstruct.ap.internal.util.Collections;
 import org.openea.eap.framework.common.util.spring.SpringUtils;
 import org.openea.eap.framework.security.config.SecurityProperties;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +74,7 @@ public class JwtUtil {
                                    SecurityProperties securityProperties) {
         String jwtToken = null;
         if(securityProperties.getJwtIssuer()!=null && securityProperties.getJwtOldKey()!=null){
-            if(Collections.asSet(securityProperties.getJwtOldKey().toLowerCase().split(",")).contains(securityProperties.getJwtIssuer().toLowerCase())){
+            if(Arrays.asList(securityProperties.getJwtOldKey().toLowerCase().split(",")).contains(securityProperties.getJwtIssuer().toLowerCase())){
                 jwtToken = createOldJwtToken(account, audience, accessTokenValiditySeconds, securityProperties);
             }
         }

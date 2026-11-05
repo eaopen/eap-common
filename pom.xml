@@ -15,7 +15,7 @@
     <url>https://github.com/eaopen/eap-common</url>
 
     <properties>
-        <revision>2.9.2</revision>
+        <revision>2.9.3-SNAPSHOT</revision>
         <!-- Maven 相关 -->
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>

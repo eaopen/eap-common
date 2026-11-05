@@ -14,7 +14,7 @@
     <url>https://github.com/eaopen/eap-common</url>
 
     <properties>
-        <revision>2.9.2</revision>
+        <revision>2.9.3-SNAPSHOT</revision>
         <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
 
         <!-- 统一依赖管理 -->
