@@ -14,20 +14,20 @@
     <url>https://github.com/eaopen/openea-eap</url>
 
     <properties>
-        <revision>3.0.0</revision>
+        <revision>3.0.1-SNAPSHOT</revision>
         <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
         <!-- 统一依赖管理 -->
-        <spring.boot.version>4.1.0</spring.boot.version>
+        <spring.boot.version>4.1.2</spring.boot.version>
         <!-- Web 相关 -->
-        <springdoc.version>3.0.3</springdoc.version>
+        <springdoc.version>3.2.0</springdoc.version>
         <knife4j.version>4.5.0</knife4j.version>
         <servlet.versoin>2.5</servlet.versoin>
         <!-- DB 相关 -->
         <druid.version>1.2.28</druid.version>
         <mybatis.version>3.5.19</mybatis.version>
         <mybatis-spring.version>4.1.0</mybatis-spring.version>
-        <mybatis-plus.version>3.5.17</mybatis-plus.version>
-        <mybatis-plus-generator.version>3.5.17</mybatis-plus-generator.version>
+        <mybatis-plus.version>3.5.18.1</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.18.1</mybatis-plus-generator.version>
         <dynamic-datasource.version>4.5.0</dynamic-datasource.version>
         <mybatis-plus-join.version>1.5.9</mybatis-plus-join.version>
         <easy-trans.version>3.1.5</easy-trans.version>
@@ -61,6 +61,8 @@
         <hutool-6.version>6.0.0-M22</hutool-6.version>
         <easyexcel.verion>4.0.3</easyexcel.verion>
         <poi.version>5.4.0</poi.version>
+        <!-- Historical POI 4.x schema artifact: never published as 5.x. -->
+        <poi-ooxml-schemas.version>4.1.2</poi-ooxml-schemas.version>
         <easypoi-base.version>4.4.0</easypoi-base.version>
         <nimbus-jose-jwt.version>10.0.2</nimbus-jose-jwt.version>
         <jjwt.version>0.12.6</jjwt.version>
@@ -738,7 +740,7 @@
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml-schemas</artifactId>
-                <version>${poi.version}</version>
+                <version>${poi-ooxml-schemas.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tika</groupId>
@@ -890,6 +892,12 @@
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
                 <version>${jjwt.version}</version>
                 <scope>runtime</scope>
             </dependency>

@@ -8,8 +8,8 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 [![Java](https://img.shields.io/badge/Java-21+-green.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-3.0.0-orange.svg)](https://github.com/eaopen/openea-eap)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.2-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Version](https://img.shields.io/badge/Version-3.0.1--SNAPSHOT-orange.svg)](https://github.com/eaopen/openea-eap)
 
 </div>
 
@@ -65,9 +65,9 @@ eap-common-pom (根模块)
 | 技术 | 版本     | 说明 |
 |------|--------|------|
 | Java | 21+    | 编程语言 |
-| Spring Boot | 4.1.0  | 应用框架 |
+| Spring Boot | 4.1.2  | 应用框架 |
 | Spring Security | 7.x（由 Boot BOM 管理） | 安全框架 |
-| MyBatis Plus | 3.5.17 | ORM框架 |
+| MyBatis Plus | 3.5.18.1 | ORM框架 |
 | Redis | 6.0+   | 缓存数据库 |
 | MySQL | 8.0+   | 关系数据库 |
 | Flowable | 8.0.0  | 工作流引擎 |
@@ -80,6 +80,13 @@ eap-common-pom (根模块)
 
 - JDK 21+
 - Maven 3.6+
+
+### Boot4 稳定版更新候选：3.0.1-SNAPSHOT
+
+- JDK 21；Spring Boot **4.1.2**、springdoc **3.2.0**、MyBatis-Plus **3.5.18.1**、Spring Cloud **2025.1.4**；其它依赖仍以经验证的 Boot4 BOM 为准。
+- 认证安全：移植 dev/维护分支的 JWT jti 唯一标识，补足 JJWT JSON Serializer 的 runtime 依赖与测试；移植 RabbitMQ 可信类型映射器及自定义转换器退让规则，并修复 POI 5.x 下失效的 `poi-ooxml-schemas` 坐标。Boot3 的 Starter 坐标不可覆盖 Boot4 版。
+- 不强制转换历史数据库/表单：技术切换后旧数据仍需可读写，业务表单升级为 Schema v2 是长期逐项推进的独立工作。
+- 这是独立候选分支，编译和业务回归通过前不可合并 dev。详细差异及门禁见 [Boot4 稳定版更新记录](doc/boot4-stable-refresh-2026-11-05.md)。
 
 ### 3.0 升级说明
 
