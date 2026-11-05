@@ -1,3 +1,8 @@
+# 开发线 2.9.3-SNAPSHOT
+
+- 回流维护线已验证的认证边界与运行依赖修复，保留 dev 现有第三方版本，不回退平台。
+- 快照与维护候选独立构建，不覆盖已发布的 2.9.2 或 2.9.0 制品。
+
 # 更新日志（Changelog）
 
 本文件记录 eap-common 各版本的对外变更，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，

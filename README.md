@@ -1,5 +1,7 @@
 # Open EAP
 
+开发线认证修复使用配套 `2.9.3-SNAPSHOT`；只用于开发验证，不替代 Current 的 `2.9.0.1-rc3` 维护补丁。迁移及制品验证见 [升级指南](doc/升级指南.md)。
+
 <div align="center">
 
 ![Open EAP Logo](https://raw.githubusercontent.com/eaopen/openea-eap/dev/doc/yudao/ruoyi-vue-pro-architecture.png)
