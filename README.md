@@ -1,3 +1,5 @@
+> 配套维护候选 `2.8.5.1-rc1`：保留已发布 2.8.5 的平台依赖；升级与兼容边界见 [升级指南](doc/升级指南.md)。本维护基线由经制品比对的历史提交建立，**不是官方 v2.8.5 tag**。
+
 # Open EAP
 This project is licensed under the terms of the MIT license.
 ## 概述 
