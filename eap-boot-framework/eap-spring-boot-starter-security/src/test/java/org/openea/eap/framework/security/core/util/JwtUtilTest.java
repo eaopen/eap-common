@@ -24,6 +24,8 @@ class JwtUtilTest {
                     .toList();
 
             assertThat(tokens).doesNotHaveDuplicates().allSatisfy(token -> {
+                assertThat(JWTUtil.parseToken(token).getHeader("alg"))
+                        .isEqualTo("openBPM".equals(issuer) ? "HS512" : "HS256");
                 assertThat(JwtUtil.hasJwtId(token)).isTrue();
                 assertThat(JwtUtil.isJwtWithoutId(token)).isFalse();
             });
@@ -58,6 +60,8 @@ class JwtUtilTest {
 
         String first = JwtUtil.createOldJwtToken("user-key", "default", 1800, properties);
         String second = JwtUtil.createOldJwtToken("user-key", "default", 1800, properties);
+
+        assertThat(JWTUtil.parseToken(first).getHeader("alg")).isEqualTo("HS512");
 
         assertThat(first).isNotBlank();
         assertThat(second).isNotBlank().isNotEqualTo(first);
