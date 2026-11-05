@@ -1,6 +1,6 @@
 # Boot4 稳定版与近期分支修复对齐（2026-11-05）
 
-> 候选分支 `feature/boot4-stable-refresh-20261105`，从原 `boot4` HEAD `9d58a2d` 派生。原 `boot4`、`dev`、`maintenance/*` 均不直接修改；经验证后再决定合并。
+> 从原 `boot4` HEAD `9d58a2d` 派生独立候选分支 `feature/boot4-stable-refresh-20261105`。本轮 JDK21 整仓本地测试和配对跨仓测试通过后，经用户授权可合入 **仅用于继续研发的 boot4 分支**；`dev`、维护分支、生产环境均不修改。
 
 ## 版本矩阵
 
@@ -44,7 +44,7 @@ mvn -f eap-cloud-dependencies/pom.xml -B -DskipTests install
 # 然后在同一版本线的 eap-boot 运行完整测试及 compile
 ```
 
-必须另附可复现证据：干净 Maven 仓库制品解析、依赖树冲突检查、认证/权限/JWT 两格式、消息序列化、老业务 DB 和流程读写回归、EAP 实际启动。未通过前不可合并 Boot4 主线或 dev。
+开发基线合并与生产发布验收分离：本轮本机测试通过后可合并到 `boot4` 供持续开发；必须另外补齐干净 Maven CI、依赖冲突审计、认证/权限/JWT 两格式、真实消息序列化、旧业务 DB 和流程完整读写回归及 EAP 实际启动等证据。**未完成这些项目不得合并 dev 或部署生产，不能据本轮 boot4 合并宣称旧数据业务兼容已验收。**
 
 ## 2026-11-05 本机验证记录
 
