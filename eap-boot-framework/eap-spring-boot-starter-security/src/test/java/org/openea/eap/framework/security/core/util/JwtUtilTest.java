@@ -5,10 +5,30 @@ import org.junit.jupiter.api.Test;
 import org.openea.eap.framework.security.config.SecurityProperties;
 
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JwtUtilTest {
+
+    @Test
+    void missingUserKeyShouldNotCollapseConcurrentSessionsInEitherSigner() {
+        for (String issuer : new String[]{"new-issuer", "openBPM"}) {
+            SecurityProperties properties = new SecurityProperties();
+            properties.setJwtIssuer(issuer);
+            properties.setJwtOldKey("openBPM");
+            properties.setJwtSecret("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
+
+            var tokens = IntStream.range(0, 200).parallel()
+                    .mapToObj(index -> JwtUtil.generateJwtToken(index % 2 == 0 ? null : "", "default", 1800, properties))
+                    .toList();
+
+            assertThat(tokens).doesNotHaveDuplicates().allSatisfy(token -> {
+                assertThat(JwtUtil.hasJwtId(token)).isTrue();
+                assertThat(JwtUtil.isJwtWithoutId(token)).isFalse();
+            });
+        }
+    }
 
     @Test
     void generateJwtTokenShouldBeUniqueForSameIdentity() {

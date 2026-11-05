@@ -9,9 +9,13 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 [![Java](https://img.shields.io/badge/Java-17+-green.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.15-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-2.9.0-orange.svg)](https://github.com/eaopen/openea-eap)
+[![Version](https://img.shields.io/badge/Version-2.9.0.1--rc1-orange.svg)](https://github.com/eaopen/openea-eap)
 
 </div>
+
+## 认证安全补丁候选 2.9.0.1-rc1
+
+基于 v2.9.0 回移已确认源头修复，保持第三方平台版本不变。先阅读 [升级指南](doc/升级指南.md)，与同版 eap-boot 配套验证。候选不是生产发布批准。
 
 ## 📖 项目简介
 
