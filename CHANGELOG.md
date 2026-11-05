@@ -1,3 +1,8 @@
+# 2.9.3 发布候选（尚未上传 Maven Central）
+
+- 回流维护线已验证的认证边界与运行依赖修复，保留 dev 现有第三方版本，不回退平台。
+- 本分支从 2.9.3-SNAPSHOT 开发线构建 2.9.3 候选；不覆盖已有版本，二奢商城/Spider 验收前不得发布 Maven Central。
+
 # 更新日志（Changelog）
 
 本文件记录 eap-common 各版本的对外变更，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
@@ -8,7 +13,13 @@
 
 发布新版本时：把 `[Unreleased]` 提为 `[版本号] - 日期`，并把该版本小节直接作为代码托管平台的 Release Notes，避免两份内容漂移。
 
-## [Unreleased]
+## [2.9.3] - 待正式发布
+
+### Fixed
+
+- `eap-spring-boot-starter-security`：JWT 新旧签发路径均加入随机 `jti`，避免相同身份与客户端在同一秒内
+  得到相同 access token；新增兼容检测方法用于区分无 `jti` 的历史 JWT 与 UUID 等不透明 token。现有签发方法签名、
+  运行时依赖和既有 claims 保持兼容；但没有 `jti` 的历史 JWT 在新版 Boot 鉴权中会被拒绝，需重新登录。
 
 ## [2.9.2] - 2026-09-15
 
