@@ -1,5 +1,7 @@
 # 开发线 2.9.4-SNAPSHOT
 
+- Fastjson 1.2.83 → 1.2.84：修复 CVE-2026-16723，保留现有 `com.alibaba.fastjson` API；增加 JSON 兼容与非法类型名拒绝回归测试。
+
 - 合并 `main/2.9.3.1` 发布历史，完整继承热修复；保留 dev 已有的后续升级。
 
 - 在 `2.9.3.1` 正式发布后推进开发版本，保持 Java 17 / Spring Boot 3.5.16；不包含 Boot 4。
