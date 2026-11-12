@@ -1,7 +1,8 @@
-# 开发线 2.9.3-SNAPSHOT
+# 开发线 2.9.4-SNAPSHOT
 
-- 回流维护线已验证的认证边界与运行依赖修复，保留 dev 现有第三方版本，不回退平台。
-- 快照与维护候选独立构建，不覆盖已发布的 2.9.2 或 2.9.0 制品。
+- 在 `2.9.3.1` 正式发布后推进开发版本，保持 Java 17 / Spring Boot 3.5.16；不包含 Boot 4。
+- 承接 Jackson BOM 2.21.7、jsoup 1.23.2、Guava 33.7.2-jre，并显式覆盖 Cloud BOM 中的 Guava 版本。
+- 根 POM 与两个独立 BOM 的 `revision` 统一为 `2.9.4-SNAPSHOT`；不覆盖已发布制品。
 
 # 更新日志（Changelog）
 
