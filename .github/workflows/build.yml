@@ -15,13 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      MAVEN_OPTS: -Dmaven.repo.local=${{ runner.temp }}/eap-m2
       TARGET_LINE: ${{ github.base_ref || github.ref_name }}
     services:
       redis:
         image: redis:7-alpine
         ports: ['6379:6379']
     steps:
+      - name: Isolate Maven repository
+        run: echo "MAVEN_OPTS=-Dmaven.repo.local=$RUNNER_TEMP/eap-m2" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
