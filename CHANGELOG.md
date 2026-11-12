@@ -1,5 +1,7 @@
 # 开发线 2.9.4-SNAPSHOT
 
+- 合并 `main/2.9.3.1` 发布历史，完整继承热修复；保留 dev 已有的后续升级。
+
 - 在 `2.9.3.1` 正式发布后推进开发版本，保持 Java 17 / Spring Boot 3.5.16；不包含 Boot 4。
 - 承接 Jackson BOM 2.21.7、jsoup 1.23.2、Guava 33.7.2-jre，并显式覆盖 Cloud BOM 中的 Guava 版本。
 - 根 POM 与两个独立 BOM 的 `revision` 统一为 `2.9.4-SNAPSHOT`；不覆盖已发布制品。
@@ -14,7 +16,20 @@
 
 发布新版本时：把 `[Unreleased]` 提为 `[版本号] - 日期`，并把该版本小节直接作为代码托管平台的 Release Notes，避免两份内容漂移。
 
-## [Unreleased]
+## [2.9.3.1] - 2026-11-13
+
+### Fixed
+
+- 仅升级 Jackson BOM 至 2.21.7、jsoup 至 1.23.2、Guava 至 33.7.2-jre，以修复此三组库的相关 CVE。
+- 保持 Java 17、Spring Boot 3.5.16、MyBatis-Plus 3.5.16 以及其余依赖版本不变，不带入额外的开发分支升级。
+
+## [2.9.3] - 2026-11-06
+
+### Fixed
+
+- `eap-spring-boot-starter-security`：JWT 新旧签发路径均加入随机 `jti`，避免相同身份与客户端在同一秒内
+  得到相同 access token；新增兼容检测方法用于区分无 `jti` 的历史 JWT 与 UUID 等不透明 token。现有签发方法签名、
+  运行时依赖和既有 claims 保持兼容；但没有 `jti` 的历史 JWT 在新版 Boot 鉴权中会被拒绝，需重新登录。
 
 ### Fixed
 
