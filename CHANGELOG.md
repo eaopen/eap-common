@@ -1,6 +1,6 @@
 # 主干开发 3.0.1-SNAPSHOT
 
-- 默认 JDK 21，兼容 JDK 25 构建与运行；使用 `--release 21` 限制 API 与字节码，dev CI 增加 JDK 21/25 双版本验证。
+- 默认 JDK 21，兼容 JDK 25 构建与运行；使用 `--release 21` 限制 API 与字节码，dev 自动 CI 仅使用 JDK 21，JDK 25 保留按需手动验证入口。
 
 - 将 boot4 合并到 dev，采用 Java 21 / Spring Boot 4.1.2；2.x 转为独立维护分支。
 - 完整保留 2.9.3.1、2.9.4-SNAPSHOT 的认证安全修复和依赖补丁，测试迁移到 MockitoBean。

@@ -46,4 +46,4 @@ mvn -q -DskipTests install
 
 ## 3.x JDK 兼容约定
 
-默认构建与发布使用 JDK 21，同时支持 JDK 25 构建和运行。根 POM 保持 `java.version=21`，通过 `maven.compiler.release=21` 限制 API 和字节码；不得为适配 JDK 25 将语言基线提升至 25。dev CI 同时验证 JDK 21/25，2.x 仍为 JDK 17。
+默认构建与发布使用 JDK 21，同时支持 JDK 25 构建和运行。根 POM 保持 `java.version=21`，通过 `maven.compiler.release=21` 限制 API 和字节码；不得为适配 JDK 25 将语言基线提升至 25。dev 自动 CI 仅使用 JDK 21；JDK 25 通过手动工作流按需验证，2.x 仍为 JDK 17。

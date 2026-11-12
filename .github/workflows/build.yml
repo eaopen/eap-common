@@ -5,6 +5,12 @@ on:
   pull_request:
     branches: [dev, '2.x']
   workflow_dispatch:
+    inputs:
+      java_version:
+        description: 'dev only: 21 is the baseline; 25 is an optional compatibility check'
+        type: choice
+        default: '21'
+        options: ['21', '25']
 permissions:
   contents: read
 concurrency:
@@ -12,11 +18,6 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    name: build (JDK ${{ matrix.jdk }})
-    strategy:
-      fail-fast: false
-      matrix:
-        jdk: ${{ fromJSON((github.base_ref || github.ref_name) == '2.x' && '[17]' || '[21,25]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -34,7 +35,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: ${{ matrix.jdk }}
+          java-version: ${{ (github.base_ref || github.ref_name) == '2.x' && '17' || (inputs.java_version || '21') }}
       - name: Check branch and Java baseline
         run: |
           python3 - <<'CHECK'
