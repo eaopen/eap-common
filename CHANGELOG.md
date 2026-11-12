@@ -1,8 +1,3 @@
-# 2.9.3 发布候选（尚未上传 Maven Central）
-
-- 回流维护线已验证的认证边界与运行依赖修复，保留 dev 现有第三方版本，不回退平台。
-- 本分支从 2.9.3-SNAPSHOT 开发线构建 2.9.3 候选；不覆盖已有版本，二奢商城/Spider 验收前不得发布 Maven Central。
-
 # 更新日志（Changelog）
 
 本文件记录 eap-common 各版本的对外变更，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
@@ -13,7 +8,14 @@
 
 发布新版本时：把 `[Unreleased]` 提为 `[版本号] - 日期`，并把该版本小节直接作为代码托管平台的 Release Notes，避免两份内容漂移。
 
-## [2.9.3] - 待正式发布
+## [2.9.3.1] - 待发布
+
+### Fixed
+
+- 仅升级 Jackson BOM 至 2.21.7、jsoup 至 1.23.2、Guava 至 33.7.2-jre，以修复此三组库的相关 CVE。
+- 保持 Java 17、Spring Boot 3.5.16、MyBatis-Plus 3.5.16 以及其余依赖版本不变，不带入额外的开发分支升级。
+
+## [2.9.3] - 2026-11-06
 
 ### Fixed
 
