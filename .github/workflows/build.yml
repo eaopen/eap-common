@@ -12,6 +12,11 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
+    name: build (JDK ${{ matrix.jdk }})
+    strategy:
+      fail-fast: false
+      matrix:
+        jdk: ${{ fromJSON((github.base_ref || github.ref_name) == '2.x' && '[17]' || '[21,25]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -29,7 +34,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: ${{ (github.base_ref || github.ref_name) == '2.x' && '17' || '21' }}
+          java-version: ${{ matrix.jdk }}
       - name: Check branch and Java baseline
         run: |
           python3 - <<'CHECK'

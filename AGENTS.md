@@ -43,3 +43,7 @@ mvn -q -DskipTests install
 ## 双线协作
 
 分支职责及发布规则以 [分支与发布策略](doc/分支与发布策略.md) 为准。维护修复 PR 指向 `2.x`（JDK 17），3.x PR 指向 `dev`（JDK 21）；跨线修复逐项移植，不能整体互相合并。
+
+## 3.x JDK 兼容约定
+
+默认构建与发布使用 JDK 21，同时支持 JDK 25 构建和运行。根 POM 保持 `java.version=21`，通过 `maven.compiler.release=21` 限制 API 和字节码；不得为适配 JDK 25 将语言基线提升至 25。dev CI 同时验证 JDK 21/25，2.x 仍为 JDK 17。

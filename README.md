@@ -1,6 +1,6 @@
 # Open EAP
 
-`dev` 已承接 Boot 4，使用 Java 21 / Spring Boot 4.1.2 / `3.0.1-SNAPSHOT`；2.x 维护请切换到 `2.x`。分支、PR 和发布规则见 [分支与发布策略](doc/分支与发布策略.md)。
+`dev` 已承接 Boot 4，默认使用 JDK 21、兼容 JDK 25，采用 Spring Boot 4.1.2 / `3.0.1-SNAPSHOT`；2.x 维护请切换到 `2.x`。分支、PR 和发布规则见 [分支与发布策略](doc/分支与发布策略.md)。
 
 <div align="center">
 
