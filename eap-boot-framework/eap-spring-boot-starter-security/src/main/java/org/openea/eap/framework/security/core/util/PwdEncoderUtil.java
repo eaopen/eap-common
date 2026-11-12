@@ -1,7 +1,6 @@
 package org.openea.eap.framework.security.core.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 
@@ -37,7 +36,7 @@ public class PwdEncoderUtil {
      */
     public static PasswordEncoder getDelegatingPasswordEncoder(String encodingId) {
         Assert.isTrue(encoders.containsKey(encodingId), encodingId + " is not found in idToPasswordEncoder");
-        DelegatingPasswordEncoder delegatingPasswordEncoder = new CustDelegatingPasswordEncoder(encodingId, encoders);
+        CustDelegatingPasswordEncoder delegatingPasswordEncoder = new CustDelegatingPasswordEncoder(encodingId, encoders);
         delegatingPasswordEncoder.setDefaultPasswordEncoderForMatches(encoders.get(encodingId));
         return delegatingPasswordEncoder;
 

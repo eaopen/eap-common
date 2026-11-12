@@ -1,0 +1,59 @@
+name: Dual-line build
+on:
+  push:
+    branches: [dev, '2.x']
+  pull_request:
+    branches: [dev, '2.x']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TARGET_LINE: ${{ github.base_ref || github.ref_name }}
+    services:
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+    steps:
+      - name: Isolate Maven repository
+        run: echo "MAVEN_OPTS=-Dmaven.repo.local=$RUNNER_TEMP/eap-m2" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ (github.base_ref || github.ref_name) == '2.x' && '17' || '21' }}
+      - name: Check branch and Java baseline
+        run: |
+          python3 - <<'CHECK'
+          import os, xml.etree.ElementTree as E
+          line = os.environ['TARGET_LINE']
+          assert line in ('dev', '2.x'), 'Select dev or 2.x'
+          p = E.parse('pom.xml').getroot()
+          assert p.findtext('{*}properties/{*}java.version') == ('17' if line == '2.x' else '21')
+          assert p.findtext('{*}properties/{*}revision').startswith('2.' if line == '2.x' else '3.')
+          CHECK
+      - name: Install verified Maven
+        run: |
+          set -euo pipefail
+          VER=3.9.16
+          cd "$RUNNER_TEMP"
+          URL="https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/$VER/apache-maven-$VER-bin.tar.gz"
+          curl -fsSLo maven.tar.gz "$URL"
+          curl -fsSLo maven.sha512 "$URL.sha512"
+          printf '%s  maven.tar.gz\n' "$(awk '{print $1}' maven.sha512)" | sha512sum -c -
+          tar -xzf maven.tar.gz
+          echo "$RUNNER_TEMP/apache-maven-$VER/bin" >> "$GITHUB_PATH"
+      - name: Bootstrap standalone BOMs
+        run: |
+          mvn -B -ntp -f eap-dependencies/pom.xml install
+          mvn -B -ntp -f eap-cloud-dependencies/pom.xml install
+      - name: Test and package all modules
+        run: mvn -B -ntp -Pcloud,dev -Dspring.data.redis.port=6379 -Duser.timezone=UTC clean install

@@ -10,7 +10,7 @@
 
 ## 仓库定位
 
-- `eap-common` 是 EAP 的 Java 17 共享框架与 Maven BOM，不是可独立部署的应用。
+- `eap-common` 是 EAP 的 Java 21 共享框架与 Maven BOM，不是可独立部署的应用。
 - 保持现有模块目录和 `org.openea.eap` 包名不变；历史 `com.fhs` 兼容包未经明确迁移计划不得重命名。
 - 对外提供的 API 以兼容为先。涉及破坏性改动时，必须明确迁移方式、影响范围和验证结果。
 - 三方依赖版本集中维护在 `eap-dependencies/pom.xml`；平台与构建插件版本维护在根 `pom.xml`。不要在子模块重复声明版本。
@@ -39,3 +39,7 @@ mvn -q -DskipTests install
 ```
 
 修改后的 `eap-common` 必须先安装到本地 Maven 仓库，供同级 `eap-boot` 编译和测试。
+
+## 双线协作
+
+分支职责及发布规则以 [分支与发布策略](doc/分支与发布策略.md) 为准。维护修复 PR 指向 `2.x`（JDK 17），3.x PR 指向 `dev`（JDK 21）；跨线修复逐项移植，不能整体互相合并。

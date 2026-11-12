@@ -1,23 +1,23 @@
 # Open EAP
 
-开发线使用配套 `2.9.4-SNAPSHOT`，承接 `2.9.3.1` 热修复；保持 Java 17 / Spring Boot 3.5.16，与 Boot 4 预览线隔离。开发快照不替代正式制品。基础 BOM 使用 Fastjson 1.2.84 修复 CVE-2026-16723；Cloud BOM 保留 Fastjson 2 兼容路线，并将相关组件对齐为 2.0.58。迁移及制品验证见 [升级指南](doc/升级指南.md)。
+`dev` 已承接 Boot 4，使用 Java 21 / Spring Boot 4.1.2 / `3.0.1-SNAPSHOT`；2.x 维护请切换到 `2.x`。分支、PR 和发布规则见 [分支与发布策略](doc/分支与发布策略.md)。
 
 <div align="center">
 
 ![Open EAP Logo](https://raw.githubusercontent.com/eaopen/openea-eap/dev/doc/yudao/ruoyi-vue-pro-architecture.png)
 
-**开放企业应用平台 - 基于Spring Boot 3.x的企业级应用开发框架**
+**开放企业应用平台 - 基于Spring Boot 4.1的企业级应用开发框架**
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
-[![Java](https://img.shields.io/badge/Java-17+-green.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.16-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Version](https://img.shields.io/badge/Version-2.9.4--SNAPSHOT-orange.svg)](https://github.com/eaopen/eap-common)
+[![Java](https://img.shields.io/badge/Java-21+-green.svg)](https://openjdk.java.net/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.2-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Version](https://img.shields.io/badge/Version-3.0.1--SNAPSHOT-orange.svg)](https://github.com/eaopen/openea-eap)
 
 </div>
 
 ## 📖 项目简介
 
-Open EAP（开放企业应用平台）是一个基于Spring Boot 3.x的企业级应用开发框架，整合了多个开源项目，为企业应用快速开发提供基础框架支持。
+Open EAP（开放企业应用平台）是一个基于Spring Boot 4.1的企业级应用开发框架，整合了多个开源项目，为企业应用快速开发提供基础框架支持。
 
 ### 🎯 设计理念
 
@@ -27,7 +27,7 @@ Open EAP（开放企业应用平台）是一个基于Spring Boot 3.x的企业级
 
 ### ✨ 核心特性
 
-- 🚀 **前后端分离**：Spring Boot 3.x + Vue2/Element-UI
+- 🚀 **前后端分离**：Spring Boot 4.1 + Vue2/Element-UI
 - 🏢 **多租户支持**：完整的SaaS多租户解决方案
 - 🌍 **国际化支持**：完整的i18n国际化框架
 - 🔄 **工作流引擎**：集成Flowable/Activiti工作流
@@ -41,8 +41,6 @@ Open EAP（开放企业应用平台）是一个基于Spring Boot 3.x的企业级
 开发人员与编码智能体共用 [AGENTS.md](AGENTS.md) 作为仓库协作规范：其中说明模块边界、兼容性要求、依赖管理和验证命令。Codex 直接读取该文件；Claude Code 通过 [CLAUDE.md](CLAUDE.md) 指向同一规则，避免多份指引发生偏差。
 
 推荐协作流程：先确认模块与调用方 → 做最小范围修改 → 运行相关测试 → 更新 README/技术文档 → 在交付说明中记录验证结果。共享框架变更完成后，先安装本仓产物，再验证同级 `eap-boot`。
-
-升级本框架或下游应用前，先阅读 [升级指南](doc/升级指南.md)（版本矩阵、升级步骤、本版特性与下游注意事项）；每个版本的对外变更见 [更新日志](CHANGELOG.md)；升级改动的回迁结论与后续治理方案见 [2.9.2 升级下游回迁评估](doc/2.9.2-升级下游回迁评估.md)。
 
 ## 🏗️ 架构设计
 
@@ -68,10 +66,10 @@ eap-common-pom (根模块)
 
 | 技术 | 版本     | 说明 |
 |------|--------|------|
-| Java | 17+    | 编程语言 |
-| Spring Boot | 3.5.16  | 应用框架 |
-| Spring Security | 6.x（由 Boot BOM 管理） | 安全框架 |
-| MyBatis Plus | 3.5.16 | ORM框架 |
+| Java | 21+    | 编程语言 |
+| Spring Boot | 4.1.2  | 应用框架 |
+| Spring Security | 7.x（由 Boot BOM 管理） | 安全框架 |
+| MyBatis Plus | 3.5.18.1 | ORM框架 |
 | Redis | 6.0+   | 缓存数据库 |
 | MySQL | 8.0+   | 关系数据库 |
 | Flowable | 8.0.0  | 工作流引擎 |
@@ -82,14 +80,28 @@ eap-common-pom (根模块)
 
 ### 环境要求
 
-- JDK 17+
+- JDK 21+
 - Maven 3.6+
+
+### Boot4 稳定版更新候选：3.0.1-SNAPSHOT
+
+- JDK 21；Spring Boot **4.1.2**、springdoc **3.2.0**、MyBatis-Plus **3.5.18.1**、Spring Cloud **2025.1.4**；其它依赖仍以经验证的 Boot4 BOM 为准。
+- 认证安全：移植 dev/维护分支的 JWT jti 唯一标识，补足 JJWT JSON Serializer 的 runtime 依赖与测试；移植 RabbitMQ 可信类型映射器及自定义转换器退让规则，并修复 POI 5.x 下失效的 `poi-ooxml-schemas` 坐标。Boot3 的 Starter 坐标不可覆盖 Boot4 版。
+- 不强制转换历史数据库/表单：技术切换后旧数据仍需可读写，业务表单升级为 Schema v2 是长期逐项推进的独立工作。
+- 这是独立候选分支，编译和业务回归通过前不可合并 dev。详细差异及门禁见 [Boot4 稳定版更新记录](doc/boot4-stable-refresh-2026-11-05.md)。
+
+### 3.0 升级说明
+
+- 3.0.0 统一使用 JDK 21、Spring Boot 4.1.0、Spring Framework 7 和 Spring Security 7，不再支持 JDK 17。
+- Web、AOP、MyBatis-Plus、Druid、Dynamic Datasource 与 JimuReport 已切换到 Boot 4 对应 Starter；SpringDoc 升级到 3.0.3。
+- Spring Boot 4 的自动配置按技术域拆包，自定义集成代码已迁移到 `restclient`、`jackson2`、`cache`、`jdbc`、`data.redis` 等新包。
+- 测试使用标准 `spring-boot-starter-test`；应用测试中的 `@MockBean` 需迁移为 Spring Framework 的 `@MockitoBean`。
 
 ### 本地构建与验证
 
 1. **克隆项目**
 ```bash
-git clone https://github.com/eaopen/eap-common.git
+git clone https://github.com/eaopen/openea-eap.git
 cd openea-eap/eap-common
 ```
 
@@ -182,7 +194,7 @@ eap-common-pom (根模块)
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   前端应用       │    │   后端服务       │    │   数据存储       │
-│  Vue2 + Element │◄──►│ Spring Boot 3.x │◄──►│ MySQL + Redis   │
+│  Vue2 + Element │◄──►│ Spring Boot 4.1 │◄──►│ MySQL + Redis   │
 │                 │    │                 │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
@@ -208,7 +220,7 @@ eap-common-pom (根模块)
 
 | 技术组件 | 版本       | 用途说明 |
 |---------|----------|----------|
-| Spring Boot | 3.5.16   | 应用开发框架 |
+| Spring Boot | 4.1.0   | 应用开发框架 |
 | Spring Security | 6.x（由 Boot BOM 管理） | 安全认证框架 |
 | MyBatis Plus | 3.5.16   | ORM框架 |
 | Druid | 1.2.28   | 数据库连接池 |
@@ -444,7 +456,7 @@ openea-eap/
 
 Open EAP是一个功能完整、架构清晰的企业级应用开发平台，具有以下优势：
 
-1. **技术先进**：基于最新的Spring Boot 3.x技术栈
+1. **技术先进**：基于最新的Spring Boot 4.1技术栈
 2. **架构灵活**：支持单体到微服务的平滑演进
 3. **功能丰富**：涵盖企业应用开发的各个方面
 4. **扩展性强**：良好的模块化设计和插件机制
@@ -660,7 +672,7 @@ springdoc:
 # 业务配置
 eap:
   info:
-    version: 2.9.2
+    version: 3.0.0
     base-package: org.openea.eap
   web:
     admin-api:
@@ -727,6 +739,6 @@ eap:
 
 ---
 
-**文档版本**：v2.9.2
-**最后更新**：2026年9月
+**文档版本**：v3.0.0
+**最后更新**：2026年7月
 **维护者**：Open EAP开发团队

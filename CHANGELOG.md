@@ -1,4 +1,10 @@
-# 开发线 2.9.4-SNAPSHOT
+# 主干开发 3.0.1-SNAPSHOT
+
+- 将 boot4 合并到 dev，采用 Java 21 / Spring Boot 4.1.2；2.x 转为独立维护分支。
+- 完整保留 2.9.3.1、2.9.4-SNAPSHOT 的认证安全修复和依赖补丁，测试迁移到 MockitoBean。
+- 增加双线 CI 与发布策略；3.x 仍未正式发布。
+
+# 维护线 2.9.4-SNAPSHOT
 
 - Cloud BOM 保留 Fastjson 2 兼容路线，将 `com.alibaba:fastjson`、`fastjson2`、`fastjson2-extension` 统一为 2.0.58，避免 chatgpt 传递依赖把核心库选成 2.0.29。
 
