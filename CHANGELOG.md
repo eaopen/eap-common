@@ -1,5 +1,7 @@
 # 开发线 2.9.4-SNAPSHOT
 
+- Cloud BOM 保留 Fastjson 2 兼容路线，将 `com.alibaba:fastjson`、`fastjson2`、`fastjson2-extension` 统一为 2.0.58，避免 chatgpt 传递依赖把核心库选成 2.0.29。
+
 - Fastjson 1.2.83 → 1.2.84：修复 CVE-2026-16723，保留现有 `com.alibaba.fastjson` API；增加 JSON 兼容与非法类型名拒绝回归测试。
 
 - 合并 `main/2.9.3.1` 发布历史，完整继承热修复；保留 dev 已有的后续升级。
