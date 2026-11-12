@@ -1,4 +1,4 @@
-# 开发线 2.9.4-SNAPSHOT
+# 维护线 2.9.4-SNAPSHOT
 
 - Cloud BOM 保留 Fastjson 2 兼容路线，将 `com.alibaba:fastjson`、`fastjson2`、`fastjson2-extension` 统一为 2.0.58，避免 chatgpt 传递依赖把核心库选成 2.0.29。
 

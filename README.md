@@ -1,6 +1,6 @@
 # Open EAP
 
-开发线使用配套 `2.9.4-SNAPSHOT`，承接 `2.9.3.1` 热修复；保持 Java 17 / Spring Boot 3.5.16，与 Boot 4 预览线隔离。开发快照不替代正式制品。基础 BOM 使用 Fastjson 1.2.84 修复 CVE-2026-16723；Cloud BOM 保留 Fastjson 2 兼容路线，并将相关组件对齐为 2.0.58。迁移及制品验证见 [升级指南](doc/升级指南.md)。
+`2.x` 是 Java 17 / Spring Boot 3.5.16 维护线，当前版本 `2.9.4-SNAPSHOT`；主干 3.x 开发位于 `dev`。分支、PR 和发布规则见 [分支与发布策略](doc/分支与发布策略.md)。
 
 <div align="center">
 
