@@ -14,12 +14,12 @@
     <url>https://github.com/eaopen/eap-common</url>
 
     <properties>
-        <revision>2.9.4-SNAPSHOT</revision>
+        <revision>3.0.1-SNAPSHOT</revision>
         <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
 
         <!-- 统一依赖管理 -->
-        <spring.cloud.version>2025.0.1</spring.cloud.version>
-        <spring.cloud.alibaba.version>2025.0.0.0</spring.cloud.alibaba.version>
+        <spring.cloud.version>2025.1.4</spring.cloud.version>
+        <spring.cloud.alibaba.version>2025.1.0.0</spring.cloud.alibaba.version>
         <!-- Security override: Alibaba BOM otherwise pins Guava 33.4.8-jre. -->
         <guava.version>33.7.2-jre</guava.version>
         <!-- Preserve Alibaba compatibility API and align its core/extension engine. -->

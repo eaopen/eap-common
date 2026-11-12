@@ -5,9 +5,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Map;
 
-public class CustDelegatingPasswordEncoder extends DelegatingPasswordEncoder {
+public class CustDelegatingPasswordEncoder implements PasswordEncoder {
+
+    private final DelegatingPasswordEncoder delegate;
+
     public CustDelegatingPasswordEncoder(String idForEncode, Map<String, PasswordEncoder> idToPasswordEncoder) {
-        super(idForEncode, idToPasswordEncoder);
+        this.delegate = new DelegatingPasswordEncoder(idForEncode, idToPasswordEncoder);
+    }
+
+    public void setDefaultPasswordEncoderForMatches(PasswordEncoder passwordEncoder) {
+        delegate.setDefaultPasswordEncoderForMatches(passwordEncoder);
+    }
+
+    @Override
+    public String encode(CharSequence rawPassword) {
+        return delegate.encode(rawPassword);
     }
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
@@ -33,7 +45,12 @@ public class CustDelegatingPasswordEncoder extends DelegatingPasswordEncoder {
             }
             return noopPasswordEncoder.matches(rawPassword, encodedPassword);
         }
-        return super.matches(rawPassword, encodedPassword);
+        return delegate.matches(rawPassword, encodedPassword);
+    }
+
+    @Override
+    public boolean upgradeEncoding(String encodedPassword) {
+        return delegate.upgradeEncoding(encodedPassword);
     }
     private  boolean isBCryptHash(String password) {
         return password.matches("^\\$2[ab?y?]\\$.{56}$");
