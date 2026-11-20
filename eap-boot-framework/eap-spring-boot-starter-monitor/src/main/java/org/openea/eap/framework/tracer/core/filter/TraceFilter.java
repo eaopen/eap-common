@@ -1,12 +1,14 @@
 package org.openea.eap.framework.tracer.core.filter;
 
 import org.openea.eap.framework.common.util.monitor.TracerUtils;
+import org.openea.eap.framework.tracer.core.util.RequestCorrelation;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.MDC;
 import java.io.IOException;
 
 /**
@@ -25,8 +27,19 @@ public class TraceFilter extends OncePerRequestFilter {
             throws IOException, ServletException {
         // 设置响应 traceId
         response.addHeader(HEADER_NAME_TRACE_ID, TracerUtils.getTraceId());
-        // 继续过滤
-        chain.doFilter(request, response);
+        String requestId = RequestCorrelation.resolve(request.getHeader(RequestCorrelation.HEADER));
+        String previous = MDC.get(RequestCorrelation.MDC_KEY);
+        MDC.put(RequestCorrelation.MDC_KEY, requestId);
+        try {
+            response.setHeader(RequestCorrelation.HEADER, requestId);
+            chain.doFilter(request, response);
+        } finally {
+            if (previous == null) {
+                MDC.remove(RequestCorrelation.MDC_KEY);
+            } else {
+                MDC.put(RequestCorrelation.MDC_KEY, previous);
+            }
+        }
     }
 
 }

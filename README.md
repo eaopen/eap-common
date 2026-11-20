@@ -742,3 +742,8 @@ eap:
 **文档版本**：v3.0.0
 **最后更新**：2026年7月
 **维护者**：Open EAP开发团队
+
+### 3.0.1-SNAPSHOT 请求关联
+
+监控 starter 的 Servlet 过滤器复用最多 64 位的字母、数字、点、下划线或连字符请求号，缺失或格式无效时生成 UUID。应用可通过响应头 `X-Request-Id` 或请求期间的 MDC `request.id` 关联日志。
+受信下游的 HTTP 客户端可以调用 `RequestCorrelation.propagate(headers)` 透传当前请求号；已显式设置的请求头优先。
